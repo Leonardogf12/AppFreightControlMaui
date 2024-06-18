@@ -7,9 +7,9 @@ namespace FreightControlMaui.MVVM.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public required string Name { get; set; }
+        public string? Name { get; set; }
 
-        public required string FirebaseLocalId { get; set; }
+        public string? FirebaseLocalId { get; set; }
     }
 }
 

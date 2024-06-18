@@ -118,6 +118,7 @@
 	  <None Remove="MVVM\Models\IBGE\" />
 	  <None Remove="MVVM\ViewModels\" />
 	  <None Remove="Services\" />
+	  <None Remove="Services\Chart\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Components\" />
@@ -142,5 +143,6 @@
 	  <Folder Include="MVVM\Models\IBGE\" />
 	  <Folder Include="MVVM\ViewModels\" />
 	  <Folder Include="Services\" />
+	  <Folder Include="Services\Chart\" />
 	</ItemGroup>
 </Project>

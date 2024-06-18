@@ -7,9 +7,9 @@ namespace FreightControlMaui.Models.Chart
         public float Value { get; set; }
         public string? Label { get; set; }
         public string? ValueLabel { get; set; }
-        public static SKColor ColorDefault => SKColor.Parse("#27AAE7");
-        public static SKColor ValueLabelColorDefault => SKColor.Parse("#FFFFFF");
-        public static SKColor TextColorDefault => SKColor.Parse("#FFFFFF");
+        public SKColor ColorDefault => SKColor.Parse("#27AAE7");
+        public SKColor ValueLabelColorDefault => SKColor.Parse("#FFFFFF");
+        public SKColor TextColorDefault => SKColor.Parse("#FFFFFF");
     }
 }
 
