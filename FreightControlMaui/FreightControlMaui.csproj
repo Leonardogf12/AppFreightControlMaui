@@ -119,6 +119,7 @@
 	  <None Remove="MVVM\ViewModels\" />
 	  <None Remove="Services\" />
 	  <None Remove="Services\Chart\" />
+	  <None Remove="MVVM\Views\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Components\" />
@@ -144,5 +145,6 @@
 	  <Folder Include="MVVM\ViewModels\" />
 	  <Folder Include="Services\" />
 	  <Folder Include="Services\Chart\" />
+	  <Folder Include="MVVM\Views\" />
 	</ItemGroup>
 </Project>
