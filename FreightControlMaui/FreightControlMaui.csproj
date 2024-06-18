@@ -101,6 +101,7 @@
 	  <None Remove="Components\Other\" />
 	  <None Remove="Controls\" />
 	  <None Remove="Controls\Resources\" />
+	  <None Remove="Components\Popups\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Components\" />
@@ -108,5 +109,6 @@
 	  <Folder Include="Components\Other\" />
 	  <Folder Include="Controls\" />
 	  <Folder Include="Controls\Resources\" />
+	  <Folder Include="Components\Popups\" />
 	</ItemGroup>
 </Project>
