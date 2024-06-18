@@ -103,6 +103,7 @@
 	  <None Remove="Controls\Resources\" />
 	  <None Remove="Components\Popups\" />
 	  <None Remove="Components\UI\" />
+	  <None Remove="Constants\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Components\" />
@@ -112,5 +113,6 @@
 	  <Folder Include="Controls\Resources\" />
 	  <Folder Include="Components\Popups\" />
 	  <Folder Include="Components\UI\" />
+	  <Folder Include="Constants\" />
 	</ItemGroup>
 </Project>
