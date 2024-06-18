@@ -112,6 +112,8 @@
 	  <None Remove="MVVM\Models\" />
 	  <None Remove="Repositories\" />
 	  <None Remove="Data\" />
+	  <None Remove="Models\" />
+	  <None Remove="Models\Chart\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Components\" />
@@ -130,5 +132,7 @@
 	  <Folder Include="MVVM\Models\" />
 	  <Folder Include="Repositories\" />
 	  <Folder Include="Data\" />
+	  <Folder Include="Models\" />
+	  <Folder Include="Models\Chart\" />
 	</ItemGroup>
 </Project>
