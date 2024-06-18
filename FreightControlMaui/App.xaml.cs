@@ -1,4 +1,6 @@
 ﻿using FreightControlMaui.Components.Popups;
+using FreightControlMaui.Constants;
+using FreightControlMaui.Controls;
 
 namespace FreightControlMaui;
 
@@ -21,6 +23,11 @@ public partial class App : Application
 
 		MainPage = new AppShell();
 	}
+
+    public static void SetLocalIdByUserLogged()
+    {
+        UserLocalIdLogged = ControlPreferences.GetKeyOfPreferences(StringConstants.firebaseUserLocalIdKey);
+    }
 
     #region Style - Colors
 
