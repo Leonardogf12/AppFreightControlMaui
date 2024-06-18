@@ -98,9 +98,15 @@
 	<ItemGroup>
 	  <None Remove="Components\" />
 	  <None Remove="Components\Chart\" />
+	  <None Remove="Components\Other\" />
+	  <None Remove="Controls\" />
+	  <None Remove="Controls\Resources\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Components\" />
 	  <Folder Include="Components\Chart\" />
+	  <Folder Include="Components\Other\" />
+	  <Folder Include="Controls\" />
+	  <Folder Include="Controls\Resources\" />
 	</ItemGroup>
 </Project>
