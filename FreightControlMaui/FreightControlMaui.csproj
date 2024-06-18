@@ -120,6 +120,7 @@
 	  <None Remove="Services\Chart\" />
 	  <None Remove="MVVM\Views\" />
 	  <None Remove="Services\Authentication\" />
+	  <None Remove="Services\Navigation\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Components\" />
@@ -147,5 +148,6 @@
 	  <Folder Include="Services\Chart\" />
 	  <Folder Include="MVVM\Views\" />
 	  <Folder Include="Services\Authentication\" />
+	  <Folder Include="Services\Navigation\" />
 	</ItemGroup>
 </Project>

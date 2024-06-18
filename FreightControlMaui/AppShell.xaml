@@ -2,15 +2,18 @@
 <Shell
     x:Class="FreightControlMaui.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:FreightControlMaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"   
     Shell.FlyoutBehavior="Disabled"
     Title="FreightControlMaui">
 
-    <ShellContent
+     <FlyoutItem Route="Login">
+        <ShellContent ContentTemplate="{DataTemplate views:LoginView}" Route="login"/>
+    </FlyoutItem>    
+
+   <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        ContentTemplate="{DataTemplate views:HomeView}"
+        Route="home" />
 
 </Shell>
 

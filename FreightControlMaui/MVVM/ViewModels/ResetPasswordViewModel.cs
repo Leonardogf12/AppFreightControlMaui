@@ -1,4 +1,5 @@
 ﻿using FreightControlMaui.MVVM.Base;
+using FreightControlMaui.Services.Authentication;
 
 namespace FreightControlMaui.MVVM.ViewModels
 {
@@ -32,7 +33,7 @@ namespace FreightControlMaui.MVVM.ViewModels
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                await Application.Current.MainPage.DisplayAlert("Ops", "Ocorreu um erro inesperado. Tente novamente em alguns instantes.", "Ok");
+                await App.Current.MainPage.DisplayAlert("Ops", "Ocorreu um erro inesperado. Tente novamente em alguns instantes.", "Ok");
             }
             finally
             {
