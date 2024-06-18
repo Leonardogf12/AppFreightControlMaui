@@ -114,6 +114,8 @@
 	  <None Remove="Data\" />
 	  <None Remove="Models\" />
 	  <None Remove="Models\Chart\" />
+	  <None Remove="MVVM\Base\" />
+	  <None Remove="MVVM\Models\IBGE\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Components\" />
@@ -134,5 +136,7 @@
 	  <Folder Include="Data\" />
 	  <Folder Include="Models\" />
 	  <Folder Include="Models\Chart\" />
+	  <Folder Include="MVVM\Base\" />
+	  <Folder Include="MVVM\Models\IBGE\" />
 	</ItemGroup>
 </Project>

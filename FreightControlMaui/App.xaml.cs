@@ -1,8 +1,19 @@
-﻿namespace FreightControlMaui;
+﻿using FreightControlMaui.Components.Popups;
+
+namespace FreightControlMaui;
 
 public partial class App : Application
 {
-	public App()
+    #region Properties
+
+    private static PopupLoadingView popupLoading = new();
+
+    public static PopupLoadingView PopupLoading { get => popupLoading; set => popupLoading = value; }
+
+    #endregion
+
+
+    public App()
 	{
 		InitializeComponent();
 
