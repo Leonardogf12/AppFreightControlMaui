@@ -106,6 +106,7 @@
 	  <None Remove="Constants\" />
 	  <None Remove="Controls\Animations\" />
 	  <None Remove="Controls\Benchmark\" />
+	  <None Remove="Controls\ControlCheckers\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Components\" />
@@ -118,5 +119,6 @@
 	  <Folder Include="Constants\" />
 	  <Folder Include="Controls\Animations\" />
 	  <Folder Include="Controls\Benchmark\" />
+	  <Folder Include="Controls\ControlCheckers\" />
 	</ItemGroup>
 </Project>
