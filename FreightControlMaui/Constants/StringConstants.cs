@@ -2,6 +2,7 @@
 {
     public static class StringConstants
     {
+        public const string DbPath = "/data/user/0/com.companyname.freight.control.maui/files/confretedata.db3";
         public const string Excluir = "Excluir";
         public const string ExcluirTudo = "Excluir Tudo";
         public const string Exportar = "Exportar";

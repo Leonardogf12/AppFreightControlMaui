@@ -107,6 +107,10 @@
 	  <None Remove="Controls\Animations\" />
 	  <None Remove="Controls\Benchmark\" />
 	  <None Remove="Controls\ControlCheckers\" />
+	  <None Remove="Controls\Excel\" />
+	  <None Remove="MVVM\" />
+	  <None Remove="MVVM\Models\" />
+	  <None Remove="Repositories\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Components\" />
@@ -120,5 +124,9 @@
 	  <Folder Include="Controls\Animations\" />
 	  <Folder Include="Controls\Benchmark\" />
 	  <Folder Include="Controls\ControlCheckers\" />
+	  <Folder Include="Controls\Excel\" />
+	  <Folder Include="MVVM\" />
+	  <Folder Include="MVVM\Models\" />
+	  <Folder Include="Repositories\" />
 	</ItemGroup>
 </Project>
