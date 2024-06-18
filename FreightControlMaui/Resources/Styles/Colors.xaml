@@ -42,4 +42,11 @@
     <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+
+     <!-- New Colors -->
+    <Color x:Key="PrimaryDark">#080E2C</Color>
+    <Color x:Key="PrimaryDarkLight">#333850</Color>
+    <Color x:Key="PrimaryGreen">#A5F3DD</Color>
+    <Color x:Key="SecondaryGreen">#D1E8E2</Color>
+    <Color x:Key="TertiaryGreen">#CCD9D5</Color>
 </ResourceDictionary>

@@ -5,6 +5,127 @@
              x:Class="FreightControlMaui.App">
     <Application.Resources>
         <ResourceDictionary>
+
+             <!-- New Colors -->
+            <Color x:Key="PrimaryDark">#080E2C</Color>
+            <Color x:Key="PrimaryDarkLight">#333850</Color>
+            <Color x:Key="PrimaryGreen">#A5F3DD</Color>
+            <Color x:Key="SecondaryGreen">#D1E8E2</Color>
+            <Color x:Key="TertiaryGreen">#CCD9D5</Color>
+            <Color x:Key="ColorOfIcons">#6A7777</Color>
+            <Color x:Key="BorderGray400">#919191</Color>
+            <Color x:Key="ColorForgotPassword">#1353B2</Color>
+            <Color x:Key="ColorFilterButtonSelected">#08CF96</Color>
+                                  
+            <!-- My Styles -->
+            <Style x:Key="buttonDarkLight" TargetType="Button">
+                <Setter Property="Padding" Value="1" />
+                <Setter Property="HeightRequest" Value="30" />
+                <Setter Property="CornerRadius" Value="15" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryDarkLight}" />
+                <Setter Property="FontFamily" Value="MontserratSemiBold" />  
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+
+             <Style x:Key="buttonDarkLightFilterPrimary" TargetType="Button">
+                <Setter Property="Padding" Value="1" />
+                <Setter Property="HeightRequest" Value="60" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="CornerRadius" Value="0" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryDarkLight}" />
+                <Setter Property="FontFamily" Value="MontserratSemiBold" />  
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+
+             <Style x:Key="buttonDarkLightFilterSecondary" TargetType="Button">
+                <Setter Property="Padding" Value="1" />
+                <Setter Property="HeightRequest" Value="60" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="CornerRadius" Value="0" />
+                <Setter Property="BackgroundColor" Value="{StaticResource ColorFilterButtonSelected}" />
+                <Setter Property="FontFamily" Value="MontserratSemiBold" />  
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+ 
+            <Style x:Key="buttonTertiaryGreen" TargetType="Button">
+                <Setter Property="Padding" Value="1" />
+                <Setter Property="HeightRequest" Value="30" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="TextColor" Value="Black" />              
+                <Setter Property="FontFamily" Value="MontserratSemiBold" />  
+                <Setter Property="BackgroundColor" Value="{StaticResource TertiaryGreen}" />
+            </Style>
+
+            <Style x:Key="buttonDarkPrimary" TargetType="Button">       
+                <Setter Property="HeightRequest" Value="45" />
+                <Setter Property="WidthRequest" Value="200" />
+                <Setter Property="CornerRadius" Value="25" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryDarkLight}" />
+                <Setter Property="TextColor" Value="White" />       
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="FontFamily" Value="MontserratSemiBold" />  
+             <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+
+              <Style x:Key="buttonLoginDarkPrimary" TargetType="Button">       
+                <Setter Property="HeightRequest" Value="45" />               
+                <Setter Property="CornerRadius" Value="25" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryDark}" />
+                <Setter Property="TextColor" Value="White" />       
+                <Setter Property="VerticalOptions" Value="Center" />               
+                <Setter Property="FontFamily" Value="MontserratSemiBold" />
+                <Setter Property="Margin" Value="10,0,10,0" /> 
+            </Style>
+
+             <Style x:Key="buttonLoginSecondaryDarkPrimary" TargetType="Button">       
+                <Setter Property="HeightRequest" Value="45" />               
+                <Setter Property="CornerRadius" Value="25" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryDark}" />       
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="BorderColor" Value="{StaticResource PrimaryDark}" />
+                <Setter Property="BorderWidth" Value="1.0" />                                  
+                <Setter Property="FontFamily" Value="MontserratSemiBold" />
+                <Setter Property="Margin" Value="10,0,10,0" /> 
+            </Style>
+
+            <Style x:Key="labelTitleView" TargetType="Label">     
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily" Value="MontserratSemiBold" />                           
+            </Style>
+
+             <Style x:Key="labelForgotPassword" TargetType="Label">     
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource ColorForgotPassword}" />
+                <Setter Property="FontFamily" Value="MontserratSemiBold" />                           
+            </Style>
+
+             <Style x:Key="labelTitleForgotPassword" TargetType="Label">     
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="HorizontalOptions" Value="Center" />               
+                <Setter Property="TextColor" Value="{StaticResource PrimaryDark}" />
+                <Setter Property="FontFamily" Value="MontserratSemiBold" />                           
+            </Style>
+
+            <Style x:Key="labelPhraseForgotPassword" TargetType="Label">     
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="Margin" Value="10,0,10,0" />
+                <Setter Property="TextColor" Value="{StaticResource BorderGray400}" />
+                                     
+            </Style>
+
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
