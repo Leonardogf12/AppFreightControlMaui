@@ -56,7 +56,7 @@ public partial class App : Application
 
     #region DB
 
-    private static DbApp _dbApp;
+    private static DbApp? _dbApp;
     public static DbApp DbApp
     {
 #if ANDROID
@@ -90,9 +90,7 @@ public partial class App : Application
     {
 
 #if ANDROID
-        DbPath = "/data/user/0/com.companyname.freight.control.maui/files/confretedata.db3";
-
-
+        DbPath = StringConstants.DbPath;
 #else
         string documentsPath = FileSystem.AppDataDirectory;
         string databaseName = "nomedodatabase.db3";

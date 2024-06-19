@@ -1,5 +1,4 @@
-﻿using System;
-using DevExpress.Maui.Editors;
+﻿using DevExpress.Maui.Editors;
 using FreightControlMaui.Components.UI;
 using FreightControlMaui.Controls.Animations;
 using FreightControlMaui.Controls.ControlCheckers;
@@ -103,8 +102,8 @@ namespace FreightControlMaui.MVVM.Views
 
             var labelTitle = new Label
             {
-                TextColor = ControlResources.GetResource<Color>("PrimaryDark"), //(Color)App.Current.Resources["PrimaryDark"],
-                Style = ControlResources.GetResource<Style>("labelTitleView") //(Style)App.Current.Resources["labelTitleView"],
+                TextColor = ControlResources.GetResource<Color>("PrimaryDark"),
+                Style = ControlResources.GetResource<Style>("labelTitleView")
             };
             labelTitle.SetBinding(Label.TextProperty, nameof(ViewModel.TextTitlePage));
             contentGridStackTitle.Add(labelTitle, 1, 0);
@@ -142,15 +141,15 @@ namespace FreightControlMaui.MVVM.Views
                     new () {Height = GridLength.Auto},
                     new () {Height = GridLength.Auto},
                     new () {Height = GridLength.Auto},
-                    new () {Height = GridLength.Auto},
+                    new () {Height = GridLength.Auto},                  
                 },
                 ColumnDefinitions = new ColumnDefinitionCollection
                 {
                     new () { Width = GridLength.Star},
                     new () { Width = GridLength.Star},
                     new () { Width = GridLength.Star},
-                    new () { Width = GridLength.Star},
-                }
+                    new () { Width = GridLength.Star},                  
+                },               
             };
 
             CreateTravelDateFieldForm(contentGridBorderForm);
@@ -159,9 +158,7 @@ namespace FreightControlMaui.MVVM.Views
 
             CreateDestinationFieldForm(contentGridBorderForm);
 
-            CreateKmFieldForm(contentGridBorderForm);
-
-            CreateFreightValueFieldForm(contentGridBorderForm);
+            CreateKmAndFreightValueFields(contentGridBorderForm);
 
             CreateObservationFieldCustom(contentGridBorderForm);
 
@@ -176,74 +173,13 @@ namespace FreightControlMaui.MVVM.Views
         {
             var travel = new DatePickerFieldCustom();
             travel.DatePicker.SetBinding(DatePicker.DateProperty, nameof(AddFreightViewModel.TravelDate));
-            contentGridBorderForm.SetColumnSpan(travel, 5);
-            contentGridBorderForm.Add(travel, 0, 0);
+            contentGridBorderForm.AddWithSpan(view: travel, row: 0, column: 0, rowSpan: 1, columnSpan: 5);
         }
 
         private void CreateOriginFieldForm(Grid contentGridBorderForm)
         {
             var grid = new Grid
-            {
-                RowDefinitions = new RowDefinitionCollection
-                {
-                    new () { Height = GridLength.Star},
-                    new () { Height = GridLength.Star},
-                },
-                ColumnDefinitions = new ColumnDefinitionCollection
-                {
-                    new () { Width = GridLength.Star},
-                    new () { Width = GridLength.Star},
-                    new () { Width = GridLength.Star},
-                    new () { Width = GridLength.Star},
-                    new () { Width = GridLength.Star},
-                },
-                RowSpacing = 3
-            };
-
-            var title = new Label
-            {
-                Text = "Origem",
-                FontFamily = "MontserratRegular",
-                FontSize = 16,
-                VerticalOptions = LayoutOptions.Center,
-                Margin = new Thickness(10, 0, 0, 0),
-            };
-            grid.SetColumnSpan(title, 5);
-            grid.Add(title, 0, 0);
-
-            OriginUfComboboxEditCustom = new ComboboxEditCustom(icon: "uf_24", labelText: "Uf")
-            {
-                Margin = new Thickness(10, 0, 5, 0),
-            };
-            OriginUfComboboxEditCustom.SetBinding(ItemsEditBase.ItemsSourceProperty, nameof(ViewModel.OriginUfCollection));
-            OriginUfComboboxEditCustom.SetBinding(ComboBoxEdit.SelectedItemProperty, nameof(ViewModel.SelectedItemOriginUf), BindingMode.TwoWay);
-            OriginUfComboboxEditCustom.SetBinding(EditBase.BorderColorProperty, nameof(ViewModel.BorderColorOriginUf));
-            OriginUfComboboxEditCustom.SetBinding(EditBase.FocusedBorderColorProperty, nameof(ViewModel.BorderColorFocusedOriginUf));
-            OriginUfComboboxEditCustom.SelectionChanged += OriginUf_SelectionChanged;
-            grid.SetColumnSpan(OriginUfComboboxEditCustom, 2);
-            grid.Add(OriginUfComboboxEditCustom, 0, 1);
-
-            var origin = new ComboboxEditCustom(icon: "local_24", labelText: "Origem")
-            {
-                Margin = new Thickness(0, 0, 10, 0),
-            };
-            origin.SetBinding(ItemsEditBase.ItemsSourceProperty, nameof(ViewModel.OriginCollection));
-            origin.SetBinding(ComboBoxEdit.SelectedItemProperty, nameof(ViewModel.SelectedItemOrigin), BindingMode.TwoWay);
-            origin.SetBinding(EditBase.BorderColorProperty, nameof(ViewModel.BorderColorOrigin));
-            origin.SetBinding(EditBase.FocusedBorderColorProperty, nameof(ViewModel.BorderColorFocusedOrigin));
-            origin.SelectionChanged += Origin_SelectionChanged;
-
-            grid.SetColumnSpan(origin, 3);
-            grid.Add(origin, 2, 1);
-
-            contentGridBorderForm.SetColumnSpan(grid, 5);
-            contentGridBorderForm.Add(grid, 0, 1);
-        }
-
-        private void CreateDestinationFieldForm(Grid contentGridBorderForm)
-        {
-            var grid = new Grid
-            {
+            {                
                 RowDefinitions = new RowDefinitionCollection
                 {
                     new () { Height = GridLength.Auto},
@@ -256,22 +192,79 @@ namespace FreightControlMaui.MVVM.Views
                     new () { Width = GridLength.Star},
                     new () { Width = GridLength.Star},
                     new () { Width = GridLength.Star},
+                },              
+            };
+
+            var title = new Label
+            {
+                Text = "Origem",
+                TextColor = Colors.Gray,
+                FontFamily = "MontserratRegular",
+                FontSize = 16,
+                VerticalOptions = LayoutOptions.Center,
+                Margin = new Thickness(10, 5, 0, 0),
+            };
+
+            grid.AddWithSpan(view: title, row: 0, column: 0, rowSpan: 1, columnSpan: 5);
+          
+            OriginUfComboboxEditCustom = new ComboboxEditCustom(icon: "uf_24", labelText: "Uf")
+            {
+                Margin = new Thickness(10, 0, 5, 0),
+            };
+            OriginUfComboboxEditCustom.SetBinding(ItemsEditBase.ItemsSourceProperty, nameof(ViewModel.OriginUfCollection));
+            OriginUfComboboxEditCustom.SetBinding(ComboBoxEdit.SelectedItemProperty, nameof(ViewModel.SelectedItemOriginUf), BindingMode.TwoWay);
+            OriginUfComboboxEditCustom.SetBinding(EditBase.BorderColorProperty, nameof(ViewModel.BorderColorOriginUf));
+            OriginUfComboboxEditCustom.SetBinding(EditBase.FocusedBorderColorProperty, nameof(ViewModel.BorderColorFocusedOriginUf));
+            OriginUfComboboxEditCustom.SelectionChanged += OriginUf_SelectionChanged;
+
+            grid.AddWithSpan(view: OriginUfComboboxEditCustom, row: 1, column: 0, rowSpan: 1, columnSpan: 2);
+           
+            var origin = new ComboboxEditCustom(icon: "local_24", labelText: "Origem")
+            {
+                Margin = new Thickness(0, 0, 10, 0),
+            };
+            origin.SetBinding(ItemsEditBase.ItemsSourceProperty, nameof(ViewModel.OriginCollection));
+            origin.SetBinding(ComboBoxEdit.SelectedItemProperty, nameof(ViewModel.SelectedItemOrigin), BindingMode.TwoWay);
+            origin.SetBinding(EditBase.BorderColorProperty, nameof(ViewModel.BorderColorOrigin));
+            origin.SetBinding(EditBase.FocusedBorderColorProperty, nameof(ViewModel.BorderColorFocusedOrigin));
+            origin.SelectionChanged += Origin_SelectionChanged;
+
+            grid.AddWithSpan(view: origin, row: 1, column: 2, rowSpan: 1, columnSpan: 3);
+          
+            contentGridBorderForm.AddWithSpan(view: grid, row: 1, column: 0, rowSpan: 1, columnSpan: 5);                     
+        }
+
+        private void CreateDestinationFieldForm(Grid contentGridBorderForm)
+        {
+            var grid = new Grid
+            {               
+                RowDefinitions = new RowDefinitionCollection
+                {
+                    new () { Height = GridLength.Star},
+                    new () { Height = GridLength.Star},
                 },
-                RowSpacing = 3
+                ColumnDefinitions = new ColumnDefinitionCollection
+                {
+                    new () { Width = GridLength.Star},
+                    new () { Width = GridLength.Star},
+                    new () { Width = GridLength.Star},
+                    new () { Width = GridLength.Star},
+                    new () { Width = GridLength.Star},
+                },               
             };
 
             var title = new Label
             {
                 Text = "Destino",
                 FontFamily = "MontserratRegular",
+                TextColor = Colors.Gray,
                 FontSize = 16,
-                HorizontalOptions = LayoutOptions.Start,
-                VerticalOptions = LayoutOptions.Center,
-                Margin = new Thickness(10, 0, 0, 0),
+                HorizontalOptions = LayoutOptions.Start,                
+                Margin = new Thickness(10, 5, 0, 0),
             };
-            grid.SetColumnSpan(title, 5);
-            grid.Add(title, 0, 0);
 
+            grid.AddWithSpan(view: title, row: 0, column: 0, rowSpan: 1, columnSpan: 5);
+          
             DestinationUfComboboxEditCustom = new ComboboxEditCustom(icon: "uf_24", labelText: "Uf")
             {
                 Margin = new Thickness(10, 0, 5, 0),
@@ -281,9 +274,9 @@ namespace FreightControlMaui.MVVM.Views
             DestinationUfComboboxEditCustom.SetBinding(EditBase.BorderColorProperty, nameof(ViewModel.BorderColorDestinationUf));
             DestinationUfComboboxEditCustom.SetBinding(EditBase.FocusedBorderColorProperty, nameof(ViewModel.BorderColorFocusedDestinationUf));
             DestinationUfComboboxEditCustom.SelectionChanged += DestinationUf_SelectionChanged;
-            grid.SetColumnSpan(DestinationUfComboboxEditCustom, 2);
-            grid.Add(DestinationUfComboboxEditCustom, 0, 1);
 
+            grid.AddWithSpan(view: DestinationUfComboboxEditCustom, row: 2, column: 0, rowSpan: 1, columnSpan: 2);            
+          
             var destination = new ComboboxEditCustom(icon: "local_24", labelText: "Destino")
             {
                 Margin = new Thickness(0, 0, 10, 0),
@@ -293,14 +286,31 @@ namespace FreightControlMaui.MVVM.Views
             destination.SetBinding(EditBase.BorderColorProperty, nameof(ViewModel.BorderColorDestination));
             destination.SetBinding(EditBase.FocusedBorderColorProperty, nameof(ViewModel.BorderColorFocusedDestination));
             destination.SelectionChanged += Destination_SelectionChanged;
-            grid.SetColumnSpan(destination, 3);
-            grid.Add(destination, 2, 1);
 
-            contentGridBorderForm.SetColumnSpan(grid, 5);
-            contentGridBorderForm.Add(grid, 0, 2);
+            grid.AddWithSpan(view: destination, row: 2, column: 2, rowSpan: 1, columnSpan: 3);            
+            
+            contentGridBorderForm.AddWithSpan(view: grid, row: 2, column: 0, rowSpan: 1, columnSpan: 5);                     
         }
 
-        private void CreateKmFieldForm(Grid contentGridBorderForm)
+        private void CreateKmAndFreightValueFields(Grid contentGridBorderForm)
+        {
+            var grid = new Grid
+            {
+                ColumnDefinitions = new ColumnDefinitionCollection
+                {
+                    new () { Width = GridLength.Star},
+                    new () { Width = GridLength.Star},
+                },                
+            };
+
+            CreateKmFieldForm(grid);
+
+            CreateFreightValueFieldForm(grid);
+
+            contentGridBorderForm.AddWithSpan(view: grid, row: 3, column: 0, rowSpan: 1, columnSpan: 5);
+        }
+
+        private void CreateKmFieldForm(Grid grid)
         {
             var km = new TextEditCustom(icon: "km_24", placeholder: "Km: 1000", keyboard: Keyboard.Numeric)
             {
@@ -310,11 +320,11 @@ namespace FreightControlMaui.MVVM.Views
             km.SetBinding(EditBase.BorderColorProperty, nameof(ViewModel.BorderColorKm));
             km.SetBinding(EditBase.FocusedBorderColorProperty, nameof(ViewModel.BorderColorFocusedKm));
             km.TextChanged += Km_TextChanged;
-            contentGridBorderForm.SetColumnSpan(km, 2);
-            contentGridBorderForm.Add(km, 0, 3);
+
+            grid.AddWithSpan(view: km, row: 0, column: 0, rowSpan: 1, columnSpan: 1);
         }
 
-        private void CreateFreightValueFieldForm(Grid contentGridBorderForm)
+        private void CreateFreightValueFieldForm(Grid grid)
         {
             var freigthField = new TextEditCustom(icon: "money_24", placeholder: "R$ 1000.00", keyboard: Keyboard.Numeric)
             {
@@ -324,16 +334,16 @@ namespace FreightControlMaui.MVVM.Views
             freigthField.SetBinding(EditBase.BorderColorProperty, nameof(ViewModel.BorderColorFreightValue));
             freigthField.SetBinding(EditBase.FocusedBorderColorProperty, nameof(ViewModel.BorderColorFocusedFreightValue));
             freigthField.TextChanged += FreigthField_TextChanged;
-            contentGridBorderForm.SetColumnSpan(freigthField, 2);
-            contentGridBorderForm.Add(freigthField, 2, 3);
+
+            grid.AddWithSpan(view: freigthField, row: 0, column: 1, rowSpan: 1, columnSpan: 1);                      
         }
 
         private void CreateObservationFieldCustom(Grid contentGridBorderForm)
         {
             var observation = new MultilineEditCustom(icon: "comment_24", placeholder: "Observacão");
             observation.SetBinding(TextEditBase.TextProperty, nameof(ViewModel.Observation));
-            contentGridBorderForm.SetColumnSpan(observation, 4);
-            contentGridBorderForm.Add(observation, 0, 4);
+
+            contentGridBorderForm.AddWithSpan(observation, 4, 0, 1, 5);
         }
 
         private void CreateSaveButton(Grid mainGrid)

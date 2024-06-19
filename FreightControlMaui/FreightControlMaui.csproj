@@ -43,6 +43,16 @@
 	</PropertyGroup>
 	
 	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\add.svg" />
+	  <MauiImage Remove="Resources\Images\dotnet_bot.png" />
+	  <MauiImage Remove="Resources\Images\money_24.svg" />
+	  <MauiImage Remove="Resources\Images\km_24.svg" />
+	  <MauiImage Remove="Resources\Images\comment_24.svg" />
+	  <MauiImage Remove="Resources\Images\calendar_24.svg" />
+	  <MauiImage Remove="Resources\Images\local_24.svg" />
+	  <MauiImage Remove="Resources\Images\uf_24.svg" />
+	</ItemGroup>
+	<ItemGroup>
 		<!-- App Icon -->
 		<!--<MauiIcon Include="Resources\AppIcon\logo_app.svg" ForegroundFile="Resources\AppIcon\logo_app_truck.svg" Color="#080E2C" /> -->
 		 <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#080E2C" />
@@ -204,39 +214,40 @@
 	  <BundleResource Include="Resources\Fonts\Montserrat-Bold.ttf" />
 	  <BundleResource Include="Resources\Fonts\Montserrat-Regular.ttf" />
 	  <BundleResource Include="Resources\Fonts\Montserrat-SemiBold.ttf" />
-	  <BundleResource Include="Resources\Images\add.svg" />
 	  <BundleResource Include="Resources\Images\back_primary_dark.svg" />
 	  <BundleResource Include="Resources\Images\back_white.svg" />
-	  <BundleResource Include="Resources\Images\calendar_24.svg" />
 	  <BundleResource Include="Resources\Images\calendar.svg" />
 	  <BundleResource Include="Resources\Images\charts_256.svg" />
 	  <BundleResource Include="Resources\Images\combobox_24.svg" />
-	  <BundleResource Include="Resources\Images\comment_24.svg" />
 	  <BundleResource Include="Resources\Images\comment.svg" />
 	  <BundleResource Include="Resources\Images\empty_tank.svg" />
 	  <BundleResource Include="Resources\Images\export.svg" />
 	  <BundleResource Include="Resources\Images\filter.svg" />
 	  <BundleResource Include="Resources\Images\fuel.svg" />
-	  <BundleResource Include="Resources\Images\km_24.svg" />
 	  <BundleResource Include="Resources\Images\landing.svg" />
 	  <BundleResource Include="Resources\Images\liters_24.svg" />
 	  <BundleResource Include="Resources\Images\liters.svg" />
-	  <BundleResource Include="Resources\Images\local_24.svg" />
 	  <BundleResource Include="Resources\Images\local.svg" />
 	  <BundleResource Include="Resources\Images\login_256.svg" />
 	  <BundleResource Include="Resources\Images\login_gray_256.svg" />
 	  <BundleResource Include="Resources\Images\logoff_24.svg" />
-	  <BundleResource Include="Resources\Images\money_24.svg" />
 	  <BundleResource Include="Resources\Images\money.svg" />
 	  <BundleResource Include="Resources\Images\settings_24.svg" />
 	  <BundleResource Include="Resources\Images\settings_white_24.svg" />
 	  <BundleResource Include="Resources\Images\shipment.svg" />
 	  <BundleResource Include="Resources\Images\trash.svg" />
 	  <BundleResource Include="Resources\Images\truck.svg" />
-	  <BundleResource Include="Resources\Images\uf_24.svg" />
 	  <BundleResource Include="Resources\Images\user_24.svg" />
 	  <BundleResource Include="Resources\Raw\loading_truck.json" />
 	  <BundleResource Include="Resources\Raw\truck_driver.json" />
 	  <BundleResource Include="Resources\Splash\splash_load.svg" />
+	  <BundleResource Include="Resources\Images\add.svg" />
+	  <BundleResource Include="Resources\Images\dotnet_bot.png" />
+	  <BundleResource Include="Resources\Images\money_24.svg" />
+	  <BundleResource Include="Resources\Images\km_24.svg" />
+	  <BundleResource Include="Resources\Images\comment_24.svg" />
+	  <BundleResource Include="Resources\Images\calendar_24.svg" />
+	  <BundleResource Include="Resources\Images\local_24.svg" />
+	  <BundleResource Include="Resources\Images\uf_24.svg" />
 	</ItemGroup>
 </Project>

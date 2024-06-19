@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using FreightControlMaui.Constants;
+﻿using FreightControlMaui.Constants;
 using SQLite;
 
 namespace FreightControlMaui.Repositories
@@ -12,7 +10,7 @@ namespace FreightControlMaui.Repositories
         public GenericRepository()
         {
             _db = new SQLiteAsyncConnection(StringConstants.DbPath);
-            _db.CreateTableAsync<T>().Wait();
+            _db.CreateTableAsync<T>();
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
