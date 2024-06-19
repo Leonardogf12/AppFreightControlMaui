@@ -207,24 +207,22 @@ namespace FreightControlMaui.MVVM.Views
             var contentGridBorder = new Grid
             {
                 RowDefinitions = new RowDefinitionCollection
-            {
-                new () {Height = GridLength.Star},
-                new () {Height = GridLength.Star},
-                new () {Height = GridLength.Star},
-                new () {Height = GridLength.Star},
-                new () {Height = GridLength.Star},
-            },
+                {
+                    new () {Height = GridLength.Star},
+                    new () {Height = GridLength.Star},
+                    new () {Height = GridLength.Star},
+                    new () {Height = GridLength.Star},
+                    new () {Height = GridLength.Star},
+                },
                 ColumnDefinitions = new ColumnDefinitionCollection
-            {
-                new () {Width = GridLength.Star},
-                new () {Width = GridLength.Star},
-                new () {Width = GridLength.Star},
-            }
+                {
+                    new () {Width = GridLength.Star},
+                    new () {Width = GridLength.Star},
+                    new () {Width = GridLength.Star},
+                }
             };
 
-            CreateLabelDate(contentGridBorder);
-
-            CreateIconTrash(contentGridBorder);
+            CreateLabelDateAndIconTrash(contentGridBorder);          
 
             CreateStackOrigin(contentGridBorder);
 
@@ -239,10 +237,27 @@ namespace FreightControlMaui.MVVM.Views
             return border;
         }
 
-        private static void CreateLabelDate(Grid contentGridBorder)
+        private void CreateLabelDateAndIconTrash(Grid contentGridBorder)
+        {
+            var grid = new Grid
+            {                
+                ColumnDefinitions = new ColumnDefinitionCollection
+                {
+                    new () {Width = GridLength.Star},
+                    new () {Width = GridLength.Star},
+                    new () {Width = GridLength.Star},
+                }
+            };
+            CreateLabelDate(grid);
+            CreateIconTrash(grid);
+
+            contentGridBorder.AddWithSpan(view: grid, row: 0, column: 0, rowSpan:1, columnSpan: 4);
+        }
+
+        private static void CreateLabelDate(Grid grid)
         {
             var labelDate = new Label
-            {
+            {                
                 TextColor = ControlResources.GetResource<Color>("PrimaryDark"),
                 FontFamily = "MontserratSemiBold",
                 FontSize = 16,
@@ -250,13 +265,14 @@ namespace FreightControlMaui.MVVM.Views
                 HorizontalOptions = LayoutOptions.Center
             };
             labelDate.SetBinding(Label.TextProperty, nameof(FreightModel.TravelDateCustom));
-            contentGridBorder.Add(labelDate, 1, 0);
+
+            grid.AddWithSpan(view: labelDate, row: 0, column: 1);            
         }
 
-        private void CreateIconTrash(Grid contentGridBorder)
+        private void CreateIconTrash(Grid grid)
         {
             var iconTrash = new Image
-            {
+            {                
                 Source = ImageSource.FromFile("trash"),
                 HeightRequest = 25,
                 HorizontalOptions = LayoutOptions.End,
@@ -266,7 +282,7 @@ namespace FreightControlMaui.MVVM.Views
             tapGestureRecognizer.Tapped += TapGestureRecognizer_Tapped_DeleteItem;
             iconTrash.GestureRecognizers.Add(tapGestureRecognizer);
 
-            contentGridBorder.Add(iconTrash, 2, 0);
+            grid.AddWithSpan(view: iconTrash, row: 0, column: 2);           
         }
 
         private static void CreateStackOrigin(Grid contentGridBorder)
@@ -423,27 +439,26 @@ namespace FreightControlMaui.MVVM.Views
             var contentGridStack = new Grid
             {
                 ColumnDefinitions = new ColumnDefinitionCollection
-            {
-                new () { Width = GridLength.Star },
-                new () { Width = GridLength.Star },
-                new () { Width = GridLength.Star },
-            },
+                {
+                    new () { Width = GridLength.Star },
+                    new () { Width = GridLength.Star },
+                    new () { Width = GridLength.Star },
+                },
                 ColumnSpacing = 10
             };
 
-            var buttonSee = CreateBaseButton("Ver", "buttonTertiaryGreen", ClickedButtonSee);
-            contentGridStack.Add(buttonSee, 0, 0);
-
-            var buttonToFuel = CreateBaseButton("Abastecer", "buttonTertiaryGreen", ClickedButtonToFuel);
-            contentGridStack.Add(buttonToFuel, 1, 0);
-
-            var buttonEdit = CreateBaseButton("Editar", "buttonTertiaryGreen", ClickedButtonEdit);
-            contentGridStack.Add(buttonEdit, 2, 0);
-
+            var buttonSee = CreateBaseButton(text: "Ver", style: "buttonTertiaryGreen", clicked: ClickedButtonSee);
+            contentGridStack.AddWithSpan(view: buttonSee, row: 0, column: 0);
+            
+            var buttonToFuel = CreateBaseButton(text: "Abastecer", style: "buttonTertiaryGreen", clicked: ClickedButtonToFuel);
+            contentGridStack.AddWithSpan(view: buttonToFuel, row: 0, column: 1);
+            
+            var buttonEdit = CreateBaseButton(text: "Editar", style: "buttonTertiaryGreen", clicked: ClickedButtonEdit);
+            contentGridStack.AddWithSpan(view: buttonEdit, row: 0, column: 2);
+            
             stack.Children.Add(contentGridStack);
 
-            contentGridBorder.SetColumnSpan(stack, 4);
-            contentGridBorder.Add(stack, 0, 4);
+            contentGridBorder.AddWithSpan(view: stack, row: 4, column: 0, rowSpan: 1, columnSpan: 4);            
         }
 
         private void CreateLabelAddNewFreights(Grid contentGridBorder)
@@ -576,7 +591,7 @@ namespace FreightControlMaui.MVVM.Views
             }
         }
 
-        private static Button CreateBaseButton(string text, string style, EventHandler clicked)
+        private static Button CreateBaseButton(string text, string style, EventHandler? clicked)
         {
             var button = new Button
             {
