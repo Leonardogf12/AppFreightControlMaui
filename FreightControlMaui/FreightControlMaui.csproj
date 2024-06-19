@@ -21,7 +21,7 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>FreightControlMaui</ApplicationTitle>
+		<ApplicationTitle>ConFrete</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.freightcontrolmaui</ApplicationId>
@@ -41,13 +41,20 @@
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
 	</PropertyGroup>
+	
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appiconOLD.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<!--<MauiIcon Include="Resources\AppIcon\logo_app.svg" ForegroundFile="Resources\AppIcon\logo_app_truck.svg" Color="#080E2C" /> -->
+		 <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#080E2C" />
 
 		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash_load.svg" Color="#080E2C" BaseSize="128,128" />
+		<!--<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#080E2C" BaseSize="128,128" /> -->
+
+
+		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -55,12 +62,6 @@
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
-	  <PackageReference Include="DevExpress.Maui.Controls" Version="24.1.3" />
-	  <PackageReference Include="DevExpress.Maui.Editors" Version="24.1.3" />
-	</ItemGroup>
-
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-ios'">
 	  <PackageReference Include="DevExpress.Maui.Controls" Version="23.1.8" />
 	  <PackageReference Include="DevExpress.Maui.Editors" Version="23.1.8" />	 
@@ -89,6 +90,15 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.60" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.60" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
+	  <PackageReference Include="DevExpress.Maui.Controls" Version="23.1.8" />
+	  <PackageReference Include="DevExpress.Maui.Editors" Version="23.1.8" />	
+	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-ios'">
+	  <PackageReference Include="DevExpress.Maui.Controls" Version="23.1.8" />
+	  <PackageReference Include="DevExpress.Maui.Editors" Version="23.1.8" />	 
 	</ItemGroup>
 
 	<ItemGroup>
@@ -132,7 +142,6 @@
 	  <None Remove="Resources\Images\combobox_24.svg" />
 	  <None Remove="Resources\Images\comment_24.svg" />
 	  <None Remove="Resources\Images\comment.svg" />
-	  <None Remove="Resources\Images\dotnet_bot.svg" />
 	  <None Remove="Resources\Images\empty_tank.svg" />
 	  <None Remove="Resources\Images\export.svg" />
 	  <None Remove="Resources\Images\filter.svg" />
@@ -159,7 +168,6 @@
 	  <None Remove="Resources\Raw\truck_driver.json" />
 	  <None Remove="Resources\Splash\" />
 	  <None Remove="Resources\Splash\splash_load.svg" />
-	  <None Remove="Resources\Splash\splash.svg" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Components\" />
@@ -205,7 +213,6 @@
 	  <BundleResource Include="Resources\Images\combobox_24.svg" />
 	  <BundleResource Include="Resources\Images\comment_24.svg" />
 	  <BundleResource Include="Resources\Images\comment.svg" />
-	  <BundleResource Include="Resources\Images\dotnet_bot.svg" />
 	  <BundleResource Include="Resources\Images\empty_tank.svg" />
 	  <BundleResource Include="Resources\Images\export.svg" />
 	  <BundleResource Include="Resources\Images\filter.svg" />
@@ -231,6 +238,5 @@
 	  <BundleResource Include="Resources\Raw\loading_truck.json" />
 	  <BundleResource Include="Resources\Raw\truck_driver.json" />
 	  <BundleResource Include="Resources\Splash\splash_load.svg" />
-	  <BundleResource Include="Resources\Splash\splash.svg" />
 	</ItemGroup>
 </Project>

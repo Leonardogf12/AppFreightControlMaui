@@ -1,4 +1,6 @@
-﻿using FreightControlMaui.Constants;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using FreightControlMaui.Constants;
 using SQLite;
 
 namespace FreightControlMaui.Repositories

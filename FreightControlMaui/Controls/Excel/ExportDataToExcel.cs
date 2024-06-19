@@ -84,7 +84,7 @@ namespace FreightControlMaui.Controls.Excel
                 await writer.WriteAsync($"Total Geral: {totalFreight - totalValue - totalExpenses:c};-;-;-;-;-;-");
             }
 
-            await Application.Current.MainPage.DisplayAlert("Sucesso", "Arquivo exportado com sucesso. O arquivo foi salvo em: Documentos.", "Ok");
+            await App.Current.MainPage.DisplayAlert("Sucesso", "Arquivo exportado com sucesso. O arquivo foi salvo em: Documentos.", "Ok");
         }
 
         public async Task<List<ToFuelModel>> GetFreightSupplies(FreightModel item)

@@ -1,4 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using DevExpress.Maui.Controls;
 using FreightControlMaui.Constants;
@@ -7,6 +10,7 @@ using FreightControlMaui.MVVM.Base;
 using FreightControlMaui.MVVM.Models;
 using FreightControlMaui.MVVM.Views;
 using FreightControlMaui.Repositories;
+using Microsoft.Maui.Controls;
 
 namespace FreightControlMaui.MVVM.ViewModels
 {

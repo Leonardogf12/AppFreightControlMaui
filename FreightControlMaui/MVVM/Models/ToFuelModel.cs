@@ -10,7 +10,7 @@ namespace FreightControlMaui.MVVM.Models
 
         public DateTime Date { get; set; }
 
-        public double? Liters { get; set; }
+        public double Liters { get; set; }
 
         public decimal AmountSpentFuel { get; set; }
 
