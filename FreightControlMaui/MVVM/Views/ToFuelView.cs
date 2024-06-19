@@ -246,8 +246,10 @@ namespace FreightControlMaui.MVVM.Views
             date.DatePicker.SetBinding(DatePicker.DateProperty, nameof(ViewModel.Date));
             date.Border.SetBinding(Border.StrokeProperty, nameof(ViewModel.StrokeDate));
             date.DatePicker.DateSelected += DatePicker_DateSelected;
-            contentGridBorderForm.SetColumnSpan(date, 2);
-            contentGridBorderForm.Add(date, 0, 0);
+
+            contentGridBorderForm.AddWithSpan(view: date, row: 0, column: 0, rowSpan: 1, columnSpan: 3);
+            /*contentGridBorderForm.SetColumnSpan(date, 2);
+            contentGridBorderForm.Add(date, 0, 0);*/
         }
 
         private void CreateFuelBoxFieldForm(Grid contentGridBorderForm)
@@ -284,7 +286,9 @@ namespace FreightControlMaui.MVVM.Views
             liters.SetBinding(EditBase.BorderColorProperty, nameof(ViewModel.BorderColorLiters));
             liters.SetBinding(EditBase.FocusedBorderColorProperty, nameof(ViewModel.BorderColorFocusedLiters));
             liters.TextChanged += Liters_TextChanged;
-            gridFuel.Add(liters, 0, 0);
+
+            gridFuel.AddWithSpan(view: liters, row: 0, column: 0);
+            //gridFuel.Add(liters, 0, 0);
 
             var amountSpentFuel = new TextEditCustom(icon: "money_24", placeholder: "Valor", keyboard: Keyboard.Numeric);
             amountSpentFuel.SetBinding(TextEditBase.TextProperty, nameof(ViewModel.AmountSpentFuel));
@@ -301,7 +305,9 @@ namespace FreightControlMaui.MVVM.Views
                 TextColor = ControlResources.GetResource<Color>("PrimaryDark"),
                 Margin = new Thickness(10, 0, 0, 10),
             };
-            gridFuel.Add(titleValuePerLiter, 0, 1);
+
+            gridFuel.AddWithSpan(view: titleValuePerLiter, row: 1, column: 0);
+           // gridFuel.Add(titleValuePerLiter, 0, 1);
 
             var contentValuePerLiter = new Label
             {
@@ -312,12 +318,15 @@ namespace FreightControlMaui.MVVM.Views
                 Margin = new Thickness(0, 0, 10, 0),
             };
             contentValuePerLiter.SetBinding(Label.TextProperty, nameof(ViewModel.ValuePerLiter));
-            gridFuel.Add(contentValuePerLiter, 1, 1);
+
+            gridFuel.AddWithSpan(view: contentValuePerLiter, row: 1, column: 1);
+            //gridFuel.Add(contentValuePerLiter, 1, 1);
 
             borderFuel.Content = gridFuel;
 
-            contentGridBorderForm.SetColumnSpan(borderFuel, 2);
-            contentGridBorderForm.Add(borderFuel, 0, 2);
+            contentGridBorderForm.AddWithSpan(view: borderFuel, row: 1, column: 0, rowSpan:1, columnSpan:3);
+           /* contentGridBorderForm.SetColumnSpan(borderFuel, 2);
+            contentGridBorderForm.Add(borderFuel, 0, 2);*/
         }
 
         private void CreateExpensesFieldForm(Grid contentGridBorderForm)
@@ -327,16 +336,20 @@ namespace FreightControlMaui.MVVM.Views
             expenses.SetBinding(EditBase.BorderColorProperty, nameof(ViewModel.BorderColorExpenses));
             expenses.SetBinding(EditBase.FocusedBorderColorProperty, nameof(ViewModel.BorderColorFocusedExpenses));
             expenses.TextChanged += Expenses_TextChanged;
-            contentGridBorderForm.SetColumnSpan(expenses, 2);
-            contentGridBorderForm.Add(expenses, 0, 3);
+
+            contentGridBorderForm.AddWithSpan(view: expenses, row: 3, column: 0, rowSpan: 1, columnSpan: 3);
+            /*contentGridBorderForm.SetColumnSpan(expenses, 2);
+            contentGridBorderForm.Add(expenses, 0, 3);*/
         }
 
         private void CreateObservationFieldForm(Grid contentGridBorderForm)
         {
             var observation = new MultilineEditCustom(icon: "comment_24", placeholder: "Observacão");
             observation.SetBinding(TextEditBase.TextProperty, nameof(ViewModel.Observation));
-            contentGridBorderForm.SetColumnSpan(observation, 2);
-            contentGridBorderForm.Add(observation, 0, 5);
+
+            contentGridBorderForm.AddWithSpan(view: observation, row: 4, column: 0, rowSpan: 1, columnSpan: 3);
+            /*contentGridBorderForm.SetColumnSpan(observation, 2);
+            contentGridBorderForm.Add(observation, 0, 5);*/
         }
 
         private void CreateButtonSave(Grid mainGrid)
