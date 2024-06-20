@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Windows.Input;
 using FreightControlMaui.Controls;
+using FreightControlMaui.Controls.Alerts;
 using FreightControlMaui.MVVM.Base;
 using FreightControlMaui.MVVM.Models;
 using FreightControlMaui.Repositories;
@@ -29,8 +30,8 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
-        private ObservableCollection<string>? _originCollection = new();
-        public ObservableCollection<string>? OriginCollection
+        private ObservableCollection<string> _originCollection = new();
+        public ObservableCollection<string> OriginCollection
         {
             get => _originCollection;
             set
@@ -84,8 +85,8 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
-        private string? _kilometer;
-        public string? Kilometer
+        private string _kilometer;
+        public string Kilometer
         {
             get => _kilometer;
             set
@@ -95,8 +96,8 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
-        private string? _freightValue;
-        public string? FreightValue
+        private string _freightValue;
+        public string FreightValue
         {
             get => _freightValue;
             set
@@ -106,8 +107,8 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
-        private string? _observation;
-        public string? Observation
+        private string _observation;
+        public string Observation
         {
             get => _observation;
             set
@@ -128,8 +129,8 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
-        private string? _selectedItemOriginUf;
-        public string? SelectedItemOriginUf
+        private string _selectedItemOriginUf;
+        public string SelectedItemOriginUf
         {
             get => _selectedItemOriginUf;
             set
@@ -139,8 +140,8 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
-        private string? _selectedItemOrigin;
-        public string? SelectedItemOrigin
+        private string _selectedItemOrigin;
+        public string SelectedItemOrigin
         {
             get => _selectedItemOrigin;
             set
@@ -150,8 +151,8 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
-        private string? _selectedItemDestinationUf;
-        public string? SelectedItemDestinationUf
+        private string _selectedItemDestinationUf;
+        public string SelectedItemDestinationUf
         {
             get => _selectedItemDestinationUf;
             set
@@ -161,8 +162,8 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
-        private string? _selectedItemDestination;
-        public string? SelectedItemDestination
+        private string _selectedItemDestination;
+        public string SelectedItemDestination
         {
             get => _selectedItemDestination;
             set
@@ -331,7 +332,7 @@ namespace FreightControlMaui.MVVM.ViewModels
         private async Task EditFreight()
         {
             try
-            {
+            {                
                 var item = new FreightModel
                 {
                     Id = SelectedFreightToEdit.Id,
@@ -350,11 +351,11 @@ namespace FreightControlMaui.MVVM.ViewModels
 
                 if (result > 0)
                 {
-                    await App.Current.MainPage.DisplayAlert("Sucesso", "Frete editado com sucesso!", "Ok");
+                    await ControlAlert.DefaultAlert("Sucesso", "Frete editado com sucesso!");                 
                     return;
                 }
 
-                await App.Current.MainPage.DisplayAlert("Ops", "Parece que houve um erro durante a edição do Frete. Por favor, tente novamente.", "Ok");
+                await ControlAlert.DefaultAlert("Ops", "Parece que houve um erro durante a edição do Frete. Por favor, tente novamente.");                
             }
             catch (Exception ex)
             {
@@ -381,7 +382,7 @@ namespace FreightControlMaui.MVVM.ViewModels
             return Task.CompletedTask;
         }
 
-        private async Task<List<string?>> LoadCitiesByState(string? state)
+        private async Task<List<string>> LoadCitiesByState(string state)
         {
             IsBusy = true;
 
@@ -399,7 +400,7 @@ namespace FreightControlMaui.MVVM.ViewModels
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return new List<string?>();
+                return new List<string>();
             }
             finally
             {
@@ -408,7 +409,7 @@ namespace FreightControlMaui.MVVM.ViewModels
         }
 
         private async Task<FreightModel> CreateObjectFreightModelToSave()
-        {
+        {            
             var model = new FreightModel()
             {
                 UserLocalId = App.UserLocalIdLogged,
@@ -448,15 +449,15 @@ namespace FreightControlMaui.MVVM.ViewModels
             var result = await _freightRepository.SaveAsync(await CreateObjectFreightModelToSave());
 
             if (result > 0)
-            {
-                await App.Current.MainPage.DisplayAlert("Sucesso", "Frete criado com sucesso!", "Ok");
+            {                
+                await ControlAlert.DefaultAlert("Sucesso", "Frete criado com sucesso!");
                 return;
             }
 
-            await App.Current.MainPage.DisplayAlert("Ops", "Parece que houve um erro durante a criação do Frete. Por favor, tente novamente.", "Ok");
+            await ControlAlert.DefaultAlert("Ops", "Parece que houve um erro durante a criação do Frete. Por favor, tente novamente.");            
         }
 
-        public async void ChangedItemOriginUf(string? state)
+        public async void ChangedItemOriginUf(string state)
         {
             OriginCollection = new ObservableCollection<string>(list: await LoadCitiesByState(state));
         }

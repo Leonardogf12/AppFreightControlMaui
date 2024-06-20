@@ -26,6 +26,9 @@ namespace FreightControlMaui.MVVM.Models
         public string? Observation { get; set; }
 
         public string TravelDateCustom => TravelDate.ToShortDateString();
+
+        public FreightModel() { }
+
     }
 }
 

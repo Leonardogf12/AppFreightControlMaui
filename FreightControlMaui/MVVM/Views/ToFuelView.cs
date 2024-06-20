@@ -1,5 +1,6 @@
 ﻿using DevExpress.Maui.Editors;
 using FreightControlMaui.Components.UI;
+using FreightControlMaui.Controls.Alerts;
 using FreightControlMaui.Controls.Animations;
 using FreightControlMaui.Controls.ControlCheckers;
 using FreightControlMaui.Controls.Resources;
@@ -247,9 +248,7 @@ namespace FreightControlMaui.MVVM.Views
             date.Border.SetBinding(Border.StrokeProperty, nameof(ViewModel.StrokeDate));
             date.DatePicker.DateSelected += DatePicker_DateSelected;
 
-            contentGridBorderForm.AddWithSpan(view: date, row: 0, column: 0, rowSpan: 1, columnSpan: 3);
-            /*contentGridBorderForm.SetColumnSpan(date, 2);
-            contentGridBorderForm.Add(date, 0, 0);*/
+            contentGridBorderForm.AddWithSpan(view: date, row: 0, column: 0, rowSpan: 1, columnSpan: 3);           
         }
 
         private void CreateFuelBoxFieldForm(Grid contentGridBorderForm)
@@ -288,8 +287,7 @@ namespace FreightControlMaui.MVVM.Views
             liters.TextChanged += Liters_TextChanged;
 
             gridFuel.AddWithSpan(view: liters, row: 0, column: 0);
-            //gridFuel.Add(liters, 0, 0);
-
+            
             var amountSpentFuel = new TextEditCustom(icon: "money_24", placeholder: "Valor", keyboard: Keyboard.Numeric);
             amountSpentFuel.SetBinding(TextEditBase.TextProperty, nameof(ViewModel.AmountSpentFuel));
             amountSpentFuel.SetBinding(EditBase.BorderColorProperty, nameof(ViewModel.BorderColorAmountSpentFuel));
@@ -307,8 +305,7 @@ namespace FreightControlMaui.MVVM.Views
             };
 
             gridFuel.AddWithSpan(view: titleValuePerLiter, row: 1, column: 0);
-           // gridFuel.Add(titleValuePerLiter, 0, 1);
-
+           
             var contentValuePerLiter = new Label
             {
                 FontFamily = "MontserratRegular",
@@ -320,13 +317,10 @@ namespace FreightControlMaui.MVVM.Views
             contentValuePerLiter.SetBinding(Label.TextProperty, nameof(ViewModel.ValuePerLiter));
 
             gridFuel.AddWithSpan(view: contentValuePerLiter, row: 1, column: 1);
-            //gridFuel.Add(contentValuePerLiter, 1, 1);
-
+            
             borderFuel.Content = gridFuel;
 
-            contentGridBorderForm.AddWithSpan(view: borderFuel, row: 1, column: 0, rowSpan:1, columnSpan:3);
-           /* contentGridBorderForm.SetColumnSpan(borderFuel, 2);
-            contentGridBorderForm.Add(borderFuel, 0, 2);*/
+            contentGridBorderForm.AddWithSpan(view: borderFuel, row: 1, column: 0, rowSpan:1, columnSpan:3);         
         }
 
         private void CreateExpensesFieldForm(Grid contentGridBorderForm)
@@ -337,9 +331,7 @@ namespace FreightControlMaui.MVVM.Views
             expenses.SetBinding(EditBase.FocusedBorderColorProperty, nameof(ViewModel.BorderColorFocusedExpenses));
             expenses.TextChanged += Expenses_TextChanged;
 
-            contentGridBorderForm.AddWithSpan(view: expenses, row: 3, column: 0, rowSpan: 1, columnSpan: 3);
-            /*contentGridBorderForm.SetColumnSpan(expenses, 2);
-            contentGridBorderForm.Add(expenses, 0, 3);*/
+            contentGridBorderForm.AddWithSpan(view: expenses, row: 3, column: 0, rowSpan: 1, columnSpan: 3);         
         }
 
         private void CreateObservationFieldForm(Grid contentGridBorderForm)
@@ -347,9 +339,7 @@ namespace FreightControlMaui.MVVM.Views
             var observation = new MultilineEditCustom(icon: "comment_24", placeholder: "Observacão");
             observation.SetBinding(TextEditBase.TextProperty, nameof(ViewModel.Observation));
 
-            contentGridBorderForm.AddWithSpan(view: observation, row: 4, column: 0, rowSpan: 1, columnSpan: 3);
-            /*contentGridBorderForm.SetColumnSpan(observation, 2);
-            contentGridBorderForm.Add(observation, 0, 5);*/
+            contentGridBorderForm.AddWithSpan(view: observation, row: 4, column: 0, rowSpan: 1, columnSpan: 3);        
         }
 
         private void CreateButtonSave(Grid mainGrid)
@@ -456,7 +446,7 @@ namespace FreightControlMaui.MVVM.Views
         {
             if (!ValidationToFieldsRequireds())
             {
-                await DisplayAlert("Atenção", "Um ou mais campos precisam de correção. Favor verificar.", "Ok");
+                await ControlAlert.DefaultAlert("Atenção", "Um ou mais campos precisam de correção. Favor verificar.");                
                 return;
             }
 
@@ -540,7 +530,7 @@ namespace FreightControlMaui.MVVM.Views
         private async Task SetBorderColorErrorToDateField()
         {
             ViewModel.StrokeDate = App.GetRedColor();
-            await DisplayAlert("Ops", "A data selecionada não pode ser menor que a data do frete.", "Ok");
+            await ControlAlert.DefaultAlert("Ops", "A data selecionada não pode ser menor que a data do frete.");
         }
 
         #endregion

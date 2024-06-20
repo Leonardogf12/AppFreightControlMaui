@@ -18,7 +18,7 @@
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
+		<Nullable>disable</Nullable>
 
 		<!-- Display name -->
 		<ApplicationTitle>ConFrete</ApplicationTitle>
@@ -178,6 +178,7 @@
 	  <None Remove="Resources\Raw\truck_driver.json" />
 	  <None Remove="Resources\Splash\" />
 	  <None Remove="Resources\Splash\splash_load.svg" />
+	  <None Remove="Controls\Alerts\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Components\" />
@@ -207,6 +208,7 @@
 	  <Folder Include="Services\Authentication\" />
 	  <Folder Include="Services\Navigation\" />
 	  <Folder Include="Resources\Splash\" />
+	  <Folder Include="Controls\Alerts\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\AppIcon\appiconfg.svg" />
