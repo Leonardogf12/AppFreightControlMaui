@@ -1,10 +1,12 @@
 ﻿using DevExpress.Maui.Editors;
 using FreightControlMaui.Components.UI;
+using FreightControlMaui.Controls.Alerts;
 using FreightControlMaui.Controls.Animations;
 using FreightControlMaui.Controls.ControlCheckers;
 using FreightControlMaui.Controls.Resources;
 using FreightControlMaui.MVVM.Base;
 using FreightControlMaui.MVVM.ViewModels;
+using Java.Lang;
 using Microsoft.Maui.Controls.Shapes;
 
 namespace FreightControlMaui.MVVM.Views
@@ -17,9 +19,9 @@ namespace FreightControlMaui.MVVM.Views
 
         public ClickAnimation ClickAnimation = new();
 
-        public ComboboxEditCustom? OriginUfComboboxEditCustom;
+        public ComboboxEditCustom OriginUfComboboxEditCustom;
 
-        public ComboboxEditCustom? DestinationUfComboboxEditCustom;
+        public ComboboxEditCustom DestinationUfComboboxEditCustom;
 
         #endregion
 
@@ -435,13 +437,13 @@ namespace FreightControlMaui.MVVM.Views
         {
             if (!ValidationOfFieldsOriginAndDestination())
             {
-                await DisplayAlert("Atenção", "Um ou mais campos precisam de correção. Favor verificar.", "Ok");
+                await ControlAlert.DefaultAlert("Atenção", "Um ou mais campos precisam de correção. Favor verificar.");                
                 return;
             }
 
             if (!CheckIfIsAllValidToSave())
             {
-                await DisplayAlert("Atenção", "Um ou mais campos precisam de correção. Favor verificar.", "Ok");
+                await ControlAlert.DefaultAlert("Atenção", "Um ou mais campos precisam de correção. Favor verificar.");                
                 return;
             }
 
@@ -450,7 +452,7 @@ namespace FreightControlMaui.MVVM.Views
 
         private async void TapGestureRecognizer_Tapped_GoBack(object sender, TappedEventArgs e)
         {
-            View? element = sender as Image;
+            View element = sender as Image;
 
             await ClickAnimation.SetFadeOnElement(element);
 
@@ -633,6 +635,5 @@ namespace FreightControlMaui.MVVM.Views
 
         #endregion
     }
-
 }
 

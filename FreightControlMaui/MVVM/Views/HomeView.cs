@@ -3,6 +3,7 @@ using DevExpress.Maui.Controls;
 using FreightControlMaui.Components.UI;
 using FreightControlMaui.Constants;
 using FreightControlMaui.Controls;
+using FreightControlMaui.Controls.Alerts;
 using FreightControlMaui.Controls.Animations;
 using FreightControlMaui.Controls.Resources;
 using FreightControlMaui.MVVM.Base;
@@ -250,7 +251,7 @@ namespace FreightControlMaui.MVVM.Views
 
                 if (result == 0)
                 {
-                    await DisplayAlert("Ops", "Nenhum registro encontrado.", "Ok");
+                    await ControlAlert.DefaultAlert("Ops", "Nenhum registro encontrado.");                    
                     return;
                 }
 
@@ -264,7 +265,7 @@ namespace FreightControlMaui.MVVM.Views
             {
                 await ClickAnimation.SetFadeOnElement(element);
 
-                var result = await DisplayAlert("Sair", "Deseja realmente deslogar sua conta?", "Sim", "Cancelar");
+                var result = await ControlAlert.DefaultAlertWithResponse("Sair", "Deseja realmente deslogar sua conta?", "Sim", "Cancelar");
 
                 SettingsDxPopup.IsOpen = false;
 

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using DevExpress.Maui.Controls;
 using FreightControlMaui.Constants;
+using FreightControlMaui.Controls.Alerts;
 using FreightControlMaui.Models;
 using FreightControlMaui.MVVM.Base;
 using FreightControlMaui.MVVM.Models;
@@ -207,10 +208,10 @@ namespace FreightControlMaui.MVVM.ViewModels
 
             if (response == StringConstants.ExcluirTudo)
             {
-                var res = await Application.Current.MainPage.DisplayAlert("Excluir Tudo",
+                var res = await ControlAlert.DefaultAlertWithResponse("Excluir Tudo",
                             "Ao excluir todos os fretes você também eliminará todos os abastecimentos relacionados e eles.",
                             "Aceitar", "Cancelar");
-
+                
                 if (!res) return;
 
                 await DeleteAllFreights();
@@ -259,14 +260,14 @@ namespace FreightControlMaui.MVVM.ViewModels
 
                 FreightCollection.Clear();
 
-                await Application.Current.MainPage.DisplayAlert("Sucesso", "Todos os registros foram excluídos com sucesso.", "Ok");
-
+                await ControlAlert.DefaultAlert("Sucesso", "Todos os registros foram excluídos com sucesso.");
+               
                 await OnRefreshingCommand();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                await Application.Current.MainPage.DisplayAlert("Erro", "Ocorreu um erro durante a exclusão. Por favor, tente novamente.", "Ok");
+                await ControlAlert.DefaultAlert("Erro", "Ocorreu um erro durante a exclusão. Por favor, tente novamente.");                
             }
             finally
             {
@@ -362,12 +363,12 @@ namespace FreightControlMaui.MVVM.ViewModels
                 {
                     FreightCollection.Remove(model);
 
-                    await Application.Current.MainPage.DisplayAlert("Sucesso", "Item excluido com sucesso!", "Ok");
+                    await ControlAlert.DefaultAlert("Sucesso", "Item excluido com sucesso!");                    
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Ops",
-                        "Parece que ocorreu um problema ao tentar excluir este Frete ou seus abastecimentos. Favor conferir.", "Ok");
+                    await ControlAlert.DefaultAlert("Ops",
+                        "Parece que ocorreu um problema ao tentar excluir este Frete ou seus abastecimentos. Favor conferir.");                                            
 
                     return;
                 }
@@ -384,9 +385,9 @@ namespace FreightControlMaui.MVVM.ViewModels
         {
             if (!CheckDatesToFilterData())
             {
-                await Application.Current.MainPage.DisplayAlert("Ops",
-                    "A data final deve ser maior ou igual a data inicial. Favor verificar.", "Ok");
-
+                await ControlAlert.DefaultAlert("Ops",
+                    "A data final deve ser maior ou igual a data inicial. Favor verificar.");
+               
                 return;
             }
 
@@ -394,9 +395,9 @@ namespace FreightControlMaui.MVVM.ViewModels
 
             if (!dataFiltered.Any())
             {
-                await Application.Current.MainPage.DisplayAlert("Filtro",
-                    "Nenhum registro foi encontrado para o período informado. Favor verificar as datas informadas.", "Ok");
-
+                await ControlAlert.DefaultAlert("Filtro",
+                    "Nenhum registro foi encontrado para o período informado. Favor verificar as datas informadas.");
+                
                 return;
             }
 
@@ -409,9 +410,9 @@ namespace FreightControlMaui.MVVM.ViewModels
         {
             if (!CheckDatesToFilterData())
             {
-                await Application.Current.MainPage.DisplayAlert("Ops",
-                    "A data final deve ser maior ou igual a data inicial. Favor verificar.", "Ok");
-
+                await ControlAlert.DefaultAlert("Ops",
+                    "A data final deve ser maior ou igual a data inicial. Favor verificar.");
+               
                 return null;
             }
 
@@ -419,9 +420,9 @@ namespace FreightControlMaui.MVVM.ViewModels
 
             if (!dataFiltered.Any())
             {
-                await Application.Current.MainPage.DisplayAlert("Filtro",
-                    "Nenhum registro foi encontrado para o período informado.", "Ok");
-
+                await ControlAlert.DefaultAlert("Filtro",
+                    "Nenhum registro foi encontrado para o período informado.");
+              
                 return null;
             }
 

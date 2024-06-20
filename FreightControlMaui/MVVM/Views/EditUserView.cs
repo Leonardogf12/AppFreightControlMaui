@@ -1,4 +1,5 @@
 ﻿using FreightControlMaui.Components.UI;
+using FreightControlMaui.Controls.Alerts;
 using FreightControlMaui.Controls.Resources;
 using FreightControlMaui.MVVM.Base;
 using FreightControlMaui.MVVM.ViewModels;
@@ -84,9 +85,7 @@ namespace FreightControlMaui.MVVM.Views
                 Margin = new Thickness(10, 0, 10, 0)
             };
             name.SetBinding(TextEditCustom.TextProperty, nameof(ViewModel.Name));
-
-            name.TextChanged += Name_TextChanged;
-
+           
             mainGrid.Add(name, 0, 0);
         }
 
@@ -124,17 +123,12 @@ namespace FreightControlMaui.MVVM.Views
         {
             await Application.Current.MainPage.Navigation.PopAsync();
         }
-
-        private void Name_TextChanged(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
+       
         private async void ButtonReset_Clicked(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(ViewModel.Name))
             {
-                await DisplayAlert("Ops", "Preencha corretamente o campo Nome. Favor verificar.", "Ok");
+                await ControlAlert.DefaultAlert("Ops", "Preencha corretamente o campo Nome. Favor verificar.");                
                 return;
             }
 

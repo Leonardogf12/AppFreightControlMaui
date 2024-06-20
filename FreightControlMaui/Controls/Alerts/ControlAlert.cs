@@ -13,6 +13,11 @@
                 await Application.Current.MainPage.DisplayAlert(title, content, textAccept, textCancel);
             }            
         }
+
+        public static async Task<bool> DefaultAlertWithResponse(string title, string content, string textAccept = "Sim", string textCancel = "Não")
+        {
+            return await Application.Current.MainPage.DisplayAlert(title, content, textAccept, textCancel);
+        }
     }
 }
 

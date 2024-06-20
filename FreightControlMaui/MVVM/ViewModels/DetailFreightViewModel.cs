@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using DevExpress.Maui.Core.Internal;
+using FreightControlMaui.Controls.Alerts;
 using FreightControlMaui.MVVM.Base;
 using FreightControlMaui.MVVM.Models;
 using FreightControlMaui.Repositories;
@@ -270,11 +271,11 @@ namespace FreightControlMaui.MVVM.ViewModels
             {
                 ToFuelCollection.Remove(model);
 
-                await Application.Current.MainPage.DisplayAlert("Sucesso", "Item excluido com sucesso!", "Ok");
+                await ControlAlert.DefaultAlert("Sucesso", "Item excluido com sucesso!");                
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("Ops", "Parece que ocorreu um problema. Favor tentar novamente.", "Ok");
+                await ControlAlert.DefaultAlert("Ops", "Parece que ocorreu um problema. Favor tentar novamente.");                
             }
 
             CheckForItemsInCollection();

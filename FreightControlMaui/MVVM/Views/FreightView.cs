@@ -1,5 +1,6 @@
 ﻿using DevExpress.Maui.Controls;
 using FreightControlMaui.Components.UI;
+using FreightControlMaui.Controls.Alerts;
 using FreightControlMaui.Controls.Animations;
 using FreightControlMaui.Controls.Excel;
 using FreightControlMaui.Controls.Resources;
@@ -532,8 +533,8 @@ namespace FreightControlMaui.MVVM.Views
             {
                 await ClickAnimation.SetFadeOnElement(element);
 
-                var result = await DisplayAlert("Excluir", "Deseja realmente excluir este frete?", "Sim", "Não");
-
+                var result = await ControlAlert.DefaultAlertWithResponse("Excluir", "Deseja realmente excluir este frete?");
+                
                 if (!result) return;
 
                 if (element.BindingContext is FreightModel item)
@@ -623,7 +624,7 @@ namespace FreightControlMaui.MVVM.Views
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                await DisplayAlert("Erro", "Parece que ocorreu um erro ao tentar exportar os fretes. Por favor, tente novamente.", "Ok");
+                await ControlAlert.DefaultAlert("Erro", "Parece que ocorreu um erro ao tentar exportar os fretes. Por favor, tente novamente.");               
             }
             finally
             {

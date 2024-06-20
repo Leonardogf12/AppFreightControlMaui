@@ -1,4 +1,5 @@
 ﻿using FreightControlMaui.Components.UI;
+using FreightControlMaui.Controls.Alerts;
 using FreightControlMaui.Controls.Resources;
 using FreightControlMaui.MVVM.Base;
 using FreightControlMaui.MVVM.ViewModels;
@@ -100,9 +101,7 @@ namespace FreightControlMaui.MVVM.Views
                 Margin = new Thickness(10, 0, 10, 0)
             };
             email.SetBinding(TextEditCustom.TextProperty, nameof(ViewModel.Email));
-
-            email.TextChanged += Email_TextChanged;
-
+           
             mainGrid.Add(email, 0, 0);
         }
 
@@ -140,19 +139,14 @@ namespace FreightControlMaui.MVVM.Views
         {
             await App.Current.MainPage.Navigation.PopAsync();
         }
-
-        private void Email_TextChanged(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
+        
         private async void ButtonReset_Clicked(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(ViewModel.Email)) return;
 
             if (!ViewModel.Email.Contains("@"))
             {
-                await DisplayAlert("Ops", "Parece que este não é um email válido. Favor verificar.", "Ok");
+                await ControlAlert.DefaultAlert("Ops", "Parece que este não é um email válido. Favor verificar.");               
                 return;
             }
 

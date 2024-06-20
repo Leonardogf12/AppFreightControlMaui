@@ -1,5 +1,6 @@
 ﻿using FreightControlMaui.Components.Other;
 using FreightControlMaui.Components.UI;
+using FreightControlMaui.Controls.Alerts;
 using FreightControlMaui.Controls.Animations;
 using FreightControlMaui.Controls.Resources;
 using FreightControlMaui.MVVM.Base;
@@ -589,8 +590,8 @@ namespace FreightControlMaui.MVVM.Views
             {
                 await ClickAnimation.SetFadeOnElement(element);
 
-                var result = await DisplayAlert("Excluir", "Deseja realmente excluir este abastecimento?", "Sim", "Não");
-
+                var result = await ControlAlert.DefaultAlertWithResponse("Excluir", "Deseja realmente excluir este abastecimento?");
+               
                 if (!result) return;
 
                 if (element.BindingContext is ToFuelModel item)
