@@ -28,8 +28,8 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
-        private string? _liters;
-        public string? Liters
+        private string _liters;
+        public string Liters
         {
             get => _liters;
             set
@@ -61,8 +61,8 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
-        private string? _amountSpentFuel;
-        public string? AmountSpentFuel
+        private string _amountSpentFuel;
+        public string AmountSpentFuel
         {
             get => _amountSpentFuel;
             set
@@ -94,8 +94,8 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
-        private string? _valuePerLiter;
-        public string? ValuePerLiter
+        private string _valuePerLiter;
+        public string ValuePerLiter
         {
             get => _valuePerLiter;
             set
@@ -105,8 +105,8 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
-        private string? _expenses;
-        public string? Expenses
+        private string _expenses;
+        public string Expenses
         {
             get => _expenses;
             set
@@ -138,8 +138,8 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
-        private string? _observation;
-        public string? Observation
+        private string _observation;
+        public string Observation
         {
             get => _observation;
             set
@@ -277,7 +277,7 @@ namespace FreightControlMaui.MVVM.ViewModels
                 return;
             }
 
-            await ControlAlert.DefaultAlert("Ops", "Parece que houve um erro durante a criação do abastecimento. Por favor, tente novamente.");\           
+            await ControlAlert.DefaultAlert("Ops", "Parece que houve um erro durante a criação do abastecimento. Por favor, tente novamente.");          
         }
 
         public void CalculatePriceOfFuel()
@@ -303,17 +303,17 @@ namespace FreightControlMaui.MVVM.ViewModels
 
         private async Task<ToFuelModel> CreateModelToAddOrEdit()
         {
-            var model = new ToFuelModel();
-            model.Id = SelectedToFuelToEdit.Id > 0 ? SelectedToFuelToEdit.Id : DetailsFreight.Id;
-            model.FreightModelId = SelectedToFuelToEdit.FreightModelId > 0 ? SelectedToFuelToEdit.FreightModelId : DetailsFreight.Id;
-            model.Date = Date;
-            model.Liters = Liters.Contains(".") ? double.Parse(Liters.Replace(".", ",")) : double.Parse(Liters.Replace(",", "."));
-            model.AmountSpentFuel = await ConvertEntrysStringToDecimal.ConvertValue(AmountSpentFuel);
-            model.ValuePerLiter = await ConvertEntrysStringToDecimal.ConvertValue(AmountSpentFuel) / await ConvertEntrysStringToDecimal.ConvertValue(Liters);
-            model.Expenses = await ConvertEntrysStringToDecimal.ConvertValue(Expenses);
-            model.Observation = Observation;
-
-            return model;
+            return new ToFuelModel()
+            {
+                Id = SelectedToFuelToEdit.Id > 0 ? SelectedToFuelToEdit.Id : DetailsFreight.Id,
+                FreightModelId = SelectedToFuelToEdit.FreightModelId > 0 ? SelectedToFuelToEdit.FreightModelId : DetailsFreight.Id,
+                Date = Date,
+                Liters = Liters.Contains(".") ? double.Parse(Liters.Replace(".", ",")) : double.Parse(Liters.Replace(",", ".")),
+                AmountSpentFuel = await ConvertEntrysStringToDecimal.ConvertValue(AmountSpentFuel),
+                ValuePerLiter = await ConvertEntrysStringToDecimal.ConvertValue(AmountSpentFuel) / await ConvertEntrysStringToDecimal.ConvertValue(Liters),
+                Expenses = await ConvertEntrysStringToDecimal.ConvertValue(Expenses),
+                Observation = Observation
+            };           
         }
 
         private async void SetValuesToDetail(bool isCreating)

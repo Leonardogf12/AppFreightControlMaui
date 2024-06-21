@@ -13,6 +13,8 @@ namespace FreightControlMaui.Data
             
             _dbApp.CreateTableAsync<FreightModel>();
             _dbApp.CreateTableAsync<ToFuelModel>();
+            _dbApp.CreateTableAsync<UserModel>();
+
         }
     }
 }

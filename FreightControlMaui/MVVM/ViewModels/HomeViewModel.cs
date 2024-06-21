@@ -13,8 +13,8 @@ namespace FreightControlMaui.MVVM.ViewModels
 
         private readonly FreightRepository _freightRepository;
 
-        private UserModel? _userLogged;
-        public UserModel? UserLogged
+        private UserModel _userLogged;
+        public UserModel UserLogged
         {
             get => _userLogged;
             set
@@ -24,8 +24,8 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
-        private string? _nameUserLogged = StringConstants.Usuario;
-        public string? NameUserLogged
+        private string _nameUserLogged = StringConstants.Usuario;
+        public string NameUserLogged
         {
             get => _nameUserLogged;
             set

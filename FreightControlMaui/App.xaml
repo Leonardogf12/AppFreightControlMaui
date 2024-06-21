@@ -16,6 +16,8 @@
             <Color x:Key="BorderGray400">#919191</Color>
             <Color x:Key="ColorForgotPassword">#1353B2</Color>
             <Color x:Key="ColorFilterButtonSelected">#08CF96</Color>
+            <Color x:Key="ColorBasicBackground">#F6F6F0</Color>
+            
                                   
             <!-- My Styles -->
             <Style x:Key="buttonDarkLight" TargetType="Button">

@@ -8,8 +8,8 @@ namespace FreightControlMaui.MVVM.ViewModels
     {
         #region Properties
 
-        private string? _email;
-        public string? Email
+        private string _email;
+        public string Email
         {
             get => _email;
             set
@@ -19,8 +19,8 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
-        private string? _password;
-        public string? Password
+        private string _password;
+        public string Password
         {
             get => _password;
             set

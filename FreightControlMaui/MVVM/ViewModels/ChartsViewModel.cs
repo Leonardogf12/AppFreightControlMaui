@@ -15,8 +15,8 @@ namespace FreightControlMaui.MVVM.ViewModels
 
         #region Chart Freight
 
-        private Chart? _freightChart;
-        public Chart? FreightChart
+        private Chart _freightChart;
+        public Chart FreightChart
         {
             get => _freightChart;
             set
@@ -63,8 +63,8 @@ namespace FreightControlMaui.MVVM.ViewModels
 
         #region Chart ToFuel
 
-        private Chart? _toFuelChart;
-        public Chart? ToFuelChart
+        private Chart _toFuelChart;
+        public Chart ToFuelChart
         {
             get => _toFuelChart;
             set
@@ -109,8 +109,8 @@ namespace FreightControlMaui.MVVM.ViewModels
 
         #endregion
 
-        private Style? _monthButtonStyle = ControlResources.GetResource<Style>("buttonDarkLightFilterSecondary");
-        public Style? MonthButtonStyle
+        private Style _monthButtonStyle = ControlResources.GetResource<Style>("buttonDarkLightFilterSecondary");
+        public Style MonthButtonStyle
         {
             get => _monthButtonStyle;
             set
@@ -120,13 +120,24 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
-        private Style? _dayButtonStyle = ControlResources.GetResource<Style>("buttonDarkLightFilterPrimary");
-        public Style? DayButtonStyle
+        private Style _dayButtonStyle = ControlResources.GetResource<Style>("buttonDarkLightFilterPrimary");
+        public Style DayButtonStyle
         {
             get => _dayButtonStyle;
             set
             {
                 _dayButtonStyle = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _isVisibleTextThereAreNoSupplies;
+        public bool IsVisibleTextThereAreNoSupplies
+        {
+            get => _isVisibleTextThereAreNoSupplies;
+            set
+            {
+                _isVisibleTextThereAreNoSupplies = value;
                 OnPropertyChanged();
             }
         }
@@ -231,6 +242,12 @@ namespace FreightControlMaui.MVVM.ViewModels
 
                 ListToFuelChartMonthlyBackup = await instanceChartService.GenerateLineChartToFuelMonthly(list);
 
+                if (ListToFuelChartMonthlyBackup.Length == 0)
+                {
+                    IsVisibleTextThereAreNoSupplies = true;
+                    return;
+                }
+
                 SetWidthRequestToFuelChart(length: ListToFuelChartMonthlyBackup.Length);
 
                 ToFuelChart = ChartStyleCustom.GetLineChartCustom(ListToFuelChartMonthlyBackup);
@@ -263,6 +280,12 @@ namespace FreightControlMaui.MVVM.ViewModels
                 var instanceChartService = MyInterfaceFactoryChartService.CreateInstance();
 
                 ListToFuelChartDailyBackup = await instanceChartService.GenerateLineChartToFuelDaily(list);
+
+                if (ListToFuelChartMonthlyBackup.Length == 0)
+                {
+                    IsVisibleTextThereAreNoSupplies = true;
+                    return;
+                }
 
                 SetWidthRequestToFuelChart(length: ListToFuelChartDailyBackup.Length);
 

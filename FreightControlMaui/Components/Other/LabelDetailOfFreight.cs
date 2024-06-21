@@ -19,6 +19,7 @@ namespace FreightControlMaui.Components.Other
                 Text = title,
                 TextColor = ControlResources.GetResource<Color>("PrimaryDark"),
                 FontFamily = "MontserratSemiBold",
+                FontAttributes = FontAttributes.Bold,
                 FontSize = 16,
                 VerticalOptions = LayoutOptions.Center,
             };

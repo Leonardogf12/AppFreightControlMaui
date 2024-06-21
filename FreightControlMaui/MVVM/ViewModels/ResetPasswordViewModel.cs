@@ -6,8 +6,8 @@ namespace FreightControlMaui.MVVM.ViewModels
 {
     public class ResetPasswordViewModel : BaseViewModel
     {
-        private string? _email;
-        public string? Email
+        private string _email;
+        public string Email
         {
             get => _email;
             set

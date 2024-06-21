@@ -4,7 +4,7 @@ namespace FreightControlMaui.Controls
 {
     public static class ConvertEntrysStringToDouble
     {
-        public static Task<double> ConvertValue(string? valueStr)
+        public static Task<double> ConvertValue(string valueStr)
         {
             CultureInfo cultureInfo = CultureInfo.InvariantCulture;
 

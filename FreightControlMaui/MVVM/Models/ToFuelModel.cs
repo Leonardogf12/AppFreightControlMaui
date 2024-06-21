@@ -18,7 +18,7 @@ namespace FreightControlMaui.MVVM.Models
 
         public decimal Expenses { get; set; }
 
-        public string? Observation { get; set; }
+        public string Observation { get; set; }
 
         [ForeignKey(nameof(FreightModel))]
         public int FreightModelId { get; set; }

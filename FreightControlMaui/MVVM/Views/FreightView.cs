@@ -34,28 +34,31 @@ namespace FreightControlMaui.MVVM.Views
 
             BackgroundColor = ControlResources.GetResource<Color>("PrimaryDark");
 
-            Content = BuildFreightView();
+            Content = BuildFreightView;
 
             BindingContext = ViewModel;
         }
 
         #region UI
 
-        private View BuildFreightView()
+        private View BuildFreightView
         {
-            var mainGrid = CreateMainGrid();
+            get
+            {
+                var mainGrid = CreateMainGrid();
 
-            CreateStackHeader(mainGrid);
+                CreateStackHeader(mainGrid);
 
-            CreateCollectionFreight(mainGrid);
+                CreateCollectionFreight(mainGrid);
 
-            CreateLabelAddNewFreights(mainGrid);
+                CreateLabelAddNewFreights(mainGrid);
 
-            CreateBottomSheetFilter(mainGrid);
+                CreateBottomSheetFilter(mainGrid);
 
-            CreateBottomSheetExport(mainGrid);
+                CreateBottomSheetExport(mainGrid);
 
-            return mainGrid;
+                return mainGrid;
+            }
         }
 
         private static Grid CreateMainGrid()
@@ -63,10 +66,11 @@ namespace FreightControlMaui.MVVM.Views
             return new Grid
             {
                 RowDefinitions = new RowDefinitionCollection
-            {
-                new () {Height = 140},
-                new () {Height = GridLength.Star},
-            },
+                {
+                    new () {Height = 140},
+                    new () {Height = GridLength.Star},
+                },
+                BackgroundColor = Colors.WhiteSmoke,
             };
         }
 
@@ -131,16 +135,17 @@ namespace FreightControlMaui.MVVM.Views
                 {
                     ItemSpacing = 10
                 },
-                VerticalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center,                
             };
             collection.SetBinding(ItemsView.ItemsSourceProperty, nameof(ViewModel.HeaderButtonFreightCollection));
             collection.ItemTemplate = new DataTemplate(CreateDataTemplateHeaderButton);
+            
 
             return collection;
         }
 
-        private View CreateDataTemplateHeaderButton()
-        {
+        private static View CreateDataTemplateHeaderButton()
+        {           
             var button = new Button
             {
                 Style = ControlResources.GetResource<Style>("buttonDarkLight"),
@@ -150,7 +155,7 @@ namespace FreightControlMaui.MVVM.Views
             button.SetBinding(Button.TextProperty, nameof(HeaderButtonFreight.Text));
             button.SetBinding(Button.CommandProperty, nameof(HeaderButtonFreight.Command));
 
-            return button;
+            return button;           
         }
 
         private void CreateCollectionFreight(Grid mainGrid)
@@ -164,7 +169,7 @@ namespace FreightControlMaui.MVVM.Views
 
             var collection = new CollectionView
             {
-                BackgroundColor = Colors.White,
+                BackgroundColor = Colors.WhiteSmoke,
                 ItemTemplate = new DataTemplate(CreateItemTemplateFreight),
                 RemainingItemsThreshold = 1,
                 Footer = new StackLayout()
@@ -192,17 +197,27 @@ namespace FreightControlMaui.MVVM.Views
 
         private View CreateItemTemplateFreight()
         {
+            var stack = new StackLayout
+            {
+                Padding = 2,
+            };
+
             var border = new Border
             {
-                BackgroundColor = Colors.Transparent,
-                StrokeThickness = 1,
-                Stroke = ControlResources.GetResource<Color>("PrimaryGreen"),
-                HeightRequest = 200,
-                Margin = DeviceInfo.Platform == DevicePlatform.Android ? 10 : 20,
-                StrokeShape = new RoundRectangle
+                BackgroundColor = Colors.White,
+                Shadow = new Shadow
                 {
-                    CornerRadius = 10,
-                }
+                    Brush = Colors.Gray,
+                    Offset = new(10, 10),
+                    Radius = 20,
+                    Opacity = 0.8f,
+                },
+                HeightRequest = 230,
+                Margin = DeviceInfo.Platform == DevicePlatform.Android ? 10 : 20,                
+                StrokeShape = new RoundRectangle()
+                {
+                    CornerRadius = 10
+                }               
             };
 
             var contentGridBorder = new Grid
@@ -235,7 +250,9 @@ namespace FreightControlMaui.MVVM.Views
 
             border.Content = contentGridBorder;
 
-            return border;
+            stack.Children.Add(border);
+
+            return stack;
         }
 
         private void CreateLabelDateAndIconTrash(Grid contentGridBorder)
@@ -592,7 +609,7 @@ namespace FreightControlMaui.MVVM.Views
             }
         }
 
-        private static Button CreateBaseButton(string text, string style, EventHandler? clicked)
+        private static Button CreateBaseButton(string text, string style, EventHandler clicked)
         {
             var button = new Button
             {

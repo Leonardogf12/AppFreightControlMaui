@@ -64,7 +64,7 @@ namespace FreightControlMaui.MVVM.Views
                     new () {Height = GridLength.Auto},
                     new () {Height = GridLength.Star},
                 },
-                BackgroundColor = Colors.White,
+                BackgroundColor = Colors.WhiteSmoke,
             };
         }
 
@@ -137,7 +137,7 @@ namespace FreightControlMaui.MVVM.Views
                     new () {Height = GridLength.Star},
                     new () {Height = GridLength.Star},
                 },
-                BackgroundColor = Colors.White,
+                BackgroundColor = Colors.WhiteSmoke,
                 Margin = 10,
                 RowSpacing = 10,
             };
@@ -203,7 +203,7 @@ namespace FreightControlMaui.MVVM.Views
         private static void CreateTitleToFuel(Grid mainGrid)
         {
             var stack = new StackLayout
-            {
+            {                
                 Orientation = StackOrientation.Horizontal,
                 Spacing = 10,
                 HorizontalOptions = LayoutOptions.Center,
@@ -234,7 +234,7 @@ namespace FreightControlMaui.MVVM.Views
             var collection = new CollectionView
             {
                 RemainingItemsThreshold = 1,
-                BackgroundColor = Colors.White,
+                BackgroundColor = Colors.WhiteSmoke,
                 ItemTemplate = new DataTemplate(CreateItemTemplateDetailFreight),
                 Footer = new StackLayout()
                 {
@@ -260,16 +260,27 @@ namespace FreightControlMaui.MVVM.Views
 
         private View CreateItemTemplateDetailFreight()
         {
-            var border = new Border
+            var stack = new StackLayout
             {
-                BackgroundColor = Colors.Transparent,
-                StrokeThickness = 1,
-                Stroke = ControlResources.GetResource<Color>("PrimaryGreen"),
+                Padding = 2
+            };
+
+            var border = new Border
+            {                              
+                BackgroundColor = Colors.White,                
+                Shadow = new Shadow
+                {                    
+                    Brush = Colors.Gray,
+                    Offset = new(10,10),
+                    Radius = 20,
+                    Opacity = 0.8f,
+                },
                 HeightRequest = 230,
                 Margin = DeviceInfo.Platform == DevicePlatform.Android ? 10 : 20,
-                StrokeShape = new RoundRectangle
+                StrokeThickness = 0,                             
+                StrokeShape = new RoundRectangle()
                 {
-                    CornerRadius = 10,
+                    CornerRadius = 10
                 }
             };
 
@@ -310,7 +321,9 @@ namespace FreightControlMaui.MVVM.Views
 
             border.Content = contentGridBorder;
 
-            return border;
+            stack.Children.Add(border);
+
+            return stack;
         }
 
         private static void CreateLabelDate(Grid contentGridBorder)

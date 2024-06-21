@@ -38,7 +38,7 @@ namespace FreightControlMaui.MVVM.Views
             return mainGrid;
         }
 
-        private Grid CreateMainGrid()
+        private static Grid CreateMainGrid()
         {
             return new Grid
             {
@@ -184,6 +184,18 @@ namespace FreightControlMaui.MVVM.Views
                 Text = "Abastecimento",
                 Margin = new Thickness(10, 0, 0, 0)
             };
+
+            var test = new Label
+            {
+                Text = "Não existe abastecimentos.",
+                FontSize = 14,
+                FontFamily = "MontserratRegular",
+                TextColor = Colors.Gray,
+                VerticalOptions = LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.Center
+            };
+            test.SetBinding(Label.IsVisibleProperty, nameof(ViewModel.IsVisibleTextThereAreNoSupplies));
+
             stackToFuel.Children.Add(toFuelChartTitle);
 
             var scrollViewChartToFuel = new ScrollView
@@ -194,6 +206,7 @@ namespace FreightControlMaui.MVVM.Views
             stackToFuel.Children.Add(scrollViewChartToFuel);
 
             grid.Add(stackToFuel, 0, 1);
+            grid.Add(test, 0, 1);
 
             scroll.Content = grid;
 

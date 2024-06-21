@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using DevExpress.Maui.Controls;
 using FreightControlMaui.Constants;
@@ -11,7 +8,6 @@ using FreightControlMaui.MVVM.Base;
 using FreightControlMaui.MVVM.Models;
 using FreightControlMaui.MVVM.Views;
 using FreightControlMaui.Repositories;
-using Microsoft.Maui.Controls;
 
 namespace FreightControlMaui.MVVM.ViewModels
 {
@@ -55,8 +51,8 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
-        private FreightModel? _selectedFreightToEdit;
-        public FreightModel? SelectedFreightToEdit
+        private FreightModel _selectedFreightToEdit;
+        public FreightModel SelectedFreightToEdit
         {
             get => _selectedFreightToEdit;
             set
@@ -101,8 +97,8 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
-        private ObservableCollection<HeaderButtonFreight>? _headerButtonFreightCollection;
-        public ObservableCollection<HeaderButtonFreight>? HeaderButtonFreightCollection
+        private ObservableCollection<HeaderButtonFreight> _headerButtonFreightCollection;
+        public ObservableCollection<HeaderButtonFreight> HeaderButtonFreightCollection
         {
             get => _headerButtonFreightCollection;
             set
@@ -201,16 +197,15 @@ namespace FreightControlMaui.MVVM.ViewModels
         {
             if (FreightCollection.Count == 0) return;
 
-            var response = await App.Current.MainPage.DisplayActionSheet("Você deseja efetivamente excluir todos os registros?",
-                            StringConstants.Cancelar, null, new string[] { StringConstants.ExcluirTudo, StringConstants.Exportar });
+            var response = await ControlAlert.DefaultAlertActionSheet("Você deseja efetivamente excluir todos os registros?",
+                                StringConstants.Cancelar, null, new string[] { StringConstants.ExcluirTudo, StringConstants.Exportar });
 
             if (response == StringConstants.Cancelar) return;
 
             if (response == StringConstants.ExcluirTudo)
             {
                 var res = await ControlAlert.DefaultAlertWithResponse("Excluir Tudo",
-                            "Ao excluir todos os fretes você também eliminará todos os abastecimentos relacionados e eles.",
-                            "Aceitar", "Cancelar");
+                            "Ao excluir todos os fretes você também eliminará todos os abastecimentos relacionados e eles.", "Aceitar", "Cancelar");
                 
                 if (!res) return;
 
@@ -227,7 +222,7 @@ namespace FreightControlMaui.MVVM.ViewModels
 
             try
             {
-                if (FreightListRemainingItems?.Count > 0 && FreightCollection.Count < FreightListRemainingItems?.Count)
+                if (FreightListRemainingItems.Count > 0 && FreightCollection.Count < FreightListRemainingItems.Count)
                 {
                     IsLoadingMoreFreightItems = true;
 
@@ -352,7 +347,7 @@ namespace FreightControlMaui.MVVM.ViewModels
             {
                 var supplys = await _toFuelRepository.GetAllById(model.Id);
 
-                if (supplys.Any())
+                if (supplys.Count != 0)
                 {
                     _ = await _toFuelRepository.DeleteByIdFreightAsync(model.Id);
                 }
@@ -393,7 +388,7 @@ namespace FreightControlMaui.MVVM.ViewModels
 
             var dataFiltered = await _freightRepository.GetByDateInitialAndFinal(initial: InitialDate, final: FinalDate);
 
-            if (!dataFiltered.Any())
+            if (dataFiltered.Count == 0)
             {
                 await ControlAlert.DefaultAlert("Filtro",
                     "Nenhum registro foi encontrado para o período informado. Favor verificar as datas informadas.");
@@ -418,7 +413,7 @@ namespace FreightControlMaui.MVVM.ViewModels
 
             var dataFiltered = await _freightRepository.GetByDateInitialAndFinal(initial: InitialDate, final: FinalDate);
 
-            if (!dataFiltered.Any())
+            if (dataFiltered.Count == 0)
             {
                 await ControlAlert.DefaultAlert("Filtro",
                     "Nenhum registro foi encontrado para o período informado.");

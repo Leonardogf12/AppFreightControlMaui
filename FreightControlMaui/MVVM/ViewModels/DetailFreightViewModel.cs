@@ -37,8 +37,8 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
-        private FreightModel? _detailFreightModel = new();
-        public FreightModel? DetailFreightModel
+        private FreightModel _detailFreightModel = new();
+        public FreightModel DetailFreightModel
         {
             get => _detailFreightModel;
             set
@@ -48,8 +48,8 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
-        private FreightModel? _selectedFreightToDetail;
-        public FreightModel? SelectedFreightToDetail
+        private FreightModel _selectedFreightToDetail;
+        public FreightModel SelectedFreightToDetail
         {
             get => _selectedFreightToDetail;
             set
@@ -140,8 +140,8 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
-        private string? _detailTotalLiters = string.Empty;
-        public string? DetailTotalLiters
+        private string _detailTotalLiters = string.Empty;
+        public string DetailTotalLiters
         {
             get => _detailTotalLiters;
             set
@@ -232,7 +232,7 @@ namespace FreightControlMaui.MVVM.ViewModels
 
             try
             {
-                if (ToFuelListRemainingItems?.Count > 0 && ToFuelCollection.Count < ToFuelListRemainingItems?.Count)
+                if (ToFuelListRemainingItems.Count > 0 && ToFuelCollection.Count < ToFuelListRemainingItems.Count)
                 {
                     IsLoadingMoreToFuelItems = true;
 
