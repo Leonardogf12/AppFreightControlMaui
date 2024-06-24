@@ -2,12 +2,12 @@
 using FreightControlMaui.Components.UI;
 using FreightControlMaui.Controls.Alerts;
 using FreightControlMaui.Controls.Animations;
-using FreightControlMaui.Controls.Excel;
 using FreightControlMaui.Controls.Resources;
 using FreightControlMaui.Models;
 using FreightControlMaui.MVVM.Base;
 using FreightControlMaui.MVVM.Models;
 using FreightControlMaui.MVVM.ViewModels;
+using FreightControlMaui.Services.Exportation;
 using FreightControlMaui.Services.Navigation;
 using Microsoft.Maui.Controls.Shapes;
 
@@ -18,8 +18,8 @@ namespace FreightControlMaui.MVVM.Views
         #region Properties
 
         private readonly INavigationService _navigationService;
-
-        private readonly IExportDataToExcel _exportDataToExcel;
+      
+        private readonly IExportData _exportData;
 
         public FreightViewModel ViewModel = new();
 
@@ -27,10 +27,10 @@ namespace FreightControlMaui.MVVM.Views
 
         #endregion
 
-        public FreightView(INavigationService navigationService, IExportDataToExcel exportDataToExcel)
+        public FreightView(INavigationService navigationService, IExportData exportData)
         {
             _navigationService = navigationService;
-            _exportDataToExcel = exportDataToExcel;
+            _exportData = exportData;
 
             BackgroundColor = ControlResources.GetResource<Color>("PrimaryDark");
 
@@ -634,7 +634,7 @@ namespace FreightControlMaui.MVVM.Views
 
             try
             {
-                await _exportDataToExcel.ExportData(await ViewModel.GetFreightsToExport());
+                await _exportData.CreateDocumentExcelAsync(await ViewModel.GetFreightsToExport());
 
                 ViewModel.BottomSheetExportState = BottomSheetState.Hidden;
             }

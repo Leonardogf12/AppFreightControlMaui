@@ -126,8 +126,6 @@
                 <Setter Property="TextColor" Value="{StaticResource BorderGray400}" />
                                      
             </Style>
-
-
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />

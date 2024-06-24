@@ -2,12 +2,15 @@
 using FreightControlMaui.MVVM.Base;
 using FreightControlMaui.MVVM.Models;
 using FreightControlMaui.Repositories;
+using FreightControlMaui.Services.Exportation;
 
 namespace FreightControlMaui.MVVM.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
         #region Properties
+
+        private readonly IExportData _exportData;
 
         private readonly UserRepository _userRepository;
 
@@ -65,7 +68,7 @@ namespace FreightControlMaui.MVVM.ViewModels
                                                                             final: new DateTime(DateTime.Now.Year, 12, 31));
 
             return result.Count;
-        }
+        }       
 
         #endregion
     }

@@ -44,7 +44,7 @@
 	
 	<ItemGroup>
 	  <MauiImage Remove="Resources\Images\add.svg" />
-	  <MauiImage Remove="Resources\Images\dotnet_bot.png" />
+	 <!-- <MauiImage Remove="Resources\Images\dotnet_bot.png" /> -->	
 	  <MauiImage Remove="Resources\Images\money_24.svg" />
 	  <MauiImage Remove="Resources\Images\km_24.svg" />
 	  <MauiImage Remove="Resources\Images\comment_24.svg" />
@@ -52,23 +52,25 @@
 	  <MauiImage Remove="Resources\Images\local_24.svg" />
 	  <MauiImage Remove="Resources\Images\uf_24.svg" />
 	</ItemGroup>
+
+	
 	<ItemGroup>
 		<!-- App Icon -->		
 		 <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#080E2C" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash_load.svg" Color="#080E2C" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\splash_load_truck.svg" Color="#080E2C" BaseSize="128,128" />
 		
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
-
+		
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
-		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
-	</ItemGroup>	
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />		
+		<MauiImage Include="Resources\Raw\dotnet_botraw.png" />
+	</ItemGroup>
 
 	<ItemGroup>	    
 		<PackageReference Include="DotNetMeteor.HotReload.Plugin" Version="3.*" />	
@@ -87,6 +89,7 @@
 		<PackageReference Include="FirebaseAuthentication.net" Version="3.7.2" />
 		<PackageReference Include="Microcharts.Maui" Version="1.0.0" />
 		<PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
+		<PackageReference Include="GemBox.Pdf" Version="17.0.1565" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -116,7 +119,6 @@
 	  <None Remove="Controls\Animations\" />
 	  <None Remove="Controls\Benchmark\" />
 	  <None Remove="Controls\ControlCheckers\" />
-	  <None Remove="Controls\Excel\" />
 	  <None Remove="MVVM\" />
 	  <None Remove="MVVM\Models\" />
 	  <None Remove="Repositories\" />
@@ -172,6 +174,8 @@
 	  <None Remove="Resources\Splash\" />
 	  <None Remove="Resources\Splash\splash_load.svg" />
 	  <None Remove="Controls\Alerts\" />
+	  <None Remove="Services\Exportation\" />
+	  <None Remove="Resources\Raw\dotnet_bot.png" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Components\" />
@@ -185,7 +189,6 @@
 	  <Folder Include="Controls\Animations\" />
 	  <Folder Include="Controls\Benchmark\" />
 	  <Folder Include="Controls\ControlCheckers\" />
-	  <Folder Include="Controls\Excel\" />
 	  <Folder Include="MVVM\" />
 	  <Folder Include="MVVM\Models\" />
 	  <Folder Include="Repositories\" />
@@ -202,6 +205,7 @@
 	  <Folder Include="Services\Navigation\" />
 	  <Folder Include="Resources\Splash\" />
 	  <Folder Include="Controls\Alerts\" />
+	  <Folder Include="Services\Exportation\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\AppIcon\appiconfg.svg" />
@@ -234,12 +238,16 @@
 	  <BundleResource Include="Resources\Raw\truck_driver.json" />
 	  <BundleResource Include="Resources\Splash\splash_load.svg" />
 	  <BundleResource Include="Resources\Images\add.svg" />
-	  <BundleResource Include="Resources\Images\dotnet_bot.png" />
 	  <BundleResource Include="Resources\Images\money_24.svg" />
 	  <BundleResource Include="Resources\Images\km_24.svg" />
 	  <BundleResource Include="Resources\Images\comment_24.svg" />
 	  <BundleResource Include="Resources\Images\calendar_24.svg" />
 	  <BundleResource Include="Resources\Images\local_24.svg" />
 	  <BundleResource Include="Resources\Images\uf_24.svg" />
+	  <BundleResource Include="Resources\Styles\Styles.xaml" Condition=" '$(EnableDefaultXamlItems)' == 'true' ">
+	    <SubType>Designer</SubType>
+	  </BundleResource>
 	</ItemGroup>
+
+
 </Project>

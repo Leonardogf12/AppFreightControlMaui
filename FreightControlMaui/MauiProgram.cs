@@ -1,11 +1,11 @@
 ﻿using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Storage;
 using DevExpress.Maui;
-using FreightControlMaui.Controls.Excel;
 using FreightControlMaui.MVVM.ViewModels;
 using FreightControlMaui.MVVM.Views;
 using FreightControlMaui.Services.Authentication;
 using FreightControlMaui.Services.Chart;
+using FreightControlMaui.Services.Exportation;
 using FreightControlMaui.Services.Navigation;
 using Microcharts.Maui;
 using Microsoft.Extensions.Logging;
@@ -47,10 +47,10 @@ public static class MauiProgram
         builder.Services.AddTransient<ChartsViewModel>();
 
         builder.Services.AddSingleton<IFileSaver>(FileSaver.Default);
-        builder.Services.AddSingleton<INavigationService, NavigationService>();
-        builder.Services.AddSingleton<IExportDataToExcel, ExportDataToExcel>();
+        builder.Services.AddSingleton<INavigationService, NavigationService>();  
         builder.Services.AddSingleton<IAuthenticationService, AuthenticationService>();
         builder.Services.AddSingleton<IChartService, ChartService>();
+        builder.Services.AddSingleton<IExportData, ExportData>();
 
 #if DEBUG
         builder.Logging.AddDebug();

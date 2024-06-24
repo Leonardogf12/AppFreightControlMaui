@@ -1,5 +1,4 @@
-﻿using System;
-using DevExpress.Maui.Controls;
+﻿using DevExpress.Maui.Controls;
 using FreightControlMaui.Components.UI;
 using FreightControlMaui.Constants;
 using FreightControlMaui.Controls;
@@ -8,7 +7,11 @@ using FreightControlMaui.Controls.Animations;
 using FreightControlMaui.Controls.Resources;
 using FreightControlMaui.MVVM.Base;
 using FreightControlMaui.MVVM.ViewModels;
+using FreightControlMaui.Services.Exportation;
 using FreightControlMaui.Services.Navigation;
+
+using GemBox.Pdf;
+using GemBox.Pdf.Content;
 
 namespace FreightControlMaui.MVVM.Views
 {
@@ -17,6 +20,8 @@ namespace FreightControlMaui.MVVM.Views
         #region Properties
 
         private readonly INavigationService _navigationService;
+
+        private readonly IExportData _exportData;
 
         public HomeViewModel ViewModel = new();
 
@@ -28,14 +33,15 @@ namespace FreightControlMaui.MVVM.Views
 
         #endregion
 
-        public HomeView(INavigationService navigationService)
+        public HomeView(INavigationService navigationService, IExportData exportData)
         {
             _navigationService = navigationService;
+            _exportData = exportData;
 
             BackgroundColor = ControlResources.GetResource<Color>("PrimaryDark");
 
             Content = BuildHomeView();
-
+            
             BindingContext = ViewModel;
         }
 
@@ -82,6 +88,9 @@ namespace FreightControlMaui.MVVM.Views
 
             var chartsButton = new ButtonHomeMenu(iconName: "charts_256", eventTap: TapGestureRecognizer_Tapped_GoToChartsView);
             stack.Children.Add(chartsButton);
+
+            var testButton = new ButtonHomeMenu(iconName: "dotnet_bot", eventTap: TapGestureRecognizer_Tapped_PdfTest);
+            //stack.Children.Add(testButton);
 
             mainGrid.Add(stack, 0, 1);
         }
@@ -259,6 +268,19 @@ namespace FreightControlMaui.MVVM.Views
             }
         }
 
+        private async void TapGestureRecognizer_Tapped_PdfTest(object sender, TappedEventArgs e)
+        {
+            try
+            {
+                var filePath = await _exportData.CreateDocumentPdfAsync();
+                await _exportData.OpenLauncher(filePath);
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.Message, "Close");
+            }                     
+        }
+
         private async void TapGestureRecognizer_Tapped_Logoff(object sender, TappedEventArgs e)
         {
             if (sender is Grid element)
@@ -300,7 +322,7 @@ namespace FreightControlMaui.MVVM.Views
 
             ViewModel.LoadInfoByUserLogged();
         }
-
+      
         #endregion
     }
 

@@ -2,6 +2,7 @@
 using FreightControlMaui.Constants;
 using FreightControlMaui.Controls;
 using FreightControlMaui.Data;
+using GemBox.Pdf;
 
 namespace FreightControlMaui;
 
@@ -18,7 +19,9 @@ public partial class App : Application
     #endregion
 
     public App()
-    {       
+    {
+        SetLicenseToComponentGemBoxPdf();
+
         SetDatabasePathDevice();
         
         InitializeComponent();
@@ -27,11 +30,8 @@ public partial class App : Application
 
         CheckUserHasLogged();
     }
-    
-    public static void SetLocalIdByUserLogged()
-    {
-        UserLocalIdLogged = ControlPreferences.GetKeyOfPreferences(StringConstants.firebaseUserLocalIdKey);
-    }
+
+    #region Private Methods
 
     private static async void CheckUserHasLogged()
     {
@@ -44,7 +44,16 @@ public partial class App : Application
         await Shell.Current.GoToAsync("//home");
     }
 
-    #region Style - Colors
+    private static void SetLicenseToComponentGemBoxPdf() => ComponentInfo.SetLicense("FREE-LIMITED-KEY");
+
+    #endregion
+
+    #region Public Methods
+
+    public static void SetLocalIdByUserLogged()
+    {
+        UserLocalIdLogged = ControlPreferences.GetKeyOfPreferences(StringConstants.firebaseUserLocalIdKey);
+    }
 
     public static Color GetRedColor() => Colors.Red;
 
@@ -56,7 +65,7 @@ public partial class App : Application
 
     #region DB
 
-    private static DbApp? _dbApp;
+    private static DbApp _dbApp;
     public static DbApp DbApp
     {
 #if ANDROID
@@ -100,6 +109,5 @@ public partial class App : Application
     }
 
     #endregion
-
 }
 

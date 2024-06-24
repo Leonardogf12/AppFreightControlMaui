@@ -1,33 +1,29 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
+using FreightControlMaui.Controls.Alerts;
 using FreightControlMaui.MVVM.Models;
 using FreightControlMaui.Repositories;
+using GemBox.Pdf;
+using GemBox.Pdf.Content;
 
-namespace FreightControlMaui.Controls.Excel
+namespace FreightControlMaui.Services.Exportation
 {
-    public class ExportDataToExcel : IExportDataToExcel
+    public class ExportData : IExportData
     {
         private readonly ToFuelRepository _toFuelRepository;
 
-        public ExportDataToExcel()
+        public ExportData()
         {
             _toFuelRepository = new();
         }
-
-        public async Task ExportData(List<FreightModel> list)
+      
+        public async Task CreateDocumentExcelAsync(List<FreightModel> list)
         {
             if (list == null) return;
 
-            string nameFile = $"fretes{DateTime.Now.ToString("dd-MM-yy-hh-mm-ss")}.csv";
+            string nameFile = $"fretes{DateTime.Now:dd-MM-yy-hh-mm-ss}.csv";
 
-            string path = string.Empty;
-#if ANDROID
-            path = Path.Combine(Android.App.Application.Context.FilesDir.AbsolutePath, "/storage/emulated/0/Documents/");
-#else
-//Todo Implement local storage to save csv file.
-#endif
-            string filePath = Path.Combine(path, nameFile);
-
+            string filePath = SetFilePathByDevice(nameFile);
+           
             var utf8 = new UTF8Encoding(true);
 
             var totalFreight = list.Select(x => x.FreightValue).Sum();
@@ -84,8 +80,47 @@ namespace FreightControlMaui.Controls.Excel
                 await writer.WriteAsync($"Total Geral: {totalFreight - totalValue - totalExpenses:c};-;-;-;-;-;-");
             }
 
-            await App.Current.MainPage.DisplayAlert("Sucesso", "Arquivo exportado com sucesso. O arquivo foi salvo em: Documentos.", "Ok");
+            await ControlAlert.DefaultAlert("Sucesso", "Arquivo exportado com sucesso. O arquivo foi salvo em: Documentos.");            
         }
+
+        public async Task<string> CreateDocumentPdfAsync(int pageCount = 1)
+        {
+            using var document = new PdfDocument();
+
+            var stepper = new Stepper
+            {
+                Minimum = 1,
+                Maximum = 10,
+                Value = pageCount
+            };
+
+            for (int i = 0; i < stepper.Value; ++i)
+                document.Pages.Add();
+
+            using (var formattedText = new PdfFormattedText())
+            {
+                formattedText.FontFamily = new PdfFontFamily("MontserratRegular");
+                formattedText.FontSize = 24;
+
+                formattedText.AppendLine($"Confrete - {DateTime.Now.ToShortDateString()}");
+                document.Pages[0].Content.DrawText(formattedText, new PdfPoint(100,100));
+
+                var image = PdfImage.Load(await FileSystem.OpenAppPackageFileAsync("dotnet_botraw.png"));
+                document.Pages[0].Content.DrawImage(image, new PdfPoint(100, 200));               
+
+            }
+          
+            string nameFile = $"fretes{DateTime.Now:dd-MM-yy-hh-mm-ss}.pdf";
+            string filePath = SetFilePathByDevice(nameFile);
+
+            await Task.Run(() => document.Save(filePath));
+
+            await ControlAlert.DefaultAlert("Sucesso", "PDF exportado com sucesso. O arquivo foi salvo em: Documentos.");
+
+            return filePath;
+        }
+
+        public async Task OpenLauncher(string filePath) => await Launcher.OpenAsync(new OpenFileRequest(Path.GetFileName(filePath), new ReadOnlyFile(filePath)));
 
         public async Task<List<ToFuelModel>> GetFreightSupplies(FreightModel item)
         {
@@ -93,7 +128,18 @@ namespace FreightControlMaui.Controls.Excel
 
             return list.ToList();
         }
-    }
 
+        public static string SetFilePathByDevice(string nameFile)
+        {
+            string path = string.Empty;
+#if ANDROID
+            path = Path.Combine(Android.App.Application.Context.FilesDir.AbsolutePath, "/storage/emulated/0/Documents/");
+#else
+//Todo Implement local storage to save csv file.
+#endif
+            return Path.Combine(path, nameFile);
+        }
+
+    }
 }
 
