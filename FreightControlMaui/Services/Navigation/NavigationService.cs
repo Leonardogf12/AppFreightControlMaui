@@ -4,8 +4,8 @@
     {
         public bool IsBrowsing = false;
 
-        public async Task NavigationToPageAsync<T>(Dictionary<string, object>? parameters = null,
-                                             View? view = null, string barsNav = "") where T : IView
+        public async Task NavigationToPageAsync<T>(Dictionary<string, object> parameters = null,
+                                             View view = null, string barsNav = "") where T : IView
         {
             if (IsBrowsing) return;
 

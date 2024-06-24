@@ -10,7 +10,7 @@ namespace FreightControlMaui.Services.Authentication
         {
         }
 
-        public async Task LoginAsync(string? email, string? password)
+        public async Task LoginAsync(string email, string password)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace FreightControlMaui.Services.Authentication
             ControlPreferences.AddKeyOnPreferences(key: StringConstants.firebaseUserLocalIdKey, contentOfObject: content.User.LocalId);
         }
 
-        public async Task ResetPassword(string? email)
+        public async Task ResetPassword(string email)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace FreightControlMaui.Services.Authentication
             }
         }
 
-        public async Task RegisterNewUser(string? name, string? email, string? password)
+        public async Task RegisterNewUser(string name, string email, string password)
         {
             try
             {

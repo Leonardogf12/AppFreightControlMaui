@@ -6,7 +6,7 @@ namespace FreightControlMaui.Services
 {
     public class DataIbgeService
     {
-        public static async Task<List<Municipio>?> GetCitiesByCodeState(string state)
+        public static async Task<List<Municipio>> GetCitiesByCodeState(string state)
         {
             using HttpClient client = new();
 

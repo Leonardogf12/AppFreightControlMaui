@@ -9,9 +9,7 @@ namespace FreightControlMaui.MVVM.ViewModels
     public class HomeViewModel : BaseViewModel
     {
         #region Properties
-
-        private readonly IExportData _exportData;
-
+       
         private readonly UserRepository _userRepository;
 
         private readonly FreightRepository _freightRepository;

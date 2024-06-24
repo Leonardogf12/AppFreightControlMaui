@@ -5,7 +5,7 @@ namespace FreightControlMaui.Components.UI
 {
     public class TextEditCustom : TextEdit
     {
-        public TextEditCustom(string icon = "", string placeholder = "", Keyboard? keyboard = null, char maskPlaceholder = new(), string? mask = null)
+        public TextEditCustom(string icon = "", string placeholder = "", Keyboard keyboard = null, char maskPlaceholder = new(), string mask = null)
         {
             MaskPlaceholderChar = maskPlaceholder;
             Mask = mask;
