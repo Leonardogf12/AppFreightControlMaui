@@ -89,7 +89,7 @@ namespace FreightControlMaui.MVVM.Views
             var chartsButton = new ButtonHomeMenu(iconName: "charts_256", eventTap: TapGestureRecognizer_Tapped_GoToChartsView);
             stack.Children.Add(chartsButton);
 
-            var testButton = new ButtonHomeMenu(iconName: "dotnet_bot", eventTap: TapGestureRecognizer_Tapped_PdfTest);
+            //var testButton = new ButtonHomeMenu(iconName: "dotnet_bot", eventTap: TapGestureRecognizer_Tapped_PdfTest);
             //stack.Children.Add(testButton);
 
             mainGrid.Add(stack, 0, 1);

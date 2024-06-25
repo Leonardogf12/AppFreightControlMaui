@@ -180,8 +180,9 @@ namespace FreightControlMaui.MVVM.Views
                     }
                 }
             };
-            collection.SetBinding(ItemsView.ItemsSourceProperty, nameof(ViewModel.FreightCollection));
+            collection.SetBinding(ItemsView.ItemsSourceProperty, nameof(ViewModel.FreightCollection));           
             collection.RemainingItemsThresholdReachedCommand = ViewModel.LoadMoreItemFreightCommand;
+
 
             refresh.Content = collection;
             mainGrid.Add(refresh, 0, 1);
@@ -624,8 +625,9 @@ namespace FreightControlMaui.MVVM.Views
 
         private async void EventFilter(object sender, EventArgs e)
         {
+            ViewModel.IsFiltering = 1;
             await ViewModel.FilterFreights();
-            ViewModel.BottomSheetFilterState = BottomSheetState.Hidden;
+            ViewModel.BottomSheetFilterState = BottomSheetState.Hidden;            
         }
 
         private async void EventExport(object sender, EventArgs e)
@@ -664,6 +666,5 @@ namespace FreightControlMaui.MVVM.Views
 
         #endregion
     }
-
 }
 

@@ -141,6 +141,18 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
+        private int _isFiltering = 0;
+        public int IsFiltering
+        {
+            get => _isFiltering;
+            set
+            {
+                _isFiltering = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         private readonly int _freightQtyItemsPage = 3;
 
         public ICommand RefreshingCommand;
@@ -217,7 +229,7 @@ namespace FreightControlMaui.MVVM.ViewModels
         }
 
         private async void OnLoadMoreItemFreightCommand()
-        {
+        {           
             if (IsLoadingMoreFreightItems) return;
 
             try
@@ -239,7 +251,7 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
             finally
             {
-                IsLoadingMoreFreightItems = false;
+                IsLoadingMoreFreightItems = false;               
             }
         }
 
@@ -275,14 +287,10 @@ namespace FreightControlMaui.MVVM.ViewModels
             FreightCollection.Clear();
 
             FreightListRemainingItems = await _freightRepository.GetByUserLocalId(App.UserLocalIdLogged);
-
-            /* App.Current.Dispatcher.Dispatch(() => { */
-
+           
             var toBeAdded = FreightListRemainingItems.Take(_freightQtyItemsPage).ToList();
 
             toBeAdded.ForEach(FreightCollection.Add);
-
-            /* });*/
 
             CheckIfThereAreFreightItemsInCollection();
         }
@@ -377,7 +385,7 @@ namespace FreightControlMaui.MVVM.ViewModels
         }
 
         public async Task FilterFreights()
-        {
+        {           
             if (!CheckDatesToFilterData())
             {
                 await ControlAlert.DefaultAlert("Ops",
@@ -397,6 +405,7 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
 
             FreightCollection.Clear();
+            FreightListRemainingItems.Clear();
 
             FreightCollection = new ObservableCollection<FreightModel>(dataFiltered);
         }

@@ -100,13 +100,21 @@ namespace FreightControlMaui.Services.Exportation
             using (var formattedText = new PdfFormattedText())
             {
                 formattedText.FontFamily = new PdfFontFamily("MontserratRegular");
-                formattedText.FontSize = 24;
 
+                formattedText.FontSize = 14;
                 formattedText.AppendLine($"Confrete - {DateTime.Now.ToShortDateString()}");
-                document.Pages[0].Content.DrawText(formattedText, new PdfPoint(100,100));
+
+                formattedText.FontSize = 12;
+                formattedText.AppendLine("Lorem Ipsum is simply dummy text of the printing and typesetting industry. ");
+                formattedText.AppendLine("Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, ");
+                formattedText.AppendLine("when an unknown printer took a galley of type and scrambled it to make a type ");
+                formattedText.AppendLine("specimen book. It has survived not only five centuries, but also the leap into");
+                formattedText.AppendLine("electronic typesetting, remaining essentially unchanged.");
+
+                document.Pages[0].Content.DrawText(formattedText, new PdfPoint(50,700));
 
                 var image = PdfImage.Load(await FileSystem.OpenAppPackageFileAsync("dotnet_botraw.png"));
-                document.Pages[0].Content.DrawImage(image, new PdfPoint(100, 200));               
+                //document.Pages[0].Content.DrawImage(image, new PdfPoint(100, 200));               
 
             }
           
