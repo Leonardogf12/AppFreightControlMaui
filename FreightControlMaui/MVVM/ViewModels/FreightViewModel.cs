@@ -141,18 +141,6 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
-        private int _isFiltering = 0;
-        public int IsFiltering
-        {
-            get => _isFiltering;
-            set
-            {
-                _isFiltering = value;
-                OnPropertyChanged();
-            }
-        }
-
-
         private readonly int _freightQtyItemsPage = 3;
 
         public ICommand RefreshingCommand;

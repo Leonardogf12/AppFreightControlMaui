@@ -624,8 +624,7 @@ namespace FreightControlMaui.MVVM.Views
         }
 
         private async void EventFilter(object sender, EventArgs e)
-        {
-            ViewModel.IsFiltering = 1;
+        {            
             await ViewModel.FilterFreights();
             ViewModel.BottomSheetFilterState = BottomSheetState.Hidden;            
         }
