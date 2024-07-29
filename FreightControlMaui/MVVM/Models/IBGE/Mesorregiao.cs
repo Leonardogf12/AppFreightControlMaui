@@ -7,4 +7,3 @@
         public UF UF { get; set; }
     }
 }
-

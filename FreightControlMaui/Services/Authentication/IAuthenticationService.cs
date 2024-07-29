@@ -9,4 +9,3 @@
         Task RegisterNewUser(string name, string email, string password);
     }
 }
-

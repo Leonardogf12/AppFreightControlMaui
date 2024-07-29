@@ -80,6 +80,4 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
     }
-
 }
-

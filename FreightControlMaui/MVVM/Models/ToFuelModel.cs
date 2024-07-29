@@ -33,4 +33,3 @@ namespace FreightControlMaui.MVVM.Models
         public string ValuePerLiterCustom => ValuePerLiter.ToString("c");
     }
 }
-

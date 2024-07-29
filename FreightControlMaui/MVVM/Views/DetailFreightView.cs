@@ -29,28 +29,31 @@ namespace FreightControlMaui.MVVM.Views
 
             BackgroundColor = ControlResources.GetResource<Color>("PrimaryDark");
 
-            Content = BuildDetailFreightView();
+            Content = BuildDetailFreightView;
 
             BindingContext = ViewModel;
         }
 
         #region UI
 
-        private View BuildDetailFreightView()
+        private View BuildDetailFreightView
         {
-            var mainGrid = CreateMainGrid();
+            get
+            {
+                var mainGrid = CreateMainGrid();
 
-            CreateStackHeader(mainGrid);
+                CreateStackHeader(mainGrid);
 
-            CreateDetailsFreight(mainGrid);
+                CreateDetailsFreight(mainGrid);
 
-            CreateTitleToFuel(mainGrid);
+                CreateTitleToFuel(mainGrid);
 
-            CreateCollectionDetailFreight(mainGrid);
+                CreateCollectionDetailFreight(mainGrid);
 
-            CreateStackWithEmptyCollection(mainGrid);
+                CreateStackWithEmptyCollection(mainGrid);
 
-            return mainGrid;
+                return mainGrid;
+            }
         }
 
         private static Grid CreateMainGrid()
@@ -250,7 +253,7 @@ namespace FreightControlMaui.MVVM.Views
             mainGrid.Add(collection, 0, 3);
         }
 
-        private View CreateActiveIndicatorFooterRegion()
+        private FooterActivityIndicator CreateActiveIndicatorFooterRegion()
         {
             var activeIndicatorFooterToFuelCollection = new FooterActivityIndicator();
             activeIndicatorFooterToFuelCollection.SetBinding(IsVisibleProperty, nameof(ViewModel.IsLoadingMoreToFuelItems));
@@ -258,7 +261,7 @@ namespace FreightControlMaui.MVVM.Views
             return activeIndicatorFooterToFuelCollection;
         }
 
-        private View CreateItemTemplateDetailFreight()
+        private StackLayout CreateItemTemplateDetailFreight()
         {
             var stack = new StackLayout
             {
@@ -579,7 +582,7 @@ namespace FreightControlMaui.MVVM.Views
                 HorizontalOptions = LayoutOptions.Center,
             };
 
-            label.SetBinding(Label.IsVisibleProperty, nameof(ViewModel.IsVisibleTextPhraseToFuelEmpty));
+            label.SetBinding(IsVisibleProperty, nameof(ViewModel.IsVisibleTextPhraseToFuelEmpty));
 
             mainGrid.Add(label, 0, 3);
         }
@@ -660,4 +663,3 @@ namespace FreightControlMaui.MVVM.Views
     }
 
 }
-

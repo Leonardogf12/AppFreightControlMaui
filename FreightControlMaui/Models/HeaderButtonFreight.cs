@@ -8,4 +8,3 @@ namespace FreightControlMaui.Models
         public required ICommand Command { get; set; }
     }
 }
-

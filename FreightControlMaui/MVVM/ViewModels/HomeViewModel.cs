@@ -9,11 +9,7 @@ namespace FreightControlMaui.MVVM.ViewModels
     public class HomeViewModel : BaseViewModel
     {
         #region Properties
-       
-        private readonly UserRepository _userRepository;
-
-        private readonly FreightRepository _freightRepository;
-
+              
         private UserModel _userLogged;
         public UserModel UserLogged
         {
@@ -35,6 +31,9 @@ namespace FreightControlMaui.MVVM.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        private readonly UserRepository _userRepository;
+        private readonly FreightRepository _freightRepository;
 
         #endregion
 
@@ -70,6 +69,4 @@ namespace FreightControlMaui.MVVM.ViewModels
 
         #endregion
     }
-
 }
-

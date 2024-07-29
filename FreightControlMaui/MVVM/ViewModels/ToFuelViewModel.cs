@@ -12,11 +12,7 @@ namespace FreightControlMaui.MVVM.ViewModels
     public class ToFuelViewModel : BaseViewModel
     {
         #region Properties
-
-        private readonly ToFuelRepository _toFuelRepository;
-
-        private readonly FreightRepository _freightRepository;
-
+       
         private DateTime _date = DateTime.Now;
         public DateTime Date
         {
@@ -241,6 +237,9 @@ namespace FreightControlMaui.MVVM.ViewModels
             }
         }
 
+        private readonly ToFuelRepository _toFuelRepository;
+        private readonly FreightRepository _freightRepository;
+
         #endregion
 
         public ToFuelViewModel()
@@ -345,6 +344,4 @@ namespace FreightControlMaui.MVVM.ViewModels
 
         #endregion
     }
-
 }
-

@@ -23,7 +23,21 @@ namespace FreightControlMaui.Controls
         {
             return Preferences.Get(key, "");
         }
+
+        public static void UpdateKeyObjectOfPreference(string key, string value = "", object contentOfObject = null)
+        {
+            RemoveKeyFromPreferences(key);
+
+            if(contentOfObject is not null)
+            {
+                var serializeContent = JsonConvert.SerializeObject(contentOfObject);
+
+                Preferences.Set(key, serializeContent);
+            }
+            else
+            {
+                Preferences.Set(key, value);
+            }            
+        }
     }
-
 }
-

@@ -30,6 +30,37 @@ public static class MauiProgram
             fonts.AddFont("Montserrat-SemiBold.ttf", "MontserratSemiBold");          
         });
 
+        RegisterServicesToViews(builder);
+        //RegisterServicesToViewModels(builder);
+        RegisterServicesToAppServices(builder);
+
+#if DEBUG
+        builder.Logging.AddDebug();
+#endif
+        return builder.Build();
+    }
+
+    private static void RegisterServicesToAppServices(MauiAppBuilder builder)
+    {
+        builder.Services.AddSingleton<IFileSaver>(FileSaver.Default);
+        builder.Services.AddSingleton<INavigationService, NavigationService>();
+        builder.Services.AddSingleton<IAuthenticationService, AuthenticationService>();
+        builder.Services.AddSingleton<IChartService, ChartService>();
+        builder.Services.AddSingleton<IExportData, ExportData>();
+    }
+
+    private static void RegisterServicesToViewModels(MauiAppBuilder builder)
+    {
+        builder.Services.AddTransient<FreightViewModel>();
+        builder.Services.AddTransient<AddFreightViewModel>();
+        builder.Services.AddTransient<DetailFreightViewModel>();
+        builder.Services.AddTransient<ToFuelViewModel>();
+        builder.Services.AddTransient<HomeViewModel>();
+        builder.Services.AddTransient<ChartsViewModel>();
+    }
+
+    private static void RegisterServicesToViews(MauiAppBuilder builder)
+    {
         builder.Services.AddTransient<HomeView>();
         builder.Services.AddTransient<FreightView>();
         builder.Services.AddTransient<AddFreightView>();
@@ -38,23 +69,5 @@ public static class MauiProgram
         builder.Services.AddTransient<RegisterView>();
         builder.Services.AddTransient<EditUserView>();
         builder.Services.AddTransient<ChartsView>();
-
-        builder.Services.AddTransient<FreightViewModel>();
-        builder.Services.AddTransient<AddFreightViewModel>();
-        builder.Services.AddTransient<DetailFreightViewModel>();
-        builder.Services.AddTransient<ToFuelViewModel>();
-        builder.Services.AddTransient<HomeViewModel>();
-        builder.Services.AddTransient<ChartsViewModel>();
-
-        builder.Services.AddSingleton<IFileSaver>(FileSaver.Default);
-        builder.Services.AddSingleton<INavigationService, NavigationService>();  
-        builder.Services.AddSingleton<IAuthenticationService, AuthenticationService>();
-        builder.Services.AddSingleton<IChartService, ChartService>();
-        builder.Services.AddSingleton<IExportData, ExportData>();
-
-#if DEBUG
-        builder.Logging.AddDebug();
-#endif
-        return builder.Build();
     }
 }

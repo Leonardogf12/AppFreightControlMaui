@@ -14,10 +14,7 @@ namespace FreightControlMaui.MVVM.ViewModels
     public class FreightViewModel : BaseViewModel
     {
         #region Properties
-
-        private readonly FreightRepository _freightRepository;
-        private readonly ToFuelRepository _toFuelRepository;
-
+       
         private ObservableCollection<FreightModel> _freightCollection = new();
         public ObservableCollection<FreightModel> FreightCollection
         {
@@ -143,6 +140,9 @@ namespace FreightControlMaui.MVVM.ViewModels
 
         private readonly int _freightQtyItemsPage = 3;
 
+        private readonly FreightRepository _freightRepository;
+        private readonly ToFuelRepository _toFuelRepository;
+
         public ICommand RefreshingCommand;
         public ICommand NewFreightCommand;
         public ICommand FilterFreightCommand;
@@ -157,6 +157,13 @@ namespace FreightControlMaui.MVVM.ViewModels
             _freightRepository = new();
             _toFuelRepository = new();
 
+            CreateCommands();           
+        }
+
+        #region Methods Privates
+
+        private void CreateCommands()
+        {
             RefreshingCommand = new Command(async () => await OnRefreshingCommand());
             NewFreightCommand = new Command(OnNewFreightCommand);
             FilterFreightCommand = new Command(OnFilterFreightCommand);
@@ -164,8 +171,6 @@ namespace FreightControlMaui.MVVM.ViewModels
             DeleteAllFreightCommand = new Command(OnDeleteAllFreightCommand);
             LoadMoreItemFreightCommand = new Command(OnLoadMoreItemFreightCommand);
         }
-
-        #region Methods Privates
 
         private async Task OnRefreshingCommand()
         {
@@ -431,4 +436,3 @@ namespace FreightControlMaui.MVVM.ViewModels
         #endregion              
     }
 }
-

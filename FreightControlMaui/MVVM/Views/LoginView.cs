@@ -1,5 +1,4 @@
-﻿using System;
-using FreightControlMaui.Components.UI;
+﻿using FreightControlMaui.Components.UI;
 using FreightControlMaui.Controls.Resources;
 using FreightControlMaui.MVVM.Base;
 using FreightControlMaui.MVVM.ViewModels;
@@ -15,16 +14,16 @@ namespace FreightControlMaui.MVVM.Views
         {
             BackgroundColor = ControlResources.GetResource<Color>("PrimaryDark");
 
-            Content = BuildLoginView();
+            Content = BuildLoginView;
 
-            CreateLoadingPopupView(this, ViewModel);
+            BaseContentPage.CreateLoadingPopupView(this, ViewModel);
 
             BindingContext = ViewModel;
         }
 
         #region UI
 
-        private Grid CreateMainGrid()
+        private static Grid CreateMainGrid()
         {
             return new Grid
             {
@@ -36,15 +35,18 @@ namespace FreightControlMaui.MVVM.Views
             };
         }
 
-        private View BuildLoginView()
+        private View BuildLoginView
         {
-            var mainGrid = CreateMainGrid();
+            get
+            {
+                var mainGrid = CreateMainGrid();
 
-            CreateImageLogin(mainGrid);
+                CreateImageLogin(mainGrid);
 
-            CreateContentOfWhiteFrame(mainGrid);
+                CreateContentOfWhiteFrame(mainGrid);
 
-            return mainGrid;
+                return mainGrid;
+            }
         }
 
         private void CreateContentOfWhiteFrame(Grid mainGrid)
@@ -83,7 +85,7 @@ namespace FreightControlMaui.MVVM.Views
             mainGrid.Add(whiteFrame, 0, 1);
         }
 
-        private void CreateImageLogin(Grid mainGrid)
+        private static void CreateImageLogin(Grid mainGrid)
         {
             var iconUser = new Image
             {
@@ -180,6 +182,4 @@ namespace FreightControlMaui.MVVM.Views
 
         #endregion       
     }
-
 }
-

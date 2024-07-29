@@ -43,7 +43,7 @@ namespace FreightControlMaui.Services.Authentication
             }
         }
 
-        private void SaveKeysOnPreferences(FirebaseAuthLink content)
+        private static void SaveKeysOnPreferences(FirebaseAuthLink content)
         {
             ControlPreferences.AddKeyOnPreferences(key: StringConstants.firebaseAuthTokenKey, contentOfObject: content);
             ControlPreferences.AddKeyOnPreferences(key: StringConstants.firebaseUserLocalIdKey, contentOfObject: content.User.LocalId);
@@ -90,7 +90,7 @@ namespace FreightControlMaui.Services.Authentication
             }
         }
 
-        private FirebaseAuthProvider GetFirebaseAuthProvider()
+        private static FirebaseAuthProvider GetFirebaseAuthProvider()
         {
             return new FirebaseAuthProvider(new FirebaseConfig(StringConstants.webApiFirebaseAuthKey));
         }
@@ -105,4 +105,3 @@ namespace FreightControlMaui.Services.Authentication
     }
 
 }
-

@@ -37,6 +37,4 @@ namespace FreightControlMaui.Components.Popups
             return load;
         }
     }
-
 }
-

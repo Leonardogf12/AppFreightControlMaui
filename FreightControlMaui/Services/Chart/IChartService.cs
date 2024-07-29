@@ -14,4 +14,3 @@ namespace FreightControlMaui.Services.Chart
         Task<ChartEntry[]> GenerateLineChartToFuelDaily(List<FreightModel> model);
     }
 }
-

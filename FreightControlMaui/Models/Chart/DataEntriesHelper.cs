@@ -9,4 +9,3 @@
         public decimal Value { get; set; }
     }
 }
-

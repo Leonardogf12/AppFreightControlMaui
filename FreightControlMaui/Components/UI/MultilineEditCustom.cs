@@ -33,4 +33,3 @@ namespace FreightControlMaui.Components.UI
         }
     }
 }
-

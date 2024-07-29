@@ -13,8 +13,6 @@ namespace FreightControlMaui.MVVM.ViewModels
     {
         #region Properties
 
-        private readonly ToFuelRepository _toFuelRepository;
-
         private ObservableCollection<ToFuelModel> _toFuelCollection = new();
         public ObservableCollection<ToFuelModel> ToFuelCollection
         {
@@ -188,6 +186,8 @@ namespace FreightControlMaui.MVVM.ViewModels
 
         private readonly int _toFuelQtyItemsPage = 3;
 
+        private readonly ToFuelRepository _toFuelRepository;
+
         public ICommand LoadMoreItemToFuelCommand;
 
         #endregion
@@ -292,4 +292,3 @@ namespace FreightControlMaui.MVVM.ViewModels
     }
 
 }
-

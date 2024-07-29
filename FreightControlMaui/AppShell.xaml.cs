@@ -18,4 +18,3 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(HomeView), typeof(HomeView));
     }
 }
-

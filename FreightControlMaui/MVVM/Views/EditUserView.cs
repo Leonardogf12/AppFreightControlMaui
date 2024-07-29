@@ -9,22 +9,22 @@ namespace FreightControlMaui.MVVM.Views
 {
     public class EditUserView : BaseContentPage
     {
-        public EditUserViewModel ViewModel = new();
+        private readonly EditUserViewModel _viewModel = new();
 
         public EditUserView()
         {
             BackgroundColor = Colors.White;
 
-            Content = BuildEditUserView();
+            Content = BuildEditUserView;
 
-            CreateLoadingPopupView(this, ViewModel);
+            CreateLoadingPopupView(this, _viewModel);
 
-            BindingContext = ViewModel;
+            BindingContext = _viewModel;
         }
 
         #region UI
 
-        private Grid CreateMainGrid()
+        private static Grid CreateMainGrid()
         {
             return new Grid
             {
@@ -36,18 +36,21 @@ namespace FreightControlMaui.MVVM.Views
             };
         }
 
-        private View BuildEditUserView()
+        private View BuildEditUserView
         {
-            var mainGrid = CreateMainGrid();
+            get
+            {
+                var mainGrid = CreateMainGrid();
 
-            CreateImageLogin(mainGrid);
+                CreateImageLogin(mainGrid);
 
-            CreateInputAndButtons(mainGrid);
+                CreateInputAndButtons(mainGrid);
 
-            return mainGrid;
+                return mainGrid;
+            }
         }
 
-        private void CreateImageLogin(Grid mainGrid)
+        private static void CreateImageLogin(Grid mainGrid)
         {
             var iconUser = new Image
             {
@@ -85,7 +88,7 @@ namespace FreightControlMaui.MVVM.Views
             {
                 Margin = new Thickness(10, 0, 10, 0)
             };
-            name.SetBinding(TextEditBase.TextProperty, nameof(ViewModel.Name));
+            name.SetBinding(TextEditBase.TextProperty, nameof(_viewModel.Name));
            
             mainGrid.Add(name, 0, 0);
         }
@@ -127,13 +130,13 @@ namespace FreightControlMaui.MVVM.Views
        
         private async void ButtonReset_Clicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(ViewModel.Name))
+            if (string.IsNullOrEmpty(_viewModel.Name))
             {
                 await ControlAlert.DefaultAlert("Ops", "Preencha corretamente o campo Nome. Favor verificar.");                
                 return;
             }
 
-            await ViewModel.SetNameForUser();
+            await _viewModel.SetNameForUser();
         }
 
         #endregion
@@ -142,6 +145,4 @@ namespace FreightControlMaui.MVVM.Views
         
         #endregion
     }
-
 }
-

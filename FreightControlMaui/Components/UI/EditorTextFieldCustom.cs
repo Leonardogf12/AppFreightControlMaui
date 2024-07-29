@@ -26,8 +26,8 @@ namespace FreightControlMaui.Components.UI
             {
                 ColumnDefinitions = new ColumnDefinitionCollection
                 {
-                    new () {Width = GridLength.Auto},
-                    new () {Width = GridLength.Star},
+                    new () { Width = GridLength.Auto },
+                    new () { Width = GridLength.Star },
                 },
                 ColumnSpacing = 10
             };
@@ -60,4 +60,3 @@ namespace FreightControlMaui.Components.UI
         }
     }
 }
-

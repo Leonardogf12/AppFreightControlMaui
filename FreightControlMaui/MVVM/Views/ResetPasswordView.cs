@@ -8,22 +8,22 @@ namespace FreightControlMaui.MVVM.Views
 {
     public class ResetPasswordView : BaseContentPage
     {
-        public ResetPasswordViewModel ViewModel = new();
+        private readonly ResetPasswordViewModel _viewModel = new();
 
         public ResetPasswordView()
         {
             BackgroundColor = Colors.White;
 
-            Content = BuildResetPasswordView();
+            Content = BuildResetPasswordView;
 
-            CreateLoadingPopupView(this, ViewModel);
+            CreateLoadingPopupView(this, _viewModel);
 
-            BindingContext = ViewModel;
+            BindingContext = _viewModel;
         }
 
         #region UI
 
-        private Grid CreateMainGrid()
+        private static Grid CreateMainGrid()
         {
             return new Grid
             {
@@ -35,18 +35,21 @@ namespace FreightControlMaui.MVVM.Views
             };
         }
 
-        private View BuildResetPasswordView()
+        private View BuildResetPasswordView
         {
-            var mainGrid = CreateMainGrid();
+            get
+            {
+                var mainGrid = CreateMainGrid();
 
-            CreatePhrases(mainGrid);
+                CreatePhrases(mainGrid);
 
-            CreateInputAndButtons(mainGrid);
+                CreateInputAndButtons(mainGrid);
 
-            return mainGrid;
+                return mainGrid;
+            }
         }
 
-        private void CreatePhrases(Grid mainGrid)
+        private static void CreatePhrases(Grid mainGrid)
         {
             var stack = new StackLayout
             {
@@ -100,7 +103,7 @@ namespace FreightControlMaui.MVVM.Views
             {
                 Margin = new Thickness(10, 0, 10, 0)
             };
-            email.SetBinding(TextEditCustom.TextProperty, nameof(ViewModel.Email));
+            email.SetBinding(TextEditCustom.TextProperty, nameof(_viewModel.Email));
            
             mainGrid.Add(email, 0, 0);
         }
@@ -142,19 +145,17 @@ namespace FreightControlMaui.MVVM.Views
         
         private async void ButtonReset_Clicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(ViewModel.Email)) return;
+            if (string.IsNullOrEmpty(_viewModel.Email)) return;
 
-            if (!ViewModel.Email.Contains("@"))
+            if (!_viewModel.Email.Contains("@"))
             {
                 await ControlAlert.DefaultAlert("Ops", "Parece que este não é um email válido. Favor verificar.");               
                 return;
             }
 
-            await ViewModel.ResetPassword();
+            await _viewModel.ResetPassword();
         }
 
         #endregion
     }
-
 }
-

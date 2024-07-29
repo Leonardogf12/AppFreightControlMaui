@@ -14,4 +14,3 @@ namespace FreightControlMaui.Controls.ControlCheckers
         }
     }
 }
-

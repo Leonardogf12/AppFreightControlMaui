@@ -47,5 +47,3 @@ namespace FreightControlMaui.Services
         }
     }
 }
-
-

@@ -32,6 +32,4 @@ namespace FreightControlMaui.Repositories
             return await _db.Table<FreightModel>().Where(x => x.UserLocalId == id).ToListAsync();
         }
     }
-
 }
-

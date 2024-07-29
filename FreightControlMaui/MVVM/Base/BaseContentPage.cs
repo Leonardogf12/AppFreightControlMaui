@@ -10,12 +10,10 @@ namespace FreightControlMaui.MVVM.Base
         {
             Shell.SetNavBarIsVisible(this, false);
 
-            Content = new Grid
-            {
-            };
+            Content = new Grid();
         }
 
-        public void CreateLoadingPopupView<TViewModel>(Page page, TViewModel viewModel) where TViewModel : INotifyPropertyChanged
+        public static void CreateLoadingPopupView<TViewModel>(Page page, TViewModel viewModel) where TViewModel : INotifyPropertyChanged
         {
             viewModel.PropertyChanged += (s, a) =>
             {
@@ -48,4 +46,3 @@ namespace FreightControlMaui.MVVM.Base
         }
     }
 }
-

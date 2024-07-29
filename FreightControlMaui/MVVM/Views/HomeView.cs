@@ -20,10 +20,8 @@ namespace FreightControlMaui.MVVM.Views
 
         private readonly IExportData _exportData;
 
-        public HomeViewModel ViewModel = new();
-
-        readonly ClickAnimation ClickAnimation = new();
-
+        private readonly HomeViewModel _viewModel = new();
+       
         public DXPopup SettingsDxPopup = new();
 
         public Image SettingsButton = new();
@@ -37,24 +35,27 @@ namespace FreightControlMaui.MVVM.Views
 
             BackgroundColor = ControlResources.GetResource<Color>("PrimaryDark");
 
-            Content = BuildHomeView();
+            Content = BuildHomeView;
             
-            BindingContext = ViewModel;
+            BindingContext = _viewModel;
         }
 
         #region UI
 
-        private View BuildHomeView()
+        private View BuildHomeView
         {
-            var mainGrid = CreateMainGrid();
+            get
+            {
+                var mainGrid = CreateMainGrid();
 
-            CreateSettingsButton(mainGrid);
+                CreateSettingsButton(mainGrid);
 
-            CreateDxPopupSettings(mainGrid);
+                CreateDxPopupSettings(mainGrid);
 
-            CreateButtonsHomeMenu(mainGrid);
+                CreateButtonsHomeMenu(mainGrid);
 
-            return mainGrid;
+                return mainGrid;
+            }
         }
 
         private static Grid CreateMainGrid()
@@ -119,7 +120,7 @@ namespace FreightControlMaui.MVVM.Views
             mainGrid.Add(SettingsDxPopup, 0, 0);
         }
 
-        private View CreateContentDxPopupSettings()
+        private StackLayout CreateContentDxPopupSettings()
         {
             var items = new StackLayout
             {
@@ -171,7 +172,7 @@ namespace FreightControlMaui.MVVM.Views
                 MaxLines = 1,
                 LineBreakMode = LineBreakMode.TailTruncation
             };
-            text.SetBinding(Label.TextProperty, nameof(ViewModel.NameUserLogged));
+            text.SetBinding(Label.TextProperty, nameof(_viewModel.NameUserLogged));
 
             content.Add(icon, 0, 0);
             content.Add(text, 1, 0);
@@ -250,7 +251,7 @@ namespace FreightControlMaui.MVVM.Views
             {
                 await ClickAnimation.SetFadeOnElement(element);
 
-                var result = await ViewModel.CheckIfExistRecordsToNavigate();
+                var result = await _viewModel.CheckIfExistRecordsToNavigate();
 
                 if (result == 0)
                 {
@@ -304,7 +305,7 @@ namespace FreightControlMaui.MVVM.Views
                
                 var param = new Dictionary<string, object>
                 {
-                    { "UserLogged", ViewModel.UserLogged }
+                    { "UserLogged", _viewModel.UserLogged }
                 };
 
                 await _navigationService.NavigationToPageAsync<EditUserView>(param);
@@ -319,7 +320,7 @@ namespace FreightControlMaui.MVVM.Views
         {
             base.OnAppearing();
 
-            ViewModel.LoadInfoByUserLogged();
+            _viewModel.LoadInfoByUserLogged();
         }
       
         #endregion

@@ -12,4 +12,3 @@ namespace FreightControlMaui.Models.Chart
         public SKColor TextColorDefault => SKColor.Parse("#FFFFFF");
     }
 }
-

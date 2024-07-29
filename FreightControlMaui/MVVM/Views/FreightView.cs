@@ -21,9 +21,7 @@ namespace FreightControlMaui.MVVM.Views
       
         private readonly IExportData _exportData;
 
-        public FreightViewModel ViewModel = new();
-
-        readonly ClickAnimation ClickAnimation = new();
+        private readonly FreightViewModel _viewModel = new();
 
         #endregion
 
@@ -36,7 +34,7 @@ namespace FreightControlMaui.MVVM.Views
 
             Content = BuildFreightView;
 
-            BindingContext = ViewModel;
+            BindingContext = _viewModel;
         }
 
         #region UI
@@ -137,14 +135,14 @@ namespace FreightControlMaui.MVVM.Views
                 },
                 VerticalOptions = LayoutOptions.Center,                
             };
-            collection.SetBinding(ItemsView.ItemsSourceProperty, nameof(ViewModel.HeaderButtonFreightCollection));
+            collection.SetBinding(ItemsView.ItemsSourceProperty, nameof(_viewModel.HeaderButtonFreightCollection));
             collection.ItemTemplate = new DataTemplate(CreateDataTemplateHeaderButton);
             
 
             return collection;
         }
 
-        private static View CreateDataTemplateHeaderButton()
+        private static Button CreateDataTemplateHeaderButton()
         {           
             var button = new Button
             {
@@ -164,8 +162,8 @@ namespace FreightControlMaui.MVVM.Views
             {
                 RefreshColor = ControlResources.GetResource<Color>("PrimaryDark")
             };
-            refresh.SetBinding(RefreshView.IsRefreshingProperty, nameof(ViewModel.IsRefreshingView));
-            refresh.Command = ViewModel.RefreshingCommand;
+            refresh.SetBinding(RefreshView.IsRefreshingProperty, nameof(_viewModel.IsRefreshingView));
+            refresh.Command = _viewModel.RefreshingCommand;
 
             var collection = new CollectionView
             {
@@ -180,23 +178,23 @@ namespace FreightControlMaui.MVVM.Views
                     }
                 }
             };
-            collection.SetBinding(ItemsView.ItemsSourceProperty, nameof(ViewModel.FreightCollection));           
-            collection.RemainingItemsThresholdReachedCommand = ViewModel.LoadMoreItemFreightCommand;
+            collection.SetBinding(ItemsView.ItemsSourceProperty, nameof(_viewModel.FreightCollection));           
+            collection.RemainingItemsThresholdReachedCommand = _viewModel.LoadMoreItemFreightCommand;
 
 
             refresh.Content = collection;
             mainGrid.Add(refresh, 0, 1);
         }
 
-        private View CreateActiveIndicatorFooterRegion()
+        private FooterActivityIndicator CreateActiveIndicatorFooterRegion()
         {
             var activeIndicatorFooterFreightCollection = new FooterActivityIndicator();
-            activeIndicatorFooterFreightCollection.SetBinding(IsVisibleProperty, nameof(ViewModel.IsLoadingMoreFreightItems));
+            activeIndicatorFooterFreightCollection.SetBinding(IsVisibleProperty, nameof(_viewModel.IsLoadingMoreFreightItems));
 
             return activeIndicatorFooterFreightCollection;
         }
 
-        private View CreateItemTemplateFreight()
+        private StackLayout CreateItemTemplateFreight()
         {
             var stack = new StackLayout
             {
@@ -491,7 +489,7 @@ namespace FreightControlMaui.MVVM.Views
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.Center
             };
-            label.SetBinding(IsVisibleProperty, nameof(ViewModel.IsVisibleTextAddNewFreight));
+            label.SetBinding(IsVisibleProperty, nameof(_viewModel.IsVisibleTextAddNewFreight));
 
             contentGridBorder.SetRowSpan(label, 3);
             contentGridBorder.Children.Add(label);
@@ -500,9 +498,9 @@ namespace FreightControlMaui.MVVM.Views
         private void CreateBottomSheetFilter(Grid mainGrid)
         {
             var bottomSheetFilter = new BottomSheetFilterDateCustom(title: "Filtrar", textButton: "Confirmar", EventFilter);
-            bottomSheetFilter.SetBinding(BottomSheet.StateProperty, nameof(ViewModel.BottomSheetFilterState));
-            bottomSheetFilter.DatePickerFieldCustomInitialDate.DatePicker.SetBinding(DatePicker.DateProperty, nameof(ViewModel.InitialDate));
-            bottomSheetFilter.DatePickerFieldCustomFinalDate.DatePicker.SetBinding(DatePicker.DateProperty, nameof(ViewModel.FinalDate));
+            bottomSheetFilter.SetBinding(BottomSheet.StateProperty, nameof(_viewModel.BottomSheetFilterState));
+            bottomSheetFilter.DatePickerFieldCustomInitialDate.DatePicker.SetBinding(DatePicker.DateProperty, nameof(_viewModel.InitialDate));
+            bottomSheetFilter.DatePickerFieldCustomFinalDate.DatePicker.SetBinding(DatePicker.DateProperty, nameof(_viewModel.FinalDate));
 
             mainGrid.Add(bottomSheetFilter, 0, 1);
         }
@@ -510,9 +508,9 @@ namespace FreightControlMaui.MVVM.Views
         private void CreateBottomSheetExport(Grid mainGrid)
         {
             var bottomSheetExport = new BottomSheetFilterDateCustom(title: "Exportar", textButton: "Exportar", EventExport);
-            bottomSheetExport.SetBinding(BottomSheet.StateProperty, nameof(ViewModel.BottomSheetExportState));
-            bottomSheetExport.DatePickerFieldCustomInitialDate.DatePicker.SetBinding(DatePicker.DateProperty, nameof(ViewModel.InitialDate));
-            bottomSheetExport.DatePickerFieldCustomFinalDate.DatePicker.SetBinding(DatePicker.DateProperty, nameof(ViewModel.FinalDate));
+            bottomSheetExport.SetBinding(BottomSheet.StateProperty, nameof(_viewModel.BottomSheetExportState));
+            bottomSheetExport.DatePickerFieldCustomInitialDate.DatePicker.SetBinding(DatePicker.DateProperty, nameof(_viewModel.InitialDate));
+            bottomSheetExport.DatePickerFieldCustomFinalDate.DatePicker.SetBinding(DatePicker.DateProperty, nameof(_viewModel.FinalDate));
 
             mainGrid.Add(bottomSheetExport, 0, 1);
         }
@@ -537,12 +535,12 @@ namespace FreightControlMaui.MVVM.Views
 
         private void ClickedButtonFilter(object sender, EventArgs e)
         {
-            ViewModel.BottomSheetFilterState = BottomSheetState.HalfExpanded;
+            _viewModel.BottomSheetFilterState = BottomSheetState.HalfExpanded;
         }
 
         private void ClickedButtonExport(object sender, EventArgs e)
         {
-            ViewModel.BottomSheetExportState = BottomSheetState.HalfExpanded;
+            _viewModel.BottomSheetExportState = BottomSheetState.HalfExpanded;
         }
 
         private async void TapGestureRecognizer_Tapped_DeleteItem(object sender, TappedEventArgs e)
@@ -557,7 +555,7 @@ namespace FreightControlMaui.MVVM.Views
 
                 if (element.BindingContext is FreightModel item)
                 {
-                    await ViewModel.DeleteFreight(item);
+                    await _viewModel.DeleteFreight(item);
                 }
             }
         }
@@ -625,19 +623,19 @@ namespace FreightControlMaui.MVVM.Views
 
         private async void EventFilter(object sender, EventArgs e)
         {            
-            await ViewModel.FilterFreights();
-            ViewModel.BottomSheetFilterState = BottomSheetState.Hidden;            
+            await _viewModel.FilterFreights();
+            _viewModel.BottomSheetFilterState = BottomSheetState.Hidden;            
         }
 
         private async void EventExport(object sender, EventArgs e)
         {
-            ViewModel.IsBusy = true;
+            _viewModel.IsBusy = true;
 
             try
             {
-                await _exportData.CreateDocumentExcelAsync(await ViewModel.GetFreightsToExport());
+                await _exportData.CreateDocumentExcelAsync(await _viewModel.GetFreightsToExport());
 
-                ViewModel.BottomSheetExportState = BottomSheetState.Hidden;
+                _viewModel.BottomSheetExportState = BottomSheetState.Hidden;
             }
             catch (Exception ex)
             {
@@ -646,7 +644,7 @@ namespace FreightControlMaui.MVVM.Views
             }
             finally
             {
-                ViewModel.IsBusy = false;
+                _viewModel.IsBusy = false;
             }
         }
 
@@ -666,4 +664,3 @@ namespace FreightControlMaui.MVVM.Views
         #endregion
     }
 }
-

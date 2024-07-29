@@ -15,6 +15,4 @@ namespace FreightControlMaui.Controls.Benchmark
             Console.WriteLine($"*Runtime: {ts.Milliseconds}");
         }
     }
-
 }
-

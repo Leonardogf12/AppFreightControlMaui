@@ -22,7 +22,7 @@ public partial class App : Application
     {
         SetLicenseToComponentGemBoxPdf();
 
-        SetDatabasePathDevice();
+        //SetDatabasePathDevice();
         
         InitializeComponent();
 
@@ -63,6 +63,7 @@ public partial class App : Application
 
     #endregion
 
+    /*
     #region DB
 
     private static DbApp _dbApp;
@@ -109,5 +110,5 @@ public partial class App : Application
     }
 
     #endregion
+    */
 }
-

@@ -6,7 +6,6 @@ namespace FreightControlMaui.Components.UI
     public class DatePickerFieldCustom : ContentView
     {
         public DatePicker DatePicker { get; set; }
-
         public Border Border { get; set; }
 
         public DatePickerFieldCustom(string nameIcon = "calendar_24")
@@ -27,10 +26,10 @@ namespace FreightControlMaui.Components.UI
             var contentGridBorder = new Grid
             {
                 ColumnDefinitions = new ColumnDefinitionCollection
-            {
-                new () {Width = GridLength.Auto},
-                new () {Width = GridLength.Star},
-            },
+                {
+                    new () {Width = GridLength.Auto},
+                    new () {Width = GridLength.Star},
+                },
                 ColumnSpacing = 10
             };
 
@@ -58,6 +57,4 @@ namespace FreightControlMaui.Components.UI
             Content = Border;
         }
     }
-
 }
-

@@ -1,9 +1,7 @@
-﻿using System;
-namespace FreightControlMaui.Services.Navigation
+﻿namespace FreightControlMaui.Services.Navigation
 {
     public interface INavigationService
     {
         Task NavigationToPageAsync<T>(Dictionary<string, object> parameters = null, View view = null, string barsNav = "") where T : IView;
     }
 }
-

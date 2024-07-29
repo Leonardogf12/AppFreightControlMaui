@@ -52,7 +52,7 @@ namespace FreightControlMaui.Services.Chart
             {
                 var listToFuel = await _toFuelRepository.GetAllById(freight.Id);
 
-                if (listToFuel.Count() == 0) continue;
+                if (listToFuel.Count == 0) continue;
 
                 var listDataEntries = listToFuel.GroupBy(x => new { x.Date.Month })
                                    .Select(n => new DataEntriesHelper
@@ -84,7 +84,7 @@ namespace FreightControlMaui.Services.Chart
             {
                 var listToFuel = await _toFuelRepository.GetAllById(freight.Id);
 
-                if (listToFuel.Count() == 0) continue;
+                if (listToFuel.Count == 0) continue;
 
                 var data = listToFuel.GroupBy(x => new { x.Date.Day, x.Date.Month, x.Date })
                              .Select(n => new DataEntriesHelper
@@ -103,7 +103,7 @@ namespace FreightControlMaui.Services.Chart
             return GetArrayToChartEntries(finalList);
         }
 
-        private ChartEntry[] GetArrayToChartEntries(List<DataEntriesHelper> data)
+        private static ChartEntry[] GetArrayToChartEntries(List<DataEntriesHelper> data)
         {
             var list = new List<DataEntries>();
 
@@ -131,9 +131,9 @@ namespace FreightControlMaui.Services.Chart
             }).ToArray();
         }
 
-        private string ConvertIntNumberToStringMount(int month)
+        private static string ConvertIntNumberToStringMount(int month)
         {
-            DateTime data = new DateTime(1, month, 1);
+            DateTime data = new(1, month, 1);
             return data.ToString("MMM", new CultureInfo("pt-BR"));
         }
     }
@@ -146,4 +146,3 @@ namespace FreightControlMaui.Services.Chart
         }
     }
 }
-

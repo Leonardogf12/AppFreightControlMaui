@@ -6,7 +6,6 @@ using FreightControlMaui.Controls.ControlCheckers;
 using FreightControlMaui.Controls.Resources;
 using FreightControlMaui.MVVM.Base;
 using FreightControlMaui.MVVM.ViewModels;
-using Java.Lang;
 using Microsoft.Maui.Controls.Shapes;
 
 namespace FreightControlMaui.MVVM.Views
@@ -15,7 +14,7 @@ namespace FreightControlMaui.MVVM.Views
     {
         #region Properties
 
-        public AddFreightViewModel ViewModel = new();
+        private readonly AddFreightViewModel _viewModel = new();
 
         public ClickAnimation ClickAnimation = new();
 
@@ -29,26 +28,29 @@ namespace FreightControlMaui.MVVM.Views
         {
             BackgroundColor = Colors.White;
 
-            Content = BuildAddFreightView();
+            Content = BuildAddFreightView;
 
-            CreateLoadingPopupView(this, ViewModel);
+            CreateLoadingPopupView(this, _viewModel);
 
-            BindingContext = ViewModel;
+            BindingContext = _viewModel;
         }
 
         #region UI
 
-        private View BuildAddFreightView()
+        private View BuildAddFreightView
         {
-            var mainGrid = CreateMainGrid();
+            get
+            {
+                var mainGrid = CreateMainGrid();
 
-            CreateHeader(mainGrid);
+                CreateHeader(mainGrid);
 
-            CreateForm(mainGrid);
+                CreateForm(mainGrid);
 
-            CreateSaveButton(mainGrid);
+                CreateSaveButton(mainGrid);
 
-            return mainGrid;
+                return mainGrid;
+            }
         }
 
         private static Grid CreateMainGrid()
@@ -107,7 +109,7 @@ namespace FreightControlMaui.MVVM.Views
                 TextColor = ControlResources.GetResource<Color>("PrimaryDark"),
                 Style = ControlResources.GetResource<Style>("labelTitleView")
             };
-            labelTitle.SetBinding(Label.TextProperty, nameof(ViewModel.TextTitlePage));
+            labelTitle.SetBinding(Label.TextProperty, nameof(_viewModel.TextTitlePage));
             contentGridStackTitle.Add(labelTitle, 1, 0);
 
             stackTitle.Children.Add(contentGridStackTitle);
@@ -213,10 +215,10 @@ namespace FreightControlMaui.MVVM.Views
             {
                 Margin = new Thickness(10, 0, 5, 0),
             };
-            OriginUfComboboxEditCustom.SetBinding(ItemsEditBase.ItemsSourceProperty, nameof(ViewModel.OriginUfCollection));
-            OriginUfComboboxEditCustom.SetBinding(ComboBoxEdit.SelectedItemProperty, nameof(ViewModel.SelectedItemOriginUf), BindingMode.TwoWay);
-            OriginUfComboboxEditCustom.SetBinding(EditBase.BorderColorProperty, nameof(ViewModel.BorderColorOriginUf));
-            OriginUfComboboxEditCustom.SetBinding(EditBase.FocusedBorderColorProperty, nameof(ViewModel.BorderColorFocusedOriginUf));
+            OriginUfComboboxEditCustom.SetBinding(ItemsEditBase.ItemsSourceProperty, nameof(_viewModel.OriginUfCollection));
+            OriginUfComboboxEditCustom.SetBinding(ComboBoxEdit.SelectedItemProperty, nameof(_viewModel.SelectedItemOriginUf), BindingMode.TwoWay);
+            OriginUfComboboxEditCustom.SetBinding(EditBase.BorderColorProperty, nameof(_viewModel.BorderColorOriginUf));
+            OriginUfComboboxEditCustom.SetBinding(EditBase.FocusedBorderColorProperty, nameof(_viewModel.BorderColorFocusedOriginUf));
             OriginUfComboboxEditCustom.SelectionChanged += OriginUf_SelectionChanged;
 
             grid.AddWithSpan(view: OriginUfComboboxEditCustom, row: 1, column: 0, rowSpan: 1, columnSpan: 2);
@@ -225,10 +227,10 @@ namespace FreightControlMaui.MVVM.Views
             {
                 Margin = new Thickness(0, 0, 10, 0),
             };
-            origin.SetBinding(ItemsEditBase.ItemsSourceProperty, nameof(ViewModel.OriginCollection));
-            origin.SetBinding(ComboBoxEdit.SelectedItemProperty, nameof(ViewModel.SelectedItemOrigin), BindingMode.TwoWay);
-            origin.SetBinding(EditBase.BorderColorProperty, nameof(ViewModel.BorderColorOrigin));
-            origin.SetBinding(EditBase.FocusedBorderColorProperty, nameof(ViewModel.BorderColorFocusedOrigin));
+            origin.SetBinding(ItemsEditBase.ItemsSourceProperty, nameof(_viewModel.OriginCollection));
+            origin.SetBinding(ComboBoxEdit.SelectedItemProperty, nameof(_viewModel.SelectedItemOrigin), BindingMode.TwoWay);
+            origin.SetBinding(EditBase.BorderColorProperty, nameof(_viewModel.BorderColorOrigin));
+            origin.SetBinding(EditBase.FocusedBorderColorProperty, nameof(_viewModel.BorderColorFocusedOrigin));
             origin.SelectionChanged += Origin_SelectionChanged;
 
             grid.AddWithSpan(view: origin, row: 1, column: 2, rowSpan: 1, columnSpan: 3);
@@ -271,10 +273,10 @@ namespace FreightControlMaui.MVVM.Views
             {
                 Margin = new Thickness(10, 0, 5, 0),
             };
-            DestinationUfComboboxEditCustom.SetBinding(ItemsEditBase.ItemsSourceProperty, nameof(ViewModel.DestinationUfCollection));
-            DestinationUfComboboxEditCustom.SetBinding(ComboBoxEdit.SelectedItemProperty, nameof(ViewModel.SelectedItemDestinationUf), BindingMode.TwoWay);
-            DestinationUfComboboxEditCustom.SetBinding(EditBase.BorderColorProperty, nameof(ViewModel.BorderColorDestinationUf));
-            DestinationUfComboboxEditCustom.SetBinding(EditBase.FocusedBorderColorProperty, nameof(ViewModel.BorderColorFocusedDestinationUf));
+            DestinationUfComboboxEditCustom.SetBinding(ItemsEditBase.ItemsSourceProperty, nameof(_viewModel.DestinationUfCollection));
+            DestinationUfComboboxEditCustom.SetBinding(ComboBoxEdit.SelectedItemProperty, nameof(_viewModel.SelectedItemDestinationUf), BindingMode.TwoWay);
+            DestinationUfComboboxEditCustom.SetBinding(EditBase.BorderColorProperty, nameof(_viewModel.BorderColorDestinationUf));
+            DestinationUfComboboxEditCustom.SetBinding(EditBase.FocusedBorderColorProperty, nameof(_viewModel.BorderColorFocusedDestinationUf));
             DestinationUfComboboxEditCustom.SelectionChanged += DestinationUf_SelectionChanged;
 
             grid.AddWithSpan(view: DestinationUfComboboxEditCustom, row: 2, column: 0, rowSpan: 1, columnSpan: 2);            
@@ -283,10 +285,10 @@ namespace FreightControlMaui.MVVM.Views
             {
                 Margin = new Thickness(0, 0, 10, 0),
             };
-            destination.SetBinding(ItemsEditBase.ItemsSourceProperty, nameof(ViewModel.DestinationCollection));
-            destination.SetBinding(ComboBoxEdit.SelectedItemProperty, nameof(ViewModel.SelectedItemDestination));
-            destination.SetBinding(EditBase.BorderColorProperty, nameof(ViewModel.BorderColorDestination));
-            destination.SetBinding(EditBase.FocusedBorderColorProperty, nameof(ViewModel.BorderColorFocusedDestination));
+            destination.SetBinding(ItemsEditBase.ItemsSourceProperty, nameof(_viewModel.DestinationCollection));
+            destination.SetBinding(ComboBoxEdit.SelectedItemProperty, nameof(_viewModel.SelectedItemDestination));
+            destination.SetBinding(EditBase.BorderColorProperty, nameof(_viewModel.BorderColorDestination));
+            destination.SetBinding(EditBase.FocusedBorderColorProperty, nameof(_viewModel.BorderColorFocusedDestination));
             destination.SelectionChanged += Destination_SelectionChanged;
 
             grid.AddWithSpan(view: destination, row: 2, column: 2, rowSpan: 1, columnSpan: 3);            
@@ -318,9 +320,9 @@ namespace FreightControlMaui.MVVM.Views
             {
                 Margin = new Thickness(10, 15, 5, 0),
             };
-            km.SetBinding(TextEditBase.TextProperty, nameof(ViewModel.Kilometer));
-            km.SetBinding(EditBase.BorderColorProperty, nameof(ViewModel.BorderColorKm));
-            km.SetBinding(EditBase.FocusedBorderColorProperty, nameof(ViewModel.BorderColorFocusedKm));
+            km.SetBinding(TextEditBase.TextProperty, nameof(_viewModel.Kilometer));
+            km.SetBinding(EditBase.BorderColorProperty, nameof(_viewModel.BorderColorKm));
+            km.SetBinding(EditBase.FocusedBorderColorProperty, nameof(_viewModel.BorderColorFocusedKm));
             km.TextChanged += Km_TextChanged;
 
             grid.AddWithSpan(view: km, row: 0, column: 0, rowSpan: 1, columnSpan: 1);
@@ -332,9 +334,9 @@ namespace FreightControlMaui.MVVM.Views
             {
                 Margin = new Thickness(0, 15, 10, 0),
             };
-            freigthField.SetBinding(TextEditBase.TextProperty, nameof(ViewModel.FreightValue));
-            freigthField.SetBinding(EditBase.BorderColorProperty, nameof(ViewModel.BorderColorFreightValue));
-            freigthField.SetBinding(EditBase.FocusedBorderColorProperty, nameof(ViewModel.BorderColorFocusedFreightValue));
+            freigthField.SetBinding(TextEditBase.TextProperty, nameof(_viewModel.FreightValue));
+            freigthField.SetBinding(EditBase.BorderColorProperty, nameof(_viewModel.BorderColorFreightValue));
+            freigthField.SetBinding(EditBase.FocusedBorderColorProperty, nameof(_viewModel.BorderColorFocusedFreightValue));
             freigthField.TextChanged += FreigthField_TextChanged;
 
             grid.AddWithSpan(view: freigthField, row: 0, column: 1, rowSpan: 1, columnSpan: 1);                      
@@ -343,7 +345,7 @@ namespace FreightControlMaui.MVVM.Views
         private void CreateObservationFieldCustom(Grid contentGridBorderForm)
         {
             var observation = new MultilineEditCustom(icon: "comment_24", placeholder: "Observacão");
-            observation.SetBinding(TextEditBase.TextProperty, nameof(ViewModel.Observation));
+            observation.SetBinding(TextEditBase.TextProperty, nameof(_viewModel.Observation));
 
             contentGridBorderForm.AddWithSpan(observation, 4, 0, 1, 5);
         }
@@ -371,8 +373,8 @@ namespace FreightControlMaui.MVVM.Views
             {
                 if (element.SelectedItem is string uf)
                 {
-                    ViewModel.SelectedItemOriginUf = uf;
-                    ViewModel.ChangedItemOriginUf(uf);
+                    _viewModel.SelectedItemOriginUf = uf;
+                    _viewModel.ChangedItemOriginUf(uf);
                     SetBorderColorDefaultForDropdownOriginUf();
                     OriginUfComboboxEditCustom.Unfocus();
                 }
@@ -396,8 +398,8 @@ namespace FreightControlMaui.MVVM.Views
             {
                 if (element.SelectedItem is string uf)
                 {
-                    ViewModel.SelectedItemDestinationUf = uf;
-                    ViewModel.ChangedItemDestinationUf(uf);
+                    _viewModel.SelectedItemDestinationUf = uf;
+                    _viewModel.ChangedItemDestinationUf(uf);
                     SetBorderColorDefaultForDropdownDestinationUf();
                     DestinationUfComboboxEditCustom.Unfocus();
                 }
@@ -447,7 +449,7 @@ namespace FreightControlMaui.MVVM.Views
                 return;
             }
 
-            ViewModel.OnSave();
+            _viewModel.OnSave();
         }
 
         private async void TapGestureRecognizer_Tapped_GoBack(object sender, TappedEventArgs e)
@@ -465,14 +467,14 @@ namespace FreightControlMaui.MVVM.Views
 
         private void SetBorderColorDefaultKmField()
         {
-            ViewModel.BorderColorKm = App.GetLightGrayColor();
-            ViewModel.BorderColorFocusedKm = App.GetGrayColor();
+            _viewModel.BorderColorKm = App.GetLightGrayColor();
+            _viewModel.BorderColorFocusedKm = App.GetGrayColor();
         }
 
         private void SetBorderColorDefaultFreightField()
         {
-            ViewModel.BorderColorFreightValue = App.GetLightGrayColor();
-            ViewModel.BorderColorFocusedFreightValue = App.GetGrayColor();
+            _viewModel.BorderColorFreightValue = App.GetLightGrayColor();
+            _viewModel.BorderColorFocusedFreightValue = App.GetGrayColor();
         }
 
         private void SetBorderColorToElementKmTextField(string text)
@@ -480,21 +482,21 @@ namespace FreightControlMaui.MVVM.Views
             if (string.IsNullOrEmpty(text))
             {
                 SetBorderColorDefaultKmField();
-                ViewModel.IsValidToSave = true;
+                _viewModel.IsValidToSave = true;
                 return;
             }
 
             if (!CheckTheEntrys.IsValidEntry(text, CheckTheEntrys.patternKilometer))
             {
-                ViewModel.BorderColorKm = App.GetRedColor();
-                ViewModel.BorderColorFocusedKm = App.GetRedColor();
-                ViewModel.IsValidToSave = false;
+                _viewModel.BorderColorKm = App.GetRedColor();
+                _viewModel.BorderColorFocusedKm = App.GetRedColor();
+                _viewModel.IsValidToSave = false;
                 return;
             }
 
             SetBorderColorDefaultKmField();
 
-            ViewModel.IsValidToSave = true;
+            _viewModel.IsValidToSave = true;
         }
 
         private void SetBorderColorToElementFreightValueTextField(string text)
@@ -502,47 +504,47 @@ namespace FreightControlMaui.MVVM.Views
             if (string.IsNullOrEmpty(text))
             {
                 SetBorderColorDefaultFreightField();
-                ViewModel.IsValidToSave = true;
+                _viewModel.IsValidToSave = true;
                 return;
             }
 
             if (!CheckTheEntrys.IsValidEntry(text, CheckTheEntrys.patternMoney))
             {
-                ViewModel.BorderColorFreightValue = App.GetRedColor();
-                ViewModel.BorderColorFocusedFreightValue = App.GetRedColor();
-                ViewModel.IsValidToSave = false;
+                _viewModel.BorderColorFreightValue = App.GetRedColor();
+                _viewModel.BorderColorFocusedFreightValue = App.GetRedColor();
+                _viewModel.IsValidToSave = false;
 
                 return;
             }
 
             SetBorderColorDefaultFreightField();
-            ViewModel.IsValidToSave = true;
+            _viewModel.IsValidToSave = true;
         }
 
         #region Origin
 
         private void SetBorderColorForDropdownOriginUf()
         {
-            ViewModel.BorderColorOriginUf = App.GetRedColor();
-            ViewModel.BorderColorFocusedOriginUf = App.GetRedColor();
+            _viewModel.BorderColorOriginUf = App.GetRedColor();
+            _viewModel.BorderColorFocusedOriginUf = App.GetRedColor();
         }
 
         private void SetBorderColorForDropdownOrigin()
         {
-            ViewModel.BorderColorOrigin = App.GetRedColor();
-            ViewModel.BorderColorFocusedOrigin = App.GetRedColor();
+            _viewModel.BorderColorOrigin = App.GetRedColor();
+            _viewModel.BorderColorFocusedOrigin = App.GetRedColor();
         }
 
         private void SetBorderColorDefaultForDropdownOriginUf()
         {
-            ViewModel.BorderColorOriginUf = App.GetLightGrayColor();
-            ViewModel.BorderColorFocusedOriginUf = App.GetGrayColor();
+            _viewModel.BorderColorOriginUf = App.GetLightGrayColor();
+            _viewModel.BorderColorFocusedOriginUf = App.GetGrayColor();
         }
 
         private void SetBorderColorDefaultForDropdownOrigin()
         {
-            ViewModel.BorderColorOrigin = App.GetLightGrayColor();
-            ViewModel.BorderColorFocusedOrigin = App.GetGrayColor();
+            _viewModel.BorderColorOrigin = App.GetLightGrayColor();
+            _viewModel.BorderColorFocusedOrigin = App.GetGrayColor();
         }
 
         #endregion
@@ -551,40 +553,40 @@ namespace FreightControlMaui.MVVM.Views
 
         private void SetBorderColorDefaultForDropdownDestinationUf()
         {
-            ViewModel.BorderColorDestinationUf = App.GetLightGrayColor();
-            ViewModel.BorderColorFocusedDestinationUf = App.GetGrayColor();
+            _viewModel.BorderColorDestinationUf = App.GetLightGrayColor();
+            _viewModel.BorderColorFocusedDestinationUf = App.GetGrayColor();
         }
 
         private void SetBorderColorDefaultForDropdownDestination()
         {
-            ViewModel.BorderColorDestination = App.GetLightGrayColor();
-            ViewModel.BorderColorFocusedDestination = App.GetGrayColor();
+            _viewModel.BorderColorDestination = App.GetLightGrayColor();
+            _viewModel.BorderColorFocusedDestination = App.GetGrayColor();
         }
 
         private void SetBorderColorForDropdownDestinationUf()
         {
-            ViewModel.BorderColorDestinationUf = App.GetRedColor();
-            ViewModel.BorderColorFocusedDestinationUf = App.GetRedColor();
+            _viewModel.BorderColorDestinationUf = App.GetRedColor();
+            _viewModel.BorderColorFocusedDestinationUf = App.GetRedColor();
         }
 
         private void SetBorderColorForDropdownDestination()
         {
-            ViewModel.BorderColorDestination = App.GetRedColor();
-            ViewModel.BorderColorFocusedDestination = App.GetRedColor();
+            _viewModel.BorderColorDestination = App.GetRedColor();
+            _viewModel.BorderColorFocusedDestination = App.GetRedColor();
         }
 
         #endregion
 
         private bool CheckIfIsAllValidToSave()
         {
-            return ViewModel.IsValidToSave;
+            return _viewModel.IsValidToSave;
         }
 
         private bool ValidationOfFieldsOriginAndDestination()
         {
             bool isValid = true;
 
-            if (string.IsNullOrEmpty(ViewModel.SelectedItemOriginUf))
+            if (string.IsNullOrEmpty(_viewModel.SelectedItemOriginUf))
             {
                 SetBorderColorForDropdownOriginUf();
                 isValid = false;
@@ -594,7 +596,7 @@ namespace FreightControlMaui.MVVM.Views
                 SetBorderColorDefaultForDropdownOriginUf();
             }
 
-            if (string.IsNullOrEmpty(ViewModel.SelectedItemOrigin))
+            if (string.IsNullOrEmpty(_viewModel.SelectedItemOrigin))
             {
                 SetBorderColorForDropdownOrigin();
                 isValid = false;
@@ -604,7 +606,7 @@ namespace FreightControlMaui.MVVM.Views
                 SetBorderColorDefaultForDropdownOrigin();
             }
 
-            if (string.IsNullOrEmpty(ViewModel.SelectedItemDestinationUf))
+            if (string.IsNullOrEmpty(_viewModel.SelectedItemDestinationUf))
             {
                 SetBorderColorForDropdownDestinationUf();
                 isValid = false;
@@ -614,7 +616,7 @@ namespace FreightControlMaui.MVVM.Views
                 SetBorderColorDefaultForDropdownDestinationUf();
             }
 
-            if (string.IsNullOrEmpty(ViewModel.SelectedItemDestination))
+            if (string.IsNullOrEmpty(_viewModel.SelectedItemDestination))
             {
                 SetBorderColorForDropdownDestination();
                 isValid = false;
@@ -630,10 +632,9 @@ namespace FreightControlMaui.MVVM.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            ViewModel.OnAppearing();
+            _viewModel.OnAppearing();
         }
 
         #endregion
     }
 }
-

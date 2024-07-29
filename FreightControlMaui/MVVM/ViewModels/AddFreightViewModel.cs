@@ -14,9 +14,7 @@ namespace FreightControlMaui.MVVM.ViewModels
     public class AddFreightViewModel : BaseViewModel
     {
         #region Properties
-
-        private readonly FreightRepository _freightRepository;
-
+        
         private FreightModel _selectedFreightToEdit;
         public FreightModel SelectedFreightToEdit
         {
@@ -315,6 +313,8 @@ namespace FreightControlMaui.MVVM.ViewModels
                 OnPropertyChanged();
             }
         }
+        
+        private readonly FreightRepository _freightRepository;
 
         public ICommand SaveCommand { get; set; }
 
@@ -361,7 +361,6 @@ namespace FreightControlMaui.MVVM.ViewModels
             {
                 Console.WriteLine(ex.Message);
             }
-
         }
 
         private Task SetValuesToEdit()
@@ -474,6 +473,4 @@ namespace FreightControlMaui.MVVM.ViewModels
 
         #endregion
     }
-
 }
-

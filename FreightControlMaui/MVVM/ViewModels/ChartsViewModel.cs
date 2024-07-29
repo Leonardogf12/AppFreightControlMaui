@@ -10,9 +10,7 @@ namespace FreightControlMaui.MVVM.ViewModels
     public class ChartsViewModel : BaseViewModel
     {
         #region Properties
-
-        private readonly FreightRepository _freightRespository;
-
+        
         #region Chart Freight
 
         private Chart _freightChart;
@@ -141,6 +139,8 @@ namespace FreightControlMaui.MVVM.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        private readonly FreightRepository _freightRespository;
 
         #endregion
 
@@ -343,6 +343,4 @@ namespace FreightControlMaui.MVVM.ViewModels
 
         #endregion
     }
-
 }
-

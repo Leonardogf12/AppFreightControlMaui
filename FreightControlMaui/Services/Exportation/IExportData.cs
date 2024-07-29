@@ -11,4 +11,3 @@ namespace FreightControlMaui.Services.Exportation
         Task OpenLauncher(string filePath);
     }
 }
-

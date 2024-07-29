@@ -8,20 +8,20 @@ namespace FreightControlMaui.MVVM.Views
 {
     public class RegisterView : BaseContentPage
     {
-        public RegisterViewModel ViewModel = new();
+        private readonly RegisterViewModel _viewModel = new();
 
         public RegisterView()
         {
             BackgroundColor = Colors.White;
 
-            Content = BuildRegisterView();
+            Content = BuildRegisterView;
 
-            BindingContext = ViewModel;
+            BindingContext = _viewModel;
         }
 
         #region UI
 
-        private Grid CreateMainGrid()
+        private static Grid CreateMainGrid()
         {
             return new Grid
             {
@@ -39,18 +39,21 @@ namespace FreightControlMaui.MVVM.Views
             };
         }
 
-        private View BuildRegisterView()
+        private View BuildRegisterView
         {
-            var mainGrid = CreateMainGrid();
+            get
+            {
+                var mainGrid = CreateMainGrid();
 
-            CreateNameField(mainGrid);
-            CreateEmailField(mainGrid);
-            CreatePasswordField(mainGrid);
-            CreateSecondPasswordField(mainGrid);
-            CreateRegisterButton(mainGrid);
-            CreateBackButton(mainGrid);
+                CreateNameField(mainGrid);
+                CreateEmailField(mainGrid);
+                CreatePasswordField(mainGrid);
+                CreateSecondPasswordField(mainGrid);
+                CreateRegisterButton(mainGrid);
+                CreateBackButton(mainGrid);
 
-            return mainGrid;
+                return mainGrid;
+            }
         }
 
         private void CreateNameField(Grid mainGrid)
@@ -59,7 +62,7 @@ namespace FreightControlMaui.MVVM.Views
             {
                 Margin = new Thickness(10, 0, 10, 0)
             };
-            name.SetBinding(TextEditBase.TextProperty, nameof(ViewModel.Name));
+            name.SetBinding(TextEditBase.TextProperty, nameof(_viewModel.Name));
 
             name.TextChanged += Name_TextChanged;
 
@@ -72,7 +75,7 @@ namespace FreightControlMaui.MVVM.Views
             {
                 Margin = new Thickness(10, 0, 10, 0)
             };
-            email.SetBinding(TextEditBase.TextProperty, nameof(ViewModel.Email));
+            email.SetBinding(TextEditBase.TextProperty, nameof(_viewModel.Email));
 
             email.TextChanged += Email_TextChanged;
 
@@ -85,7 +88,7 @@ namespace FreightControlMaui.MVVM.Views
             {
                 Margin = new Thickness(10, 0, 10, 0)
             };
-            password.SetBinding(TextEditBase.TextProperty, nameof(ViewModel.Password));
+            password.SetBinding(TextEditBase.TextProperty, nameof(_viewModel.Password));
 
             mainGrid.Add(password, 0, 2);
         }
@@ -96,7 +99,7 @@ namespace FreightControlMaui.MVVM.Views
             {
                 Margin = new Thickness(10, 0, 10, 0)
             };
-            secondPassword.SetBinding(TextEditBase.TextProperty, nameof(ViewModel.SecondPassword));
+            secondPassword.SetBinding(TextEditBase.TextProperty, nameof(_viewModel.SecondPassword));
 
             mainGrid.Add(secondPassword, 0, 3);
         }
@@ -143,7 +146,7 @@ namespace FreightControlMaui.MVVM.Views
 
         private async void ButtonRegister_Clicked(object sender, EventArgs e)
         {
-            await ViewModel.RegisterNewUser();
+            await _viewModel.RegisterNewUser();
         }
 
         private async void ButtonBack_Clicked(object sender, EventArgs e)
@@ -153,6 +156,4 @@ namespace FreightControlMaui.MVVM.Views
 
         #endregion
     }
-
 }
-

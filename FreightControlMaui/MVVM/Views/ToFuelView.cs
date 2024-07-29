@@ -14,11 +14,9 @@ namespace FreightControlMaui.MVVM.Views
     {
         #region Properties
 
-        public ToFuelViewModel ViewModel = new();
-
-        public ClickAnimation ClickAnimation = new();
-
-        public int Calc = 0;
+        private readonly ToFuelViewModel _viewModel = new();
+        
+        public const int Zero = 0;
 
         #endregion
 
@@ -26,26 +24,29 @@ namespace FreightControlMaui.MVVM.Views
         {
             BackgroundColor = Colors.White;
 
-            Content = BuildToFuelView();
+            Content = BuildToFuelView;
 
-            BindingContext = ViewModel;
+            BindingContext = _viewModel;
         }
 
         #region UI
 
-        private View BuildToFuelView()
+        private View BuildToFuelView
         {
-            var mainGrid = CreateMainGrid();
+            get
+            {
+                var mainGrid = CreateMainGrid();
 
-            CreateStackTitle(mainGrid);
+                CreateStackTitle(mainGrid);
 
-            CreateStackInfoFreight(mainGrid);
+                CreateStackInfoFreight(mainGrid);
 
-            CreateForm(mainGrid);
+                CreateForm(mainGrid);
 
-            CreateButtonSave(mainGrid);
+                CreateButtonSave(mainGrid);
 
-            return mainGrid;
+                return mainGrid;
+            }
         }
 
         private static Grid CreateMainGrid()
@@ -141,7 +142,7 @@ namespace FreightControlMaui.MVVM.Views
                 FontSize = 14,
                 TextColor = ControlResources.GetResource<Color>("PrimaryDark")
             };
-            contentDate.SetBinding(Label.TextProperty, nameof(ViewModel.DetailTravelDate));
+            contentDate.SetBinding(Label.TextProperty, nameof(_viewModel.DetailTravelDate));
             stackDate.Children.Add(contentDate);
 
             stack.Children.Add(stackDate);
@@ -165,7 +166,7 @@ namespace FreightControlMaui.MVVM.Views
                 FontSize = 14,
                 TextColor = ControlResources.GetResource<Color>("PrimaryDark")
             };
-            contentOrigin.SetBinding(Label.TextProperty, nameof(ViewModel.DetailOrigin));
+            contentOrigin.SetBinding(Label.TextProperty, nameof(_viewModel.DetailOrigin));
             stackOrigin.Children.Add(contentOrigin);
 
             stack.Children.Add(stackOrigin);
@@ -189,7 +190,7 @@ namespace FreightControlMaui.MVVM.Views
                 FontSize = 14,
                 TextColor = ControlResources.GetResource<Color>("PrimaryDark")
             };
-            contentDestination.SetBinding(Label.TextProperty, nameof(ViewModel.DetailDestination));
+            contentDestination.SetBinding(Label.TextProperty, nameof(_viewModel.DetailDestination));
             stackDestination.Children.Add(contentDestination);
 
             stack.Children.Add(stackDestination);
@@ -244,8 +245,8 @@ namespace FreightControlMaui.MVVM.Views
         private void CreateToFuelDateFieldForm(Grid contentGridBorderForm)
         {
             var date = new DatePickerFieldCustom();
-            date.DatePicker.SetBinding(DatePicker.DateProperty, nameof(ViewModel.Date));
-            date.Border.SetBinding(Border.StrokeProperty, nameof(ViewModel.StrokeDate));
+            date.DatePicker.SetBinding(DatePicker.DateProperty, nameof(_viewModel.Date));
+            date.Border.SetBinding(Border.StrokeProperty, nameof(_viewModel.StrokeDate));
             date.DatePicker.DateSelected += DatePicker_DateSelected;
 
             contentGridBorderForm.AddWithSpan(view: date, row: 0, column: 0, rowSpan: 1, columnSpan: 3);           
@@ -281,17 +282,17 @@ namespace FreightControlMaui.MVVM.Views
             };
 
             var liters = new TextEditCustom(icon: "liters_24", placeholder: "Litros", keyboard: Keyboard.Numeric);
-            liters.SetBinding(TextEditBase.TextProperty, nameof(ViewModel.Liters));
-            liters.SetBinding(EditBase.BorderColorProperty, nameof(ViewModel.BorderColorLiters));
-            liters.SetBinding(EditBase.FocusedBorderColorProperty, nameof(ViewModel.BorderColorFocusedLiters));
+            liters.SetBinding(TextEditBase.TextProperty, nameof(_viewModel.Liters));
+            liters.SetBinding(EditBase.BorderColorProperty, nameof(_viewModel.BorderColorLiters));
+            liters.SetBinding(EditBase.FocusedBorderColorProperty, nameof(_viewModel.BorderColorFocusedLiters));
             liters.TextChanged += Liters_TextChanged;
 
             gridFuel.AddWithSpan(view: liters, row: 0, column: 0);
             
             var amountSpentFuel = new TextEditCustom(icon: "money_24", placeholder: "Valor", keyboard: Keyboard.Numeric);
-            amountSpentFuel.SetBinding(TextEditBase.TextProperty, nameof(ViewModel.AmountSpentFuel));
-            amountSpentFuel.SetBinding(EditBase.BorderColorProperty, nameof(ViewModel.BorderColorAmountSpentFuel));
-            amountSpentFuel.SetBinding(EditBase.FocusedBorderColorProperty, nameof(ViewModel.BorderColorFocusedAmountSpentFuel));
+            amountSpentFuel.SetBinding(TextEditBase.TextProperty, nameof(_viewModel.AmountSpentFuel));
+            amountSpentFuel.SetBinding(EditBase.BorderColorProperty, nameof(_viewModel.BorderColorAmountSpentFuel));
+            amountSpentFuel.SetBinding(EditBase.FocusedBorderColorProperty, nameof(_viewModel.BorderColorFocusedAmountSpentFuel));
             amountSpentFuel.TextChanged += AmountSpentFuel_TextChanged;
             gridFuel.Add(amountSpentFuel, 1, 0);
 
@@ -314,7 +315,7 @@ namespace FreightControlMaui.MVVM.Views
                 HorizontalOptions = LayoutOptions.End,
                 Margin = new Thickness(0, 0, 10, 0),
             };
-            contentValuePerLiter.SetBinding(Label.TextProperty, nameof(ViewModel.ValuePerLiter));
+            contentValuePerLiter.SetBinding(Label.TextProperty, nameof(_viewModel.ValuePerLiter));
 
             gridFuel.AddWithSpan(view: contentValuePerLiter, row: 1, column: 1);
             
@@ -326,9 +327,9 @@ namespace FreightControlMaui.MVVM.Views
         private void CreateExpensesFieldForm(Grid contentGridBorderForm)
         {
             var expenses = new TextEditCustom(icon: "money_24", placeholder: "Despesas", keyboard: Keyboard.Numeric);
-            expenses.SetBinding(TextEditBase.TextProperty, nameof(ViewModel.Expenses));
-            expenses.SetBinding(EditBase.BorderColorProperty, nameof(ViewModel.BorderColorExpenses));
-            expenses.SetBinding(EditBase.FocusedBorderColorProperty, nameof(ViewModel.BorderColorFocusedExpenses));
+            expenses.SetBinding(TextEditBase.TextProperty, nameof(_viewModel.Expenses));
+            expenses.SetBinding(EditBase.BorderColorProperty, nameof(_viewModel.BorderColorExpenses));
+            expenses.SetBinding(EditBase.FocusedBorderColorProperty, nameof(_viewModel.BorderColorFocusedExpenses));
             expenses.TextChanged += Expenses_TextChanged;
 
             contentGridBorderForm.AddWithSpan(view: expenses, row: 3, column: 0, rowSpan: 1, columnSpan: 3);         
@@ -337,7 +338,7 @@ namespace FreightControlMaui.MVVM.Views
         private void CreateObservationFieldForm(Grid contentGridBorderForm)
         {
             var observation = new MultilineEditCustom(icon: "comment_24", placeholder: "Observacão");
-            observation.SetBinding(TextEditBase.TextProperty, nameof(ViewModel.Observation));
+            observation.SetBinding(TextEditBase.TextProperty, nameof(_viewModel.Observation));
 
             contentGridBorderForm.AddWithSpan(view: observation, row: 4, column: 0, rowSpan: 1, columnSpan: 3);        
         }
@@ -349,7 +350,7 @@ namespace FreightControlMaui.MVVM.Views
                 Text = "Salvar",
                 Style = ControlResources.GetResource<Style>("buttonDarkPrimary")
             };
-            button.SetBinding(IsEnabledProperty, nameof(ViewModel.IsEnabledSaveButton));
+            button.SetBinding(IsEnabledProperty, nameof(_viewModel.IsEnabledSaveButton));
 
             button.Clicked += SaveClicked;
 
@@ -366,14 +367,14 @@ namespace FreightControlMaui.MVVM.Views
 
             var dateSelected = element.Date;
 
-            if (dateSelected < ViewModel.DetailsFreight.TravelDate)
+            if (dateSelected < _viewModel.DetailsFreight.TravelDate)
             {
                 await SetBorderColorErrorToDateField();
 
                 return;
             }
 
-            ViewModel.StrokeDate = App.GetLightGrayColor();
+            _viewModel.StrokeDate = App.GetLightGrayColor();
         }
 
         private async void TapGestureRecognizer_Tapped_GoBack(object sender, TappedEventArgs e)
@@ -389,7 +390,7 @@ namespace FreightControlMaui.MVVM.Views
         {
             if (string.IsNullOrEmpty(GetValueStringOfObject(sender)))
             {
-                ViewModel.ValuePerLiter = Calc.ToString("c");
+                _viewModel.ValuePerLiter = Zero.ToString("c");
                 SetBorderColorDefaultLitersField();
                 return;
             }
@@ -402,14 +403,14 @@ namespace FreightControlMaui.MVVM.Views
 
             SetBorderColorDefaultLitersField();
 
-            ViewModel.CalculatePriceOfFuel();
+            _viewModel.CalculatePriceOfFuel();
         }
 
         private void AmountSpentFuel_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(GetValueStringOfObject(sender)))
             {
-                ViewModel.ValuePerLiter = Calc.ToString("c");
+                _viewModel.ValuePerLiter = Zero.ToString("c");
                 SetBorderColorDefaultAmountSpentFuelField();
                 return;
             }
@@ -422,7 +423,7 @@ namespace FreightControlMaui.MVVM.Views
 
             SetBorderColorDefaultAmountSpentFuelField();
 
-            ViewModel.CalculatePriceOfFuel();
+            _viewModel.CalculatePriceOfFuel();
         }
 
         private void Expenses_TextChanged(object sender, EventArgs e)
@@ -450,7 +451,7 @@ namespace FreightControlMaui.MVVM.Views
                 return;
             }
 
-            ViewModel.OnSave();
+            _viewModel.OnSave();
         }
 
         #endregion
@@ -461,23 +462,23 @@ namespace FreightControlMaui.MVVM.Views
         {
             bool isValid = true;
 
-            if (string.IsNullOrEmpty(ViewModel.Liters))
+            if (string.IsNullOrEmpty(_viewModel.Liters))
             {
                 SetBorderColorErrorToLitersField();
                 isValid = false;
             }
 
-            if (string.IsNullOrEmpty(ViewModel.AmountSpentFuel))
+            if (string.IsNullOrEmpty(_viewModel.AmountSpentFuel))
             {
                 SetBorderColorErrorToAmountSpentFuelField();
                 isValid = false;
             }
 
-            if (ViewModel.BorderColorExpenses == App.GetRedColor())
+            if (_viewModel.BorderColorExpenses == App.GetRedColor())
             {
                 isValid = false;
             }
-            if (ViewModel.BorderColorLiters == App.GetRedColor())
+            if (_viewModel.BorderColorLiters == App.GetRedColor())
             {
                 isValid = false;
             }
@@ -493,43 +494,43 @@ namespace FreightControlMaui.MVVM.Views
 
         private void SetBorderColorDefaultLitersField()
         {
-            ViewModel.BorderColorLiters = App.GetLightGrayColor();
-            ViewModel.BorderColorFocusedLiters = App.GetGrayColor();
+            _viewModel.BorderColorLiters = App.GetLightGrayColor();
+            _viewModel.BorderColorFocusedLiters = App.GetGrayColor();
         }
 
         private void SetBorderColorDefaultAmountSpentFuelField()
         {
-            ViewModel.BorderColorAmountSpentFuel = App.GetLightGrayColor();
-            ViewModel.BorderColorFocusedAmountSpentFuel = App.GetGrayColor();
+            _viewModel.BorderColorAmountSpentFuel = App.GetLightGrayColor();
+            _viewModel.BorderColorFocusedAmountSpentFuel = App.GetGrayColor();
         }
 
         private void SetBorderColorDefaultExpensesField()
         {
-            ViewModel.BorderColorExpenses = App.GetLightGrayColor();
-            ViewModel.BorderColorFocusedExpenses = App.GetGrayColor();
+            _viewModel.BorderColorExpenses = App.GetLightGrayColor();
+            _viewModel.BorderColorFocusedExpenses = App.GetGrayColor();
         }
 
         private void SetBorderColorErrorToLitersField()
         {
-            ViewModel.BorderColorLiters = App.GetRedColor();
-            ViewModel.BorderColorFocusedLiters = App.GetRedColor();
+            _viewModel.BorderColorLiters = App.GetRedColor();
+            _viewModel.BorderColorFocusedLiters = App.GetRedColor();
         }
 
         private void SetBorderColorErrorToAmountSpentFuelField()
         {
-            ViewModel.BorderColorAmountSpentFuel = App.GetRedColor();
-            ViewModel.BorderColorFocusedAmountSpentFuel = App.GetRedColor();
+            _viewModel.BorderColorAmountSpentFuel = App.GetRedColor();
+            _viewModel.BorderColorFocusedAmountSpentFuel = App.GetRedColor();
         }
 
         private void SetBorderColorErrorToExpensesField()
         {
-            ViewModel.BorderColorExpenses = App.GetRedColor();
-            ViewModel.BorderColorFocusedExpenses = App.GetRedColor();
+            _viewModel.BorderColorExpenses = App.GetRedColor();
+            _viewModel.BorderColorFocusedExpenses = App.GetRedColor();
         }
 
         private async Task SetBorderColorErrorToDateField()
         {
-            ViewModel.StrokeDate = App.GetRedColor();
+            _viewModel.StrokeDate = App.GetRedColor();
             await ControlAlert.DefaultAlert("Ops", "A data selecionada não pode ser menor que a data do frete.");
         }
 
@@ -537,4 +538,3 @@ namespace FreightControlMaui.MVVM.Views
     }
 
 }
-

@@ -8,34 +8,31 @@ namespace FreightControlMaui.MVVM.Views
 {
     public class ChartsView : BaseContentPage
     {
-        #region Properties
-
-        public ChartsViewModel ViewModel = new();
-
-        ClickAnimation ClickAnimation = new();
-
-        #endregion
-
+        private readonly ChartsViewModel _viewModel = new();
+              
         public ChartsView()
         {
             BackgroundColor = ControlResources.GetResource<Color>("PrimaryDark");
 
-            Content = BuildChartsView();
+            Content = BuildChartsView;
 
-            BindingContext = ViewModel;
+            BindingContext = _viewModel;
         }
 
         #region UI
 
-        private View BuildChartsView()
+        private View BuildChartsView
         {
-            var mainGrid = CreateMainGrid();
+            get
+            {
+                var mainGrid = CreateMainGrid();
 
-            CreateStackHeader(mainGrid);
+                CreateStackHeader(mainGrid);
 
-            CreateCharts(mainGrid);
+                CreateCharts(mainGrid);
 
-            return mainGrid;
+                return mainGrid;
+            }
         }
 
         private static Grid CreateMainGrid()
@@ -103,7 +100,7 @@ namespace FreightControlMaui.MVVM.Views
             mainGrid.Add(stack, 0, 0);
         }
 
-        private View CreateFilterButtons()
+        private Grid CreateFilterButtons()
         {
             var grid = new Grid
             {
@@ -119,7 +116,7 @@ namespace FreightControlMaui.MVVM.Views
             {
                 Text = "Mensal",
             };
-            monthlyButton.SetBinding(Button.StyleProperty, nameof(ViewModel.MonthButtonStyle));
+            monthlyButton.SetBinding(StyleProperty, nameof(_viewModel.MonthButtonStyle));
             monthlyButton.Clicked += MonthlyButton_Clicked;
             grid.Add(monthlyButton, 0, 0);
 
@@ -127,7 +124,7 @@ namespace FreightControlMaui.MVVM.Views
             {
                 Text = "Diário",
             };
-            dailyButton.SetBinding(Button.StyleProperty, nameof(ViewModel.DayButtonStyle));
+            dailyButton.SetBinding(Button.StyleProperty, nameof(_viewModel.DayButtonStyle));
             dailyButton.Clicked += DailyButton_Clicked;
             grid.Add(dailyButton, 1, 0);
 
@@ -194,7 +191,7 @@ namespace FreightControlMaui.MVVM.Views
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.Center
             };
-            test.SetBinding(Label.IsVisibleProperty, nameof(ViewModel.IsVisibleTextThereAreNoSupplies));
+            test.SetBinding(Label.IsVisibleProperty, nameof(_viewModel.IsVisibleTextThereAreNoSupplies));
 
             stackToFuel.Children.Add(toFuelChartTitle);
 
@@ -213,35 +210,35 @@ namespace FreightControlMaui.MVVM.Views
             mainGrid.Add(scroll, 0, 1);
         }
 
-        private View CreateLineChartFreight()
+        private ChartView CreateLineChartFreight()
         {
             var chart = new ChartView
             {
-                BindingContext = ViewModel,
+                BindingContext = _viewModel,
                 Margin = new Thickness(10),
                 HeightRequest = 200,
                 HorizontalOptions = LayoutOptions.Center,
                 FlowDirection = FlowDirection.LeftToRight,
             };
-            chart.SetBinding(WidthRequestProperty, nameof(ViewModel.WidthLineChartFreight));
-            chart.SetBinding(ChartView.ChartProperty, nameof(ViewModel.FreightChart));
+            chart.SetBinding(WidthRequestProperty, nameof(_viewModel.WidthLineChartFreight));
+            chart.SetBinding(ChartView.ChartProperty, nameof(_viewModel.FreightChart));
 
             return chart;
         }
 
-        private View CreateLineChartToFuel()
+        private ChartView CreateLineChartToFuel()
         {
             var chart = new ChartView
             {
-                BindingContext = ViewModel,
+                BindingContext = _viewModel,
                 Margin = new Thickness(10),
                 HeightRequest = 200,
                 HorizontalOptions = LayoutOptions.Center,
                 FlowDirection = FlowDirection.LeftToRight,
             };
 
-            chart.SetBinding(WidthRequestProperty, nameof(ViewModel.WidthLineChartToFuel));
-            chart.SetBinding(ChartView.ChartProperty, nameof(ViewModel.ToFuelChart));
+            chart.SetBinding(WidthRequestProperty, nameof(_viewModel.WidthLineChartToFuel));
+            chart.SetBinding(ChartView.ChartProperty, nameof(_viewModel.ToFuelChart));
 
             return chart;
         }
@@ -261,16 +258,16 @@ namespace FreightControlMaui.MVVM.Views
 
         private async void MonthlyButton_Clicked(object sender, EventArgs e)
         {
-            ViewModel.MonthButtonStyle = ControlResources.GetResource<Style>("buttonDarkLightFilterSecondary");
-            ViewModel.DayButtonStyle = ControlResources.GetResource<Style>("buttonDarkLightFilterPrimary");
+            _viewModel.MonthButtonStyle = ControlResources.GetResource<Style>("buttonDarkLightFilterSecondary");
+            _viewModel.DayButtonStyle = ControlResources.GetResource<Style>("buttonDarkLightFilterPrimary");
 
             await LoadMonthlyCharts();
         }
 
         private async void DailyButton_Clicked(object sender, EventArgs e)
         {
-            ViewModel.DayButtonStyle = ControlResources.GetResource<Style>("buttonDarkLightFilterSecondary");
-            ViewModel.MonthButtonStyle = ControlResources.GetResource<Style>("buttonDarkLightFilterPrimary");
+            _viewModel.DayButtonStyle = ControlResources.GetResource<Style>("buttonDarkLightFilterSecondary");
+            _viewModel.MonthButtonStyle = ControlResources.GetResource<Style>("buttonDarkLightFilterPrimary");
 
             await LoadDailyCharts();
 
@@ -288,18 +285,17 @@ namespace FreightControlMaui.MVVM.Views
 
         private async Task LoadMonthlyCharts()
         {
-            await ViewModel.LoadEntriesFreightChartMonthly();
-            await ViewModel.LoadEntriesToFuelChartMonthly();
+            await _viewModel.LoadEntriesFreightChartMonthly();
+            await _viewModel.LoadEntriesToFuelChartMonthly();
         }
 
         private async Task LoadDailyCharts()
         {
-            await ViewModel.LoadEntriesFreightChartsDaily();
-            await ViewModel.LoadEntriesToFuelChartsDaily();
+            await _viewModel.LoadEntriesFreightChartsDaily();
+            await _viewModel.LoadEntriesToFuelChartsDaily();
         }
 
         #endregion
     }
 
 }
-

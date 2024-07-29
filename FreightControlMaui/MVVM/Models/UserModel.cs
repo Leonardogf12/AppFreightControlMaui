@@ -12,4 +12,3 @@ namespace FreightControlMaui.MVVM.Models
         public string FirebaseLocalId { get; set; }
     }
 }
-

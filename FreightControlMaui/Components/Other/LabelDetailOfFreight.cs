@@ -38,6 +38,4 @@ namespace FreightControlMaui.Components.Other
             Children.Add(stack);
         }
     }
-
 }
-

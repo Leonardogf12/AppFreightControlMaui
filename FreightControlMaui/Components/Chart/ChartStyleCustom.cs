@@ -45,4 +45,3 @@ namespace FreightControlMaui.Components.Chart
         }
     }
 }
-

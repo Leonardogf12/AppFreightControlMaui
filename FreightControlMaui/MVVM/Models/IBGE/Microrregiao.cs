@@ -7,4 +7,3 @@
         public Mesorregiao Mesorregiao { get; set; }
     }
 }
-

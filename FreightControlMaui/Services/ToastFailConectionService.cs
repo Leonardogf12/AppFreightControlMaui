@@ -22,6 +22,4 @@ namespace FreightControlMaui.Services
             await toast.Show(cancellationTokenSource.Token);
         }
     }
-
 }
-

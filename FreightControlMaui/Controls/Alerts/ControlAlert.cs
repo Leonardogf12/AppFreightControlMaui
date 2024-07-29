@@ -1,6 +1,4 @@
-﻿using FreightControlMaui.Constants;
-
-namespace FreightControlMaui.Controls.Alerts
+﻿namespace FreightControlMaui.Controls.Alerts
 {
     public static class ControlAlert
 	{
@@ -27,4 +25,3 @@ namespace FreightControlMaui.Controls.Alerts
         }
     }
 }
-

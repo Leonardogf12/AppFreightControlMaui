@@ -28,7 +28,5 @@ namespace FreightControlMaui.MVVM.Models
         public string TravelDateCustom => TravelDate.ToShortDateString();
 
         public FreightModel() { }
-
     }
 }
-
