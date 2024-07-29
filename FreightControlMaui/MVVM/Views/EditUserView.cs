@@ -3,6 +3,7 @@ using FreightControlMaui.Controls.Alerts;
 using FreightControlMaui.Controls.Resources;
 using FreightControlMaui.MVVM.Base;
 using FreightControlMaui.MVVM.ViewModels;
+using DevExpress.Maui.Editors;
 
 namespace FreightControlMaui.MVVM.Views
 {
@@ -84,7 +85,7 @@ namespace FreightControlMaui.MVVM.Views
             {
                 Margin = new Thickness(10, 0, 10, 0)
             };
-            name.SetBinding(TextEditCustom.TextProperty, nameof(ViewModel.Name));
+            name.SetBinding(TextEditBase.TextProperty, nameof(ViewModel.Name));
            
             mainGrid.Add(name, 0, 0);
         }
@@ -135,6 +136,10 @@ namespace FreightControlMaui.MVVM.Views
             await ViewModel.SetNameForUser();
         }
 
+        #endregion
+
+        #region Overrides
+        
         #endregion
     }
 

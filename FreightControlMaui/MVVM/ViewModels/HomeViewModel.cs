@@ -48,11 +48,11 @@ namespace FreightControlMaui.MVVM.ViewModels
 
         public async void LoadInfoByUserLogged()
         {
-            var user = await _userRepository.GetUserByFirebaseLocalId(App.UserLocalIdLogged);
+            UserLogged = await _userRepository.GetUserByFirebaseLocalId(App.UserLocalIdLogged);
 
-            if (user != null)
+            if (UserLogged != null)
             {
-                NameUserLogged = user.Name;
+                NameUserLogged = UserLogged.Name;
             }
             else
             {

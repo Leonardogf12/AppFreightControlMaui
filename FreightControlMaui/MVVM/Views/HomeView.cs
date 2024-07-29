@@ -10,9 +10,6 @@ using FreightControlMaui.MVVM.ViewModels;
 using FreightControlMaui.Services.Exportation;
 using FreightControlMaui.Services.Navigation;
 
-using GemBox.Pdf;
-using GemBox.Pdf.Content;
-
 namespace FreightControlMaui.MVVM.Views
 {
     public class HomeView : BaseContentPage
@@ -88,9 +85,6 @@ namespace FreightControlMaui.MVVM.Views
 
             var chartsButton = new ButtonHomeMenu(iconName: "charts_256", eventTap: TapGestureRecognizer_Tapped_GoToChartsView);
             stack.Children.Add(chartsButton);
-
-            //var testButton = new ButtonHomeMenu(iconName: "dotnet_bot", eventTap: TapGestureRecognizer_Tapped_PdfTest);
-            //stack.Children.Add(testButton);
 
             mainGrid.Add(stack, 0, 1);
         }
@@ -307,8 +301,13 @@ namespace FreightControlMaui.MVVM.Views
                 await ClickAnimation.SetFadeOnElement(element);
 
                 SettingsDxPopup.IsOpen = false;
+               
+                var param = new Dictionary<string, object>
+                {
+                    { "UserLogged", ViewModel.UserLogged }
+                };
 
-                await _navigationService.NavigationToPageAsync<EditUserView>();
+                await _navigationService.NavigationToPageAsync<EditUserView>(param);
             }
         }
 
@@ -325,6 +324,4 @@ namespace FreightControlMaui.MVVM.Views
       
         #endregion
     }
-
 }
-

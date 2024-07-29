@@ -5,12 +5,26 @@ using FreightControlMaui.Repositories;
 
 namespace FreightControlMaui.MVVM.ViewModels
 {
+    [QueryProperty("UserLogged", nameof(UserLogged))]
     public class EditUserViewModel : BaseViewModel
     {
         #region Properties
 
         private readonly UserRepository _userRepository;
 
+        private UserModel _userLogged;
+        public UserModel UserLogged
+        {
+            get => _userLogged;
+            set
+            {
+                _userLogged = value;
+                OnPropertyChanged();
+
+                UpdateValueName();                
+            }
+        }
+       
         private string _name;
         public string Name
         {
@@ -48,6 +62,11 @@ namespace FreightControlMaui.MVVM.ViewModels
             };
         }
 
+        private void UpdateValueName()
+        {
+            Name = UserLogged.Name;
+        }
+
         #endregion
 
         public async Task SetNameForUser()
@@ -75,8 +94,7 @@ namespace FreightControlMaui.MVVM.ViewModels
             {
                 IsBusy = false;
             }
-        }
-
+        }        
     }
 
 }
